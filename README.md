@@ -39,6 +39,7 @@ Bagi yang ingin membaca secara mendalam dalam format teks Markdown:
 5. **[`05_KILLER_QA_DEFENSE_JURI.md`](docs/05_KILLER_QA_DEFENSE_JURI.md)**: Kumpulan 8 pertanyaan tersulit juri beserta contekan jawaban skakmat dan referensi jurnal resminya.
 6. **[`06_ARSITEKTUR_TEKNIK_DAN_AI.md`](docs/06_ARSITEKTUR_TEKNIK_DAN_AI.md)**: Arsitektur software (FastAPI, Next.js, PostgreSQL), alasan menggunakan model Elastic Net dan transformasi CLR, serta guardrail LLM.
 7. **[`07_AUDIT_DATA_DAN_SITASI_RESMI.md`](docs/07_AUDIT_DATA_DAN_SITASI_RESMI.md)**: Audit validitas 100% data, rujukan DOI jurnal peer-reviewed, kalkulasi riil modal tambak Jatim, dan batasan ilmiah anti-blunder.
+8. **[`08_BEDAH_LENGKAP_WABAH_AHPND.md`](docs/08_BEDAH_LENGKAP_WABAH_AHPND.md)**: Bedah biologi penyakit AHPND/EMS, plasmid pVA1, gen racun pirAB, mekanisme kerusakan organ hepatopankreas, dan tindakan intervensi petambak.
 
 ---
 
