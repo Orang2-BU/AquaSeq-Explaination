@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaSeq · Biodiversity Engine & Microbial Ecology Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #060b14; color: #f8fafc; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .card-glow { border: 1px solid rgba(255,255,255,0.08); transition: all 0.2s ease-in-out; }
+    .card-glow:hover { border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.15); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#060b14]">
+
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-30 px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="text-xs text-slate-400 hover:text-cyan-400">← Portal Utama</a>
+      <span class="text-slate-700">|</span>
+      <h1 class="text-sm font-bold text-white flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-indigo-950 text-indigo-400 border border-indigo-800 text-xs">BIODIVERSITY TRACK 2</span>
+        Eksplorasi Keanekaragaman Hayati Mikrobioma Air Tambak
+      </h1>
+    </div>
+    <span class="text-xs text-slate-400 hidden sm:block">Shannon (H') · Chao1 · Bray-Curtis · Centered Log-Ratio</span>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- Hero Header -->
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 p-6 rounded-2xl border border-indigo-900/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-950 text-indigo-400 border border-indigo-800/40 mb-2">
+          Track 2: Genomics for Food Security and Biodiversity
+        </div>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white">Kenapa Biodiversitas Mikroba Menyelamatkan Tambak?</h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
+          Bukan cuma mematikan patogen, AquaSeq memantau kesehatan ekologi perairan secara holistik. Saat komunitas mikroba seimbang (Shannon tinggi), patogen alami tidak bisa berkembang biak menjadi wabah.
+        </p>
+      </div>
+
+      <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 text-xs space-y-1">
+        <span class="text-slate-400 block font-mono text-[10px]">RUMUS SHANNON (H'):</span>
+        <div class="text-indigo-300 font-bold mono">H' = - ∑ [ p(i) × ln p(i) ]</div>
+      </div>
+    </div>
+
+    <!-- Main Grid: Interactive Sliders vs Live Ecosystem Pie Chart -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Sliders Column (5 cols) -->
+      <div class="lg:col-span-5 bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-5">
+        <div class="flex justify-between items-center">
+          <h3 class="text-sm font-bold text-white">Komposisi Komunitas Mikroba Kolam</h3>
+          <button onclick="setScenario('healthy')" class="text-xs text-indigo-400 hover:underline">Reset Sehat</button>
+        </div>
+
+        <!-- Presets -->
+        <div class="grid grid-cols-3 gap-1.5 text-xs">
+          <button onclick="setScenario('healthy')" class="p-2 rounded-lg bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 font-semibold text-center text-[11px]">
+            🌿 Ekosistem Stabil
+          </button>
+          <button onclick="setScenario('stressed')" class="p-2 rounded-lg bg-amber-950/60 border border-amber-800/60 text-amber-300 font-semibold text-center text-[11px]">
+            ⚠️ Stres Lingkungan
+          </button>
+          <button onclick="setScenario('collapse')" class="p-2 rounded-lg bg-rose-950/60 border border-rose-800/60 text-rose-300 font-semibold text-center text-[11px]">
+            🚨 Disbiosis Akut
+          </button>
+        </div>
+
+        <!-- Taxa 1: Probiotik Alami -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs">
+            <span class="text-emerald-400 font-medium">Bakteri Penyeimbang & Probiotik</span>
+            <span id="lbl-t1" class="font-bold text-emerald-400 mono">35%</span>
+          </div>
+          <input type="range" id="sl-t1" min="1" max="80" value="35" oninput="calcBiodiversity()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+          <span class="text-[10px] text-slate-400">Rhodobacteraceae, Bacillus (Pengurai sisa pakan amonia).</span>
+        </div>
+
+        <!-- Taxa 2: Mikroba Komensal Netral -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs">
+            <span class="text-cyan-400 font-medium">Mikroba Komensal Netral Lainnya</span>
+            <span id="lbl-t2" class="font-bold text-cyan-400 mono">40%</span>
+          </div>
+          <input type="range" id="sl-t2" min="1" max="80" value="40" oninput="calcBiodiversity()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+          <span class="text-[10px] text-slate-400">Flavobacteriaceae, Planctomycetes (Komunitas alami air payau).</span>
+        </div>
+
+        <!-- Taxa 3: Bakteri Oportunistik Vibrio Biasa -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs">
+            <span class="text-amber-400 font-medium">Vibrio Alami Non-Toksin</span>
+            <span id="lbl-t3" class="font-bold text-amber-400 mono">20%</span>
+          </div>
+          <input type="range" id="sl-t3" min="1" max="80" value="20" oninput="calcBiodiversity()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500">
+          <span class="text-[10px] text-slate-400">Vibrio non-patogenik (Normal ada di semua tambak pesisir).</span>
+        </div>
+
+        <!-- Taxa 4: Vibrio Patogenik Pembawa pirAB -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs">
+            <span class="text-rose-400 font-medium">Vibrio Patogenik (pirAB Toksin Positif)</span>
+            <span id="lbl-t4" class="font-bold text-rose-400 mono">5%</span>
+          </div>
+          <input type="range" id="sl-t4" min="0" max="60" value="5" oninput="calcBiodiversity()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-rose-500">
+          <span class="text-[10px] text-slate-400">Penyebab wabah AHPND (Mortalitas 100% jika meledak).</span>
+        </div>
+
+      </div>
+
+      <!-- Charts & Computed Metrics (7 cols) -->
+      <div class="lg:col-span-7 space-y-4">
+        
+        <!-- Live Biodiversity Metrics -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-1 card-glow">
+            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Shannon Index (H')</span>
+            <div id="metric-shannon" class="text-2xl font-black text-indigo-400 mono">1.28</div>
+            <span id="badge-shannon" class="text-[11px] font-semibold text-emerald-400">Keragaman Tinggi</span>
+          </div>
+
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-1 card-glow">
+            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Estimator Chao1</span>
+            <div id="metric-chao1" class="text-2xl font-black text-cyan-400 mono">48 Jenis</div>
+            <span class="text-[11px] text-slate-400">Termasuk taksa langka</span>
+          </div>
+
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-1 card-glow">
+            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Bray-Curtis Shift</span>
+            <div id="metric-bc" class="text-2xl font-black text-amber-400 mono">0.18</div>
+            <span id="badge-bc" class="text-[11px] font-semibold text-slate-400">Pergeseran Rendah</span>
+          </div>
+
+        </div>
+
+        <!-- Chart Container: Community Distribution -->
+        <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-3">
+          <div class="flex justify-between items-center">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-white">Visualisasi Struktur Mikrobioma Air</h4>
+            <span id="lbl-status-ekosistem" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800">
+              EKOSISTEM STABIL
+            </span>
+          </div>
+
+          <div class="h-56 flex items-center justify-center">
+            <canvas id="chart-microbiome"></canvas>
+          </div>
+
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs text-slate-300 leading-relaxed">
+            <strong class="text-indigo-300">Hubungan ke Ketahanan Pangan:</strong>
+            <span id="desc-ekologi">
+              Komunitas bakteri seimbang menekan populasi patogen melalui kompetisi ruang dan nutrien. Udang tumbuh sehat tanpa antibiotik kimiawi.
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Biodiversity Track Callout for Presentation -->
+    <div class="bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900 p-5 rounded-2xl border border-indigo-800/40 space-y-2">
+      <h4 class="text-sm font-bold text-white flex items-center gap-2">
+        <span>🌊</span> Poin Pertahanan Diri di Depan Juri Track 2 Biodiversity:
+      </h4>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        "Pak Juri, banyak tim hanya mengukur apakah ada penyakit atau tidak. AquaSeq mengadopsi <strong>paradigma ekologi mikroba</strong>: air tambak adalah ekosistem hidup. Penurunan Shannon Index dan pergeseran Bray-Curtis memberi sinyal stres ekosistem <em>sebelum</em> patogen berlipat ganda. Kami memantau biodiversitas untuk mencegah kematian massal sekaligus menghentikan penggunaan antibiotik liar yang mencemari kawasan pesisir Indonesia."
+      </p>
+    </div>
+
+  </main>
+
+  <script>
+    let chartMicrobiome = null;
+
+    function initChart() {
+      const ctx = document.getElementById('chart-microbiome').getContext('2d');
+      chartMicrobiome = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: [
+            'Bakteri Penyeimbang & Probiotik',
+            'Mikroba Komensal Netral',
+            'Vibrio Alami Non-Toksin',
+            'Vibrio Patogenik (pirAB+)'
+          ],
+          datasets: [{
+            data: [35, 40, 20, 5],
+            backgroundColor: [
+              'rgba(16, 185, 129, 0.8)',
+              'rgba(6, 182, 212, 0.8)',
+              'rgba(245, 158, 11, 0.8)',
+              'rgba(244, 63, 94, 0.8)'
+            ],
+            borderColor: '#0f172a',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { color: '#94a3b8', boxWidth: 10, font: { size: 10 } }
+            }
+          },
+          cutout: '60%'
+        }
+      });
+    }
+
+    function calcBiodiversity() {
+      const t1 = parseFloat(document.getElementById('sl-t1').value);
+      const t2 = parseFloat(document.getElementById('sl-t2').value);
+      const t3 = parseFloat(document.getElementById('sl-t3').value);
+      const t4 = parseFloat(document.getElementById('sl-t4').value);
+
+      const total = t1 + t2 + t3 + t4;
+      const p1 = t1 / total;
+      const p2 = t2 / total;
+      const p3 = t3 / total;
+      const p4 = t4 / total;
+
+      document.getElementById('lbl-t1').innerText = Math.round(p1 * 100) + '%';
+      document.getElementById('lbl-t2').innerText = Math.round(p2 * 100) + '%';
+      document.getElementById('lbl-t3').innerText = Math.round(p3 * 100) + '%';
+      document.getElementById('lbl-t4').innerText = Math.round(p4 * 100) + '%';
+
+      // Shannon H = - sum(p * ln(p))
+      let H = 0;
+      [p1, p2, p3, p4].forEach(p => {
+        if (p > 0) {
+          H -= p * Math.log(p);
+        }
+      });
+
+      document.getElementById('metric-shannon').innerText = H.toFixed(2);
+
+      // Status logic
+      const badgeH = document.getElementById('badge-shannon');
+      const badgeStatus = document.getElementById('lbl-status-ekosistem');
+      const descEko = document.getElementById('desc-ekologi');
+
+      if (H >= 1.25 && p4 <= 0.08) {
+        badgeH.innerText = 'Keragaman Tinggi (Seimbang)';
+        badgeH.className = 'text-[11px] font-semibold text-emerald-400';
+        badgeStatus.innerText = 'EKOSISTEM STABIL';
+        badgeStatus.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800';
+        document.getElementById('metric-bc').innerText = '0.12';
+        document.getElementById('desc-ekologi').innerText = 'Komunitas bakteri beragam dan merata. Bakteri baik mendominasi relung makanan, menekan patogen agar tidak dapat memicu infeksi.';
+      } else if (H >= 0.95 && p4 <= 0.20) {
+        badgeH.innerText = 'Keragaman Menurun (Stres)';
+        badgeH.className = 'text-[11px] font-semibold text-amber-400';
+        badgeStatus.innerText = 'STRES LINGKUNGAN / WASPADA';
+        badgeStatus.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-amber-950 text-amber-400 border border-amber-800';
+        document.getElementById('metric-bc').innerText = '0.38';
+        document.getElementById('desc-ekologi').innerText = 'Keseimbangan mikrobioma mulai bergeser. Vibrio meningkat. Waktu terbaik untuk intervensi budidaya (kurangi pakan, sipon lumpur dasar).';
+      } else {
+        badgeH.innerText = 'Keruntuhan Keragaman (Disbiosis)';
+        badgeH.className = 'text-[11px] font-semibold text-rose-400';
+        badgeStatus.innerText = 'KERUNTUHAN MIKROBIOMA (KRISIS)';
+        badgeStatus.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-rose-950 text-rose-400 border border-rose-800';
+        document.getElementById('metric-bc').innerText = '0.68';
+        document.getElementById('desc-ekologi').innerText = 'Satu taksa patogen mendominasi perairan. Udang dalam bahaya kematian massal 100% jika tidak segera diambil tindakan darurat.';
+      }
+
+      // Update Chart
+      if (chartMicrobiome) {
+        chartMicrobiome.data.datasets[0].data = [t1, t2, t3, t4];
+        chartMicrobiome.update();
+      }
+    }
+
+    function setScenario(scen) {
+      if (scen === 'healthy') {
+        document.getElementById('sl-t1').value = 40;
+        document.getElementById('sl-t2').value = 40;
+        document.getElementById('sl-t3').value = 18;
+        document.getElementById('sl-t4').value = 2;
+      } else if (scen === 'stressed') {
+        document.getElementById('sl-t1').value = 20;
+        document.getElementById('sl-t2').value = 25;
+        document.getElementById('sl-t3').value = 40;
+        document.getElementById('sl-t4').value = 15;
+      } else if (scen === 'collapse') {
+        document.getElementById('sl-t1').value = 5;
+        document.getElementById('sl-t2').value = 10;
+        document.getElementById('sl-t3').value = 35;
+        document.getElementById('sl-t4').value = 50;
+      }
+      calcBiodiversity();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initChart();
+      calcBiodiversity();
+    });
+  </script>
+</body>
+</html>

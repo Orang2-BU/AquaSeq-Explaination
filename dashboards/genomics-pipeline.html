@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaSeq · Interactive Wet-to-Dry Pipeline Visualizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #070b12; color: #f8fafc; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .step-active { border-color: #06b6d4; background: rgba(6, 182, 212, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#070b12]">
+
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-30 px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="text-xs text-slate-400 hover:text-cyan-400">← Portal Utama</a>
+      <span class="text-slate-700">|</span>
+      <h1 class="text-sm font-bold text-white flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-400 border border-purple-800 text-xs">PIPELINE VISUALIZER</span>
+        Simulasi Alur Genomik & Algoritma AI (Wet to Dry)
+      </h1>
+    </div>
+    <span class="text-xs text-slate-400 hidden sm:block">Filtlong · EM-Silva138 · Profile HMM · Elastic Net</span>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- Top Controller: Sample Selector -->
+    <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 p-5 rounded-2xl border border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div>
+        <h2 class="text-lg font-bold text-white">Simulasi Analisis Sampel Lapangan Real-Time</h2>
+        <p class="text-xs text-slate-400 mt-0.5">Pilih skenario tambak di bawah untuk melihat bagaimana data mengalir dari air kolam sampai notifikasi WhatsApp.</p>
+      </div>
+
+      <div class="flex items-center gap-2 w-full sm:w-auto">
+        <select id="sel-scenario" onchange="runSimulation()" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-semibold text-white focus:outline-none focus:border-cyan-500 flex-1 sm:flex-initial">
+          <option value="healthy">🟢 Kolam A-01: DOC 14 (Mikrobioma Sehat & Seimbang)</option>
+          <option value="watch" selected>🟡 Kolam B-02: DOC 28 (Sinyal Awal Disbiosis / Waspada)</option>
+          <option value="critical">🔴 Kolam C-03: DOC 35 (Wabah AHPND Akut / Bahaya Tinggi)</option>
+        </select>
+        <button onclick="runSimulation()" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs whitespace-nowrap shadow-lg shadow-cyan-600/20">
+          ⚡ Jalankan Ulang
+        </button>
+      </div>
+    </div>
+
+    <!-- 6-Stage Pipeline Steps Navigation -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5" id="steps-nav">
+      
+      <div onclick="selectStep(1)" id="step-btn-1" class="step-card p-3 rounded-xl border border-slate-800 bg-slate-950/60 cursor-pointer transition text-xs space-y-1 step-active">
+        <div class="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+          <span>STEP 01</span>
+          <span>WET-LAB</span>
+        </div>
+        <div class="font-bold text-slate-200">Sampling eDNA</div>
+        <div class="text-[10px] text-slate-400">Filter 1L air kolam</div>
+      </div>
+
+      <div onclick="selectStep(2)" id="step-btn-2" class="step-card p-3 rounded-xl border border-slate-800 bg-slate-950/60 cursor-pointer transition text-xs space-y-1">
+        <div class="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+          <span>STEP 02</span>
+          <span>WET-LAB</span>
+        </div>
+        <div class="font-bold text-slate-200">Nanopore Run</div>
+        <div class="text-[10px] text-slate-400">16S + Marka Multiplex</div>
+      </div>
+
+      <div onclick="selectStep(3)" id="step-btn-3" class="step-card p-3 rounded-xl border border-slate-800 bg-slate-950/60 cursor-pointer transition text-xs space-y-1">
+        <div class="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+          <span>STEP 03</span>
+          <span>BIOINFORMATICS</span>
+        </div>
+        <div class="font-bold text-slate-200">QC & CLR Normal</div>
+        <div class="text-[10px] text-slate-400">Hapus bias proporsi</div>
+      </div>
+
+      <div onclick="selectStep(4)" id="step-btn-4" class="step-card p-3 rounded-xl border border-slate-800 bg-slate-950/60 cursor-pointer transition text-xs space-y-1">
+        <div class="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+          <span>STEP 04</span>
+          <span>GENOMICS</span>
+        </div>
+        <div class="font-bold text-slate-200">Lacak Toksin pirAB</div>
+        <div class="text-[10px] text-slate-400">Profile HMM plasmid</div>
+      </div>
+
+      <div onclick="selectStep(5)" id="step-btn-5" class="step-card p-3 rounded-xl border border-slate-800 bg-slate-950/60 cursor-pointer transition text-xs space-y-1">
+        <div class="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+          <span>STEP 05</span>
+          <span>AI ENGINE</span>
+        </div>
+        <div class="font-bold text-slate-200">Skor Disbiosis</div>
+        <div class="text-[10px] text-slate-400">Shannon & Elastic Net</div>
+      </div>
+
+      <div onclick="selectStep(6)" id="step-btn-6" class="step-card p-3 rounded-xl border border-slate-800 bg-slate-950/60 cursor-pointer transition text-xs space-y-1">
+        <div class="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+          <span>STEP 06</span>
+          <span>DECISION</span>
+        </div>
+        <div class="font-bold text-slate-200">qPCR & WhatsApp</div>
+        <div class="text-[10px] text-slate-400">3-5 Marka & Aksi Petani</div>
+      </div>
+
+    </div>
+
+    <!-- Main Detail Viewer of Selected Step -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Stage Deep Dive (7 cols) -->
+      <div class="lg:col-span-7 bg-slate-900 rounded-2xl border border-slate-800 p-6 space-y-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <span id="detail-tag" class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950 text-cyan-400 border border-cyan-800">TAHAP 1</span>
+            <h3 id="detail-title" class="text-lg font-bold text-white mt-1">Sampling eDNA Air Kolam</h3>
+          </div>
+          <span id="detail-runtime" class="text-xs text-slate-400 mono">Waktu: ~15 Menit</span>
+        </div>
+
+        <div id="detail-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <!-- Description -->
+        </div>
+
+        <!-- Interactive Terminal Output Box -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between items-center text-xs text-slate-400">
+            <span class="mono">Terminal / Execution Log</span>
+            <span class="text-[10px] text-emerald-400">● Live Pipeline Output</span>
+          </div>
+          <div id="detail-log" class="bg-slate-950 p-4 rounded-xl border border-slate-800 mono text-xs text-slate-300 h-52 overflow-y-auto space-y-1">
+            <!-- Simulated logs -->
+          </div>
+        </div>
+
+        <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-xs text-slate-300">
+          <strong class="text-cyan-300">Poin Penting untuk Juri:</strong>
+          <span id="detail-judge-note">Poin penjelasan</span>
+        </div>
+      </div>
+
+      <!-- Live Results & WhatsApp Preview (5 cols) -->
+      <div class="lg:col-span-5 space-y-4">
+        
+        <!-- Live Computed Risk Metric Card -->
+        <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Hasil Kalkulasi Engine Saat Ini</h4>
+          
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-0.5">
+              <span class="text-[10px] text-slate-400">Shannon Diversity Index</span>
+              <div id="res-shannon" class="text-lg font-bold text-cyan-400 mono">2.14</div>
+              <span id="res-shannon-status" class="text-[10px] text-amber-400">Pergeseran sedang</span>
+            </div>
+
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-0.5">
+              <span class="text-[10px] text-slate-400">Deteksi Gen pirAB</span>
+              <div id="res-pirab" class="text-lg font-bold text-amber-400 mono">Positif (Low)</div>
+              <span class="text-[10px] text-slate-400">Plasmid pVA1</span>
+            </div>
+          </div>
+
+          <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400">Skor Risiko Disbiosis Terhitung:</span>
+              <div id="res-score" class="text-2xl font-black text-amber-400 mono">0.58</div>
+            </div>
+            <div id="res-level-badge" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-950 text-amber-400 border border-amber-800">
+              WASPADA (BAND II)
+            </div>
+          </div>
+
+          <!-- Marka qPCR Terpilih -->
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1.5 text-xs">
+            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">3 Marka qPCR Rekomendasi Mingguan:</span>
+            <div id="res-markers" class="space-y-1 text-slate-300 mono text-[11px]">
+              <div>1. <span class="text-cyan-400">V. parahaemolyticus gyrB</span> (Primer VP-F/R)</div>
+              <div>2. <span class="text-rose-400">pirA / pirB toxin gene</span> (Primer AP4-F/R)</div>
+              <div>3. <span class="text-emerald-400">Rhodobacteraceae 16S</span> (Probiotik penyeimbang)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp Phone Mockup -->
+        <div class="bg-slate-900 rounded-2xl border border-slate-800 p-4 space-y-2">
+          <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2">
+            <span class="flex items-center gap-1.5 font-semibold text-emerald-400">
+              <span>💬</span> WhatsApp Peringatan Petambak
+            </span>
+            <span class="mono text-[10px] text-slate-500">Live Delivery</span>
+          </div>
+
+          <div class="bg-[#0b141a] p-3 rounded-xl border border-slate-800 text-xs space-y-2">
+            <div class="bg-[#202c33] p-3 rounded-lg text-slate-200 space-y-1.5 shadow">
+              <div class="flex justify-between items-center text-[10px] border-b border-slate-700/60 pb-1 text-emerald-400 font-bold">
+                <span>⚠️ AQUASEQ EARLY-WARNING</span>
+                <span class="text-slate-400">10:42 AM</span>
+              </div>
+              <div id="wa-body" class="text-xs leading-relaxed text-slate-200">
+                <!-- WhatsApp text -->
+              </div>
+            </div>
+            <div class="text-[10px] text-center text-slate-500">
+              Pesan dikirim otomatis via WhatsApp Business API tanpa membuka laptop.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    let activeStep = 1;
+
+    const pipelineData = {
+      healthy: {
+        shannon: "3.42",
+        shannonStatus: "Normal & Sangat Beragam",
+        shannonColor: "text-emerald-400",
+        pirab: "Negatif (0 Read)",
+        pirabColor: "text-emerald-400",
+        score: "0.14",
+        scoreColor: "text-emerald-400",
+        levelBadge: "AMAN (BAND I)",
+        badgeStyle: "bg-emerald-950 text-emerald-400 border border-emerald-800",
+        markers: [
+          "1. Total 16S Bacterial Biomass (Baseline normal)",
+          "2. Bacillus subtilis amylase gene (Probiotik aktif)",
+          "3. Nitrobacteraceae nxrA (Siklus nitrogen sehat)"
+        ],
+        wa: `Halo Pak Slamet (Tambak Situbondo B-01).<br><br>
+        ✅ <strong>STATUS AIR: AMAN (BAND I)</strong><br>
+        Hasil uji eDNA DOC 14 menunjukkan komunitas mikroba sangat stabil (Shannon Index 3.42) dan tidak ditemukan gen racun pirAB.<br><br>
+        <strong>Rekomendasi Hari Ini:</strong> Pertahankan pola pakan standar dan aerasi normal. Uji qPCR minggu depan dijadwalkan pada 28 Oktober 2026.`
+      },
+      watch: {
+        shannon: "2.14",
+        shannonStatus: "Pergeseran Komunitas (Disbiosis Awal)",
+        shannonColor: "text-amber-400",
+        pirab: "Positif Lemah (18 Reads)",
+        pirabColor: "text-amber-400",
+        score: "0.58",
+        scoreColor: "text-amber-400",
+        levelBadge: "WASPADA (BAND II)",
+        badgeStyle: "bg-amber-950 text-amber-400 border border-amber-800",
+        markers: [
+          "1. V. parahaemolyticus gyrB (Primer VP-F/R)",
+          "2. pirA/pirB virulence plasmid (Primer AP4-F/R)",
+          "3. Rhodobacteraceae log-ratio (Penyeimbang)"
+        ],
+        wa: `Halo Pak Slamet (Tambak Situbondo B-02).<br><br>
+        ⚠️ <strong>STATUS AIR: WASPADA (BAND II)</strong><br>
+        Terdeteksi sinyal pergeseran mikrobioma di DOC 28. Keragaman turun ke 2.14 dan terdeteksi salinan awal gen toksin pirAB.<br><br>
+        <strong>Rekomendasi Aksi Cepat:</strong><br>
+        1. Kurangi pakan sebesar 15–20% untuk menekan limbah organik.<br>
+        2. Lakukan sipon dasar kolam sore ini untuk buang sedimen amonia.<br>
+        3. Tambahkan aerasi kincir malam hari.<br><br>
+        Tim AquaSeq memilih 3 marka qPCR di atas untuk pemantauan intensif 3 hari ke depan.`
+      },
+      critical: {
+        shannon: "0.89",
+        shannonStatus: "Keruntuhan Total Mikrobioma (Disbiosis Akut)",
+        shannonColor: "text-rose-400",
+        pirab: "Positif Tinggi (482 Reads)",
+        pirabColor: "text-rose-400",
+        score: "0.89",
+        scoreColor: "text-rose-400",
+        levelBadge: "TINGGI (BAND III)",
+        badgeStyle: "bg-rose-950 text-rose-400 border border-rose-800",
+        markers: [
+          "1. pirAB dual-toxin transcript (qPCR konfirmasi)",
+          "2. Vibrio parahaemolyticus pathogenic strain",
+          "3. Vibrio harveyi luminescent indicator"
+        ],
+        wa: `🚨 <strong>PERINGATAN KRITIS: BAHAYA TINGGI (BAND III)</strong><br><br>
+        Kolam C-03 (DOC 35) mengalami keruntuhan keragaman mikroba drastis (Shannon 0.89) didominasi oleh Vibrio pembawa toksin pirAB (AHPND terkonfirmasi).<br><br>
+        <strong>TINDAKAN DARURAT HARI INI:</strong><br>
+        1. Hentikan pemberian pakan 30% segera.<br>
+        2. Desinfeksi air buangan sebelum keluar dari saluran IPAL tambak.<br>
+        3. Bersiap lakukan panen darurat selektif bila mortalitas fisik teramati di anco pakan.<br><br>
+        Laporan lengkap telah dikirimkan ke email pemilik tambak.`
+      }
+    };
+
+    const stepDetails = {
+      1: {
+        title: "Sampling eDNA Air Kolam",
+        tag: "TAHAP 01 · WET-LAB",
+        time: "~15 Menit di Tepi Kolam",
+        desc: "Teknisi lapangan mengambil 1 liter air kolam dari 4 titik representatif, lalu menyaringnya menggunakan spuit steril dengan membran filter PES 0.22 μm. Membran filter menahan seluruh sel bakteri, mikroalga, dan partikel virus bebas tanpa perlu menangkap udang.",
+        judge: "eDNA bersifat non-invasif. Menghindari stres pada udang dan bisa dilakukan rutin oleh teknisi kolam biasa.",
+        log: `[08:15:10] Inisiator sampling: Teknisi Kolam Situbondo
+[08:16:02] Volume sampel air: 1.000 mL (Pooled 4 titik)
+[08:18:40] Filtrasi membran Sterivex 0.22 um selesai
+[08:20:15] Penambahan larutan buffer lisis & pengawet DNA
+[08:22:00] Sampel disegel kode lot: LOT-STB-20261020-B02
+[08:22:30] Status: Siap dikirim rantai dingin ke Lab Mitra (BBPBAP Situbondo)`
+      },
+      2: {
+        title: "Sekuensing Oxford Nanopore (MinION)",
+        tag: "TAHAP 02 · SEQUENCING",
+        time: "~4 Jam di Lab Mitra",
+        desc: "DNA diekstraksi secara cepat dan diamplifikasi untuk gen 16S rRNA panjang penuh (V1-V9) serta amplikon gen virulensi spesifik. Sampel diberi barcode unik dan dimultiplex hingga 75 sampel per flowcell R10.4.1 untuk menekan biaya hingga Rp 300.000 per tes.",
+        judge: "Multiplexing 75 sampel adalah kunci rahasia unit economics kita. Menggunakan kimia V14 Nanopore yang akurasinya setara Illumina (Juanpere-Borras 2026).",
+        log: `[10:30:12] Memulai basecalling real-time Dorado (Super-accurate model)
+[10:35:45] Flowcell ID: FLO-MIN114 · Chemistry: R10.4.1 (V14)
+[11:00:22] Total reads dihasilkan: 2.450.000 reads
+[11:15:30] Demultiplexing barcode: Barcode_14 (LOT-STB-B02)
+[11:20:10] Alokasi reads untuk sampel B-02: 182.400 reads
+[11:22:00] Status: Berkas FastQ mentah dikirim ke AquaSeq Cloud Engine API`
+      },
+      3: {
+        title: "QC Penyaringan Mutu & Transformasi CLR",
+        tag: "TAHAP 03 · BIOINFORMATICS",
+        time: "~8 Menit di Server",
+        desc: "Pipeline Python menjalankan Filtlong untuk membuang reads dengan skor kualitas rendah (Q < 10) atau panjang tidak sesuai (<1.200 bp). Selanjutnya data kelimpahan taksa ditransformasi menggunakan Centered Log-Ratio (CLR) agar bebas dari ilusi persentase komposisional.",
+        judge: "Data 16S adalah data proporsi (komposisional). Menggunakan log-ratio (CLR) mencegah kesalahan diagnosis semu jika satu bakteri melonjak.",
+        log: `[11:23:01] Worker Celery menerima FastQ payload (182.400 reads)
+[11:24:12] Running Filtlong QC: min_length=1200, min_mean_q=10
+[11:25:05] Reads lolos QC: 168.910 reads (92.6% pass rate)
+[11:26:40] Klasifikasi taksonomi Silva 138 Naive Bayes
+[11:27:10] Mengaplikasikan Centered Log-Ratio (CLR) pada matriks kelimpahan
+[11:27:50] Batch effect correction terhadap baseline kolam Jawa Timur selesai`
+      },
+      4: {
+        title: "Pencarian Toksin virulensi pirAB (Profile HMM)",
+        tag: "TAHAP 04 · VIRULENCE DETECTION",
+        time: "~3 Menit di Server",
+        desc: "Engine menjalankan pencocokan Profile HMM terhadap pustaka gen toksin plasmid pVA1 (pirA dan pirB). HMM mampu mendeteksi varian gen racun meskipun mengalami mutasi atau delesi urutan basa yang sering kali lolos dari primer PCR konvensional.",
+        judge: "Vibrio biasa ada di semua tambak. Yang mematikan adalah gen toksin pirAB. Mencari gen senjatanya jauh lebih spesifik daripada sekadar menghitung bakteri Vibrio.",
+        log: `[11:28:10] Memuat Profile HMM: pVA1_pirA_toxin.hmm & pirB_toxin.hmm
+[11:29:05] Scanning 168.910 filtered reads...
+[11:29:45] Match terdeteksi: pirA bitscore=342.1 (E-value: 2.1e-45)
+[11:30:10] Match terdeteksi: pirB bitscore=418.6 (E-value: 1.4e-60)
+[11:30:25] Kepadatan salinan relatif gen racun: 18 reads terkonfirmasi
+[11:30:40] Flag virulensi: POSITIF AKTIF (Plasmid pVA1 hadir di kolam)`
+      },
+      5: {
+        title: "Perhitungan Indeks Keragaman & Skor Disbiosis",
+        tag: "TAHAP 05 · AI PREDICTION",
+        time: "~2 Menit di Server",
+        desc: "Mesin menghitung Shannon Diversity Index dan Bray-Curtis dissimilarity terhadap baseline normal kolam pada DOC 28. Fitur-fitur ini dimasukkan ke model Elastic Net (Logistic Regression ter-regularisasi) untuk menghasilkan skor risiko terkalibrasi antara 0,00 hingga 1,00.",
+        judge: "Kami tidak memakai Deep Learning kotak hitam karena data berlabel masih ratusan sampel. Elastic Net transparan (explainable AI) dan koefisiennya bisa dipertanggungjawabkan di depan juri.",
+        log: `[11:31:00] Menghitung Shannon Index (H') = 2.14 (Baseline normal DOC 28 = 3.10)
+[11:31:20] Menghitung Bray-Curtis dissimilarity terhadap sampling minggu lalu = 0.42
+[11:31:45] Menginput ke model Elastic Net terkalibrasi conformal
+[11:32:10] SHAP Attribution: +0.28 (pirAB), +0.18 (Shannon collapse), +0.12 (Vibrio ratio)
+[11:32:30] Nilai Prediksi Probabilitas Risiko: 0.58
+[11:32:45] Band Klasifikasi Terpilih: WASPADA (BAND II)`
+      },
+      6: {
+        title: "Seleksi Marka qPCR & Pengiriman WhatsApp",
+        tag: "TAHAP 06 · DECISION & ACTION",
+        time: "~1 Menit",
+        desc: "Algoritma Stability Selection memilih 3–5 marka spesifik yang paling optimal dari segi biaya dan sensitivitas untuk dipantau dengan qPCR murah setiap minggu. Di saat yang sama, LLM Guardrail menyusun pesan WhatsApp berbahasa Indonesia dan mengirimkannya ke nomor teknisi kolam.",
+        judge: "LLM kami tidak pernah membuat angka atau skor risiko sendiri. LLM hanya menerjemahkan payload angka deterministik dari pipeline menjadi instruksi bahasa Indonesia.",
+        log: `[11:33:00] Algoritma Stability Selection (Knapsack Cost constraint <= Rp 75.000)
+[11:33:15] Marka qPCR terpilih: 1) gyrB, 2) pirA/pirB, 3) Rhodobacteraceae
+[11:33:30] Guardrail LLM memformat payload JSON menjadi pesan Bahasa Indonesia
+[11:33:45] Validasi template guardrail: PASS (No halluncination detected)
+[11:34:00] Mengirim WhatsApp via Gateway ke: +62 812-3456-7890 (Pak Slamet)
+[11:34:10] Status pesan: DELIVERED & READ`
+      }
+    };
+
+    function selectStep(stepNum) {
+      activeStep = stepNum;
+      for (let i = 1; i <= 6; i++) {
+        const btn = document.getElementById(`step-btn-${i}`);
+        if (i === stepNum) {
+          btn.className = 'step-card p-3 rounded-xl border border-cyan-500 bg-cyan-950/20 cursor-pointer transition text-xs space-y-1 step-active';
+        } else {
+          btn.className = 'step-card p-3 rounded-xl border border-slate-800 bg-slate-950/60 cursor-pointer transition text-xs space-y-1';
+        }
+      }
+
+      const info = stepDetails[stepNum];
+      document.getElementById('detail-tag').innerText = info.tag;
+      document.getElementById('detail-title').innerText = info.title;
+      document.getElementById('detail-runtime').innerText = `Waktu: ${info.time}`;
+      document.getElementById('detail-desc').innerText = info.desc;
+      document.getElementById('detail-judge-note').innerText = info.judge;
+      document.getElementById('detail-log').innerText = info.log;
+    }
+
+    function runSimulation() {
+      const scenarioKey = document.getElementById('sel-scenario').value;
+      const data = pipelineData[scenarioKey];
+
+      document.getElementById('res-shannon').innerText = data.shannon;
+      document.getElementById('res-shannon-status').innerText = data.shannonStatus;
+      document.getElementById('res-shannon-status').className = `text-[10px] ${data.shannonColor}`;
+
+      document.getElementById('res-pirab').innerText = data.pirab;
+      document.getElementById('res-pirab').className = `text-lg font-bold mono ${data.pirabColor}`;
+
+      document.getElementById('res-score').innerText = data.score;
+      document.getElementById('res-score').className = `text-2xl font-black mono ${data.scoreColor}`;
+
+      document.getElementById('res-level-badge').innerText = data.levelBadge;
+      document.getElementById('res-level-badge').className = `px-3 py-1.5 rounded-lg text-xs font-bold ${data.badgeStyle}`;
+
+      const markersContainer = document.getElementById('res-markers');
+      markersContainer.innerHTML = data.markers.map(m => `<div>${m}</div>`).join('');
+
+      document.getElementById('wa-body').innerHTML = data.wa;
+
+      selectStep(activeStep);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      runSimulation();
+    });
+  </script>
+</body>
+</html>

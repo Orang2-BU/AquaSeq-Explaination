@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaSeq · Competitive Landscape & Moat Radar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #070c16; color: #f8fafc; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .card-glow { border: 1px solid rgba(255,255,255,0.08); transition: all 0.2s ease-in-out; }
+    .card-glow:hover { border-color: rgba(6, 182, 212, 0.4); box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.15); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#070c16]">
+
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-30 px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="text-xs text-slate-400 hover:text-cyan-400">← Portal Utama</a>
+      <span class="text-slate-700">|</span>
+      <h1 class="text-sm font-bold text-white flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 text-xs">MARKET MOAT</span>
+        Radar Pesaing & Analisis Diferensiasi Mutlak
+      </h1>
+    </div>
+    <span class="text-xs text-slate-400 hidden sm:block">AquaSeq vs JALA vs PCR Lapangan vs Lab Konvensional</span>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- Top Callout -->
+    <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-950 text-cyan-400 border border-cyan-800/40 mb-2">
+          Kriteria D & G GenoHack (Diferensiasi & Keunggulan Sulit Ditiru)
+        </div>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white">Di Mana Posisi AquaSeq di Pasar?</h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
+          Juri investor akan selalu bertanya: <em>"Kenapa petambak gak pakai JALA aja? Kenapa gak pakai kit PCR biasa?"</em>. Halaman ini membuktikan kenapa AquaSeq menang mutlak.
+        </p>
+      </div>
+      <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-emerald-300 font-semibold flex items-center gap-2">
+        <span>🛡️ Moat:</span>
+        <span>Algoritma Pemilih Marka Dinamis + Baseline Kolam Lokal</span>
+      </div>
+    </div>
+
+    <!-- Main Grid: Radar Chart & Interactive Matrix -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Left: Interactive Radar Chart (5 cols) -->
+      <div class="lg:col-span-5 bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-4 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="text-sm font-bold text-white">Radar Kapabilitas Multi-Dimensi</h3>
+            <span class="text-[11px] text-cyan-400 font-mono">Skor 1 - 10</span>
+          </div>
+          <p class="text-xs text-slate-400">
+            Perbandingan 5 parameter kritis: deteksi biologis, kecepatan aksi, keterjangkauan biaya, jangkauan varian, dan bahasa petani.
+          </p>
+        </div>
+
+        <div class="h-72 flex items-center justify-center">
+          <canvas id="chart-radar"></canvas>
+        </div>
+
+        <!-- Competitor Legend Selector -->
+        <div class="space-y-1.5 pt-2 border-t border-slate-800">
+          <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Klik untuk Sorot Pesaing:</span>
+          <div class="flex flex-wrap gap-1.5 text-xs">
+            <button onclick="highlightComp(0)" class="px-2.5 py-1 rounded-lg bg-cyan-950 border border-cyan-800 text-cyan-300 font-semibold text-[11px]">
+              ⭐ AquaSeq (Kita)
+            </button>
+            <button onclick="highlightComp(1)" class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 text-[11px]">
+              JALA (IoT Air)
+            </button>
+            <button onclick="highlightComp(2)" class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 text-[11px]">
+              Kit PCR Lapangan
+            </button>
+            <button onclick="highlightComp(3)" class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 text-[11px]">
+              Lab Sentral Kampus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Detailed Comparison Matrix (7 cols) -->
+      <div class="lg:col-span-7 space-y-4">
+        
+        <!-- Interactive Card for Selected Competitor -->
+        <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-3">
+          <div class="flex justify-between items-center">
+            <span id="comp-type" class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950 text-cyan-400 border border-cyan-800">SOLUSI KITA</span>
+            <h3 id="comp-name" class="text-base font-bold text-white">AquaSeq Platform</h3>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800/80 space-y-1">
+              <span class="text-slate-400 block text-[10px]">Kelebihan / Kekuatan:</span>
+              <p id="comp-pros" class="text-emerald-300 font-medium leading-relaxed">
+                Menghubungkan sekuensing komunitas untuk deteksi ancaman baru dengan qPCR murah mingguan dan rekomendasi WhatsApp Bahasa Indonesia.
+              </p>
+            </div>
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800/80 space-y-1">
+              <span class="text-slate-400 block text-[10px]">Kelemahan / Celah:</span>
+              <p id="comp-cons" class="text-rose-300 font-medium leading-relaxed">
+                Belum memiliki data pilot multi-siklus di lapangan (saat ini TRL 3, target pilot TRL 5 dalam 12 bulan).
+              </p>
+            </div>
+          </div>
+
+          <!-- Strategy Response -->
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs space-y-1">
+            <span class="text-cyan-300 font-bold block">💡 Strategi Menghadapi Juri Soal Ini:</span>
+            <p id="comp-strategy" class="text-slate-300 leading-relaxed">
+              Tegaskan bahwa AquaSeq adalah satu-satunya solusi yang menggabungkan sekuensing (penemuan) dengan qPCR (pemantauan murah) dan bahasa petani.
+            </p>
+          </div>
+        </div>
+
+        <!-- The 3 Core Moats Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2 card-glow">
+            <div class="text-xl">🧬</div>
+            <h4 class="text-xs font-bold text-white">Moat 1: Dynamic Marker Selection</h4>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Algoritma optimasi kombinatorial yang memilih 3–5 marka qPCR paling kritis per biaya. Bukan tes panel kaku.
+            </p>
+          </div>
+
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2 card-glow">
+            <div class="text-xl">🗺️</div>
+            <h4 class="text-xs font-bold text-white">Moat 2: Proprietary Local Baseline</h4>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Database mikrobioma normal per umur budidaya (DOC) untuk pesisir tambak tropis Indonesia (Jatim).
+            </p>
+          </div>
+
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2 card-glow">
+            <div class="text-xl">🤝</div>
+            <h4 class="text-xs font-bold text-white">Moat 3: API Integration with JALA</h4>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Bukan menyaingi sensor IoT yang ada, melainkan menjadi mitra biologis via API yang terhubung ke puluhan ribu kolam.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Matrix Table -->
+    <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-4">
+      <h3 class="text-sm font-bold text-white">Matriks Perbandingan Fitur Komprehensif</h3>
+      
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-slate-800 text-slate-400">
+              <th class="py-2.5 px-3">Parameter Evaluasi</th>
+              <th class="py-2.5 px-3 text-cyan-400 bg-cyan-950/20 font-bold">AquaSeq (Platform Kita)</th>
+              <th class="py-2.5 px-3">JALA / Sensor Fisika-Kimia</th>
+              <th class="py-2.5 px-3">Kit PCR Lapangan</th>
+              <th class="py-2.5 px-3">Lab Konvensional</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800 text-slate-300">
+            <tr>
+              <td class="py-3 px-3 font-semibold text-white">Deteksi Mikroba / Patogen Hidup</td>
+              <td class="py-3 px-3 text-emerald-400 font-bold bg-cyan-950/20">✅ Ya (eDNA 16S + qPCR)</td>
+              <td class="py-3 px-3 text-rose-400">❌ Tidak (Hanya pH, suhu, DO)</td>
+              <td class="py-3 px-3 text-amber-400">⚠️ Terbatas (Hanya 1 target)</td>
+              <td class="py-3 px-3 text-emerald-400">✅ Ya (Kultur / PCR)</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold text-white">Deteksi Varian / Ancaman Baru</td>
+              <td class="py-3 px-3 text-emerald-400 font-bold bg-cyan-950/20">✅ Ya (Nanopore berkala)</td>
+              <td class="py-3 px-3 text-rose-400">❌ Buta</td>
+              <td class="py-3 px-3 text-rose-400">❌ Buta (Panel kaku)</td>
+              <td class="py-3 px-3 text-amber-400">⚠️ Butuh waktu riset lama</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold text-white">Kecepatan Hasil ke Petani</td>
+              <td class="py-3 px-3 text-emerald-400 font-bold bg-cyan-950/20">⚡ Hitungan jam (WhatsApp)</td>
+              <td class="py-3 px-3 text-emerald-400">⚡ Real-time (App)</td>
+              <td class="py-3 px-3 text-emerald-400">⚡ 2–3 Jam di lokasi</td>
+              <td class="py-3 px-3 text-rose-400">⏳ 3–7 Hari kerja</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold text-white">Biaya Monitoring Mingguan</td>
+              <td class="py-3 px-3 text-emerald-400 font-bold bg-cyan-950/20">💰 Sangat Murah (Rp 75rb/uji)</td>
+              <td class="py-3 px-3 text-amber-400">💰 Alat IoT awal Rp 5-15jt</td>
+              <td class="py-3 px-3 text-rose-400">💸 Rp 300rb–500rb / tes</td>
+              <td class="py-3 px-3 text-rose-400">💸 Rp 400rb–800rb / sampel</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-3 font-semibold text-white">Bahasa Output Keputusan</td>
+              <td class="py-3 px-3 text-emerald-400 font-bold bg-cyan-950/20">📱 Bahasa Indonesia (Aksi Tepi Kolam)</td>
+              <td class="py-3 px-3 text-emerald-400">📱 Grafik & Tabel aplikasi</td>
+              <td class="py-3 px-3 text-amber-400">⚠️ Pita gel / kurva Ct lab</td>
+              <td class="py-3 px-3 text-rose-400">📄 PDF teknis bahasa ilmiah</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let radarChart = null;
+
+    const competitorsData = [
+      {
+        name: "AquaSeq (Solusi Kita)",
+        type: "SOLUSI KITA",
+        typeBadge: "bg-cyan-950 text-cyan-400 border border-cyan-800",
+        scores: [9.5, 9.0, 8.5, 8.8, 9.5],
+        pros: "Menghubungkan sekuensing komunitas untuk deteksi ancaman baru dengan qPCR murah mingguan dan rekomendasi WhatsApp Bahasa Indonesia.",
+        cons: "Belum memiliki data pilot multi-siklus di lapangan (saat ini TRL 3, target pilot TRL 5 dalam 12 bulan).",
+        strategy: "Tegaskan bahwa AquaSeq adalah satu-satunya solusi yang menggabungkan sekuensing (penemuan) dengan qPCR (pemantauan murah) dan bahasa petani."
+      },
+      {
+        name: "JALA / Sensor IoT Fisika-Kimia",
+        type: "POTENTIAL PARTNER",
+        typeBadge: "bg-blue-950 text-blue-400 border border-blue-800",
+        scores: [2.0, 9.5, 7.0, 1.0, 8.5],
+        pros: "Aplikasi manajemen tambak sangat populer, integrasi sensor fisik bagus (pH, DO, suhu) dengan jaringan petambak luas.",
+        cons: "Buta total terhadap mikroorganisme hidup (patogen). Air tampak jernih dan normal, tapi udang mati mendadak.",
+        strategy: "Katakan: 'JALA adalah mitra potensial kami lewat integrasi API. Kami menambahkan biological layer yang selama ini mereka tidak miliki.'"
+      },
+      {
+        name: "Kit PCR Lapangan Konvensional",
+        type: "DIRECT TESTING COMPETITOR",
+        typeBadge: "bg-amber-950 text-amber-400 border border-amber-800",
+        scores: [6.5, 7.5, 4.0, 3.0, 4.0],
+        pros: "Bisa dibawa ke tambak, hasil keluar dalam 2-3 jam untuk patogen yang sudah diketahui.",
+        cons: "Sangat mahal per tes (Rp 300-500rb per pengujian), panel kaku (hanya menguji 1 target), tidak bisa melihat pergeseran mikrobioma kolam.",
+        strategy: "Katakan: 'PCR lapangan menguji apa yang dicurigai setelah udang tampak lesu. AquaSeq memantau pergeseran mikrobioma secara preventif sebelum gejala muncul.'"
+      },
+      {
+        name: "Laboratorium Sentral Kampus / Balai",
+        type: "OUTSOURCED TESTING",
+        typeBadge: "bg-purple-950 text-purple-400 border border-purple-800",
+        scores: [8.5, 3.0, 3.5, 6.0, 2.0],
+        pros: "Peralatan sangat lengkap, diakui secara akademis dan ilmiah.",
+        cons: "Sangat lambat (3-7 hari kerja). Saat hasil PDF teknis keluar, kolam udang sudah mati dan dibuang. Petani tidak paham istilah p-value atau CFU.",
+        strategy: "Katakan: 'Laboratorium sentral adalah mitra sekuensing kami (asset-light), sedangkan AquaSeq adalah otak komputasi dan pengambil keputusan cepat bagi petani.'"
+      }
+    ];
+
+    function initRadar() {
+      const ctx = document.getElementById('chart-radar').getContext('2d');
+      radarChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: [
+            'Deteksi Biologi',
+            'Kecepatan Aksi',
+            'Keterjangkauan Biaya',
+            'Jangkauan Varian',
+            'Bahasa Petani'
+          ],
+          datasets: [
+            {
+              label: 'AquaSeq',
+              data: competitorsData[0].scores,
+              backgroundColor: 'rgba(6, 182, 212, 0.3)',
+              borderColor: '#06b6d4',
+              pointBackgroundColor: '#06b6d4',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              borderWidth: 2
+            },
+            {
+              label: 'JALA (IoT Air)',
+              data: competitorsData[1].scores,
+              backgroundColor: 'rgba(59, 130, 246, 0.1)',
+              borderColor: 'rgba(59, 130, 246, 0.5)',
+              borderDash: [4, 4],
+              borderWidth: 1.5
+            },
+            {
+              label: 'Kit PCR Lapangan',
+              data: competitorsData[2].scores,
+              backgroundColor: 'rgba(245, 158, 11, 0.1)',
+              borderColor: 'rgba(245, 158, 11, 0.5)',
+              borderDash: [4, 4],
+              borderWidth: 1.5
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: { color: '#94a3b8', font: { size: 10 } }
+            }
+          },
+          scales: {
+            r: {
+              angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+              grid: { color: 'rgba(255, 255, 255, 0.08)' },
+              pointLabels: { color: '#cbd5e1', font: { size: 10, family: 'Plus Jakarta Sans' } },
+              ticks: { display: false, min: 0, max: 10 }
+            }
+          }
+        }
+      });
+    }
+
+    function highlightComp(idx) {
+      const c = competitorsData[idx];
+      document.getElementById('comp-name').innerText = c.name;
+      document.getElementById('comp-type').innerText = c.type;
+      document.getElementById('comp-type').className = `px-2 py-0.5 rounded text-[10px] font-bold ${c.typeBadge}`;
+      document.getElementById('comp-pros').innerText = c.pros;
+      document.getElementById('comp-cons').innerText = c.cons;
+      document.getElementById('comp-strategy').innerText = c.strategy;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initRadar();
+      highlightComp(0);
+    });
+  </script>
+</body>
+</html>

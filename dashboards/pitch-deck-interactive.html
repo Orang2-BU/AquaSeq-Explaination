@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaSeq · Interactive Pitch Deck & Presentation Simulator (3 Min)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080c14; color: #f8fafc; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .slide-active { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.1); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#080c14]">
+
+  <!-- Top bar -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-30 px-4 py-2.5 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="text-xs text-slate-400 hover:text-cyan-400">← Portal Utama</a>
+      <span class="text-slate-750">|</span>
+      <h1 class="text-sm font-bold text-white flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800 text-xs">PITCH SIMULATOR</span>
+        10 Slide Presentasi Hackathon (Target 180s)
+      </h1>
+    </div>
+
+    <!-- Rehearsal Stopwatch -->
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 bg-slate-950 px-3 py-1 rounded-lg border border-slate-800 text-xs">
+        <span class="text-slate-400">⏱️ Latihan Timer:</span>
+        <span id="timer-display" class="font-bold text-cyan-400 mono text-sm">00:00</span>
+        <span class="text-slate-500">/ 03:00</span>
+      </div>
+      <button onclick="toggleTimer()" id="btn-timer" class="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 font-medium">
+        Mulai Timer
+      </button>
+      <button onclick="resetTimer()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs text-slate-400">
+        Reset
+      </button>
+    </div>
+  </header>
+
+  <!-- Slide Viewer & Controls -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+    
+    <!-- Left: Slide Thumbnails List (4 cols) -->
+    <div class="lg:col-span-4 bg-slate-900/90 rounded-2xl border border-slate-800 p-4 flex flex-col h-[750px]">
+      <div class="flex justify-between items-center mb-3">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Daftar Slide (GenoHack 10-Slide Deck)</span>
+        <span id="slide-indicator" class="text-xs text-cyan-400 font-bold mono">Slide 1 / 10</span>
+      </div>
+
+      <div class="flex-1 overflow-y-auto space-y-2 pr-1 custom-scrollbar" id="thumbnails-container">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between gap-2">
+        <button onclick="prevSlide()" class="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200">
+          ← Sebelumnya
+        </button>
+        <button onclick="nextSlide()" class="flex-1 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-xs font-semibold text-white shadow-lg shadow-cyan-600/20">
+          Selanjutnya →
+        </button>
+      </div>
+    </div>
+
+    <!-- Right: Slide Display & Speaker Script (8 cols) -->
+    <div class="lg:col-span-8 space-y-4 flex flex-col h-[750px]">
+      
+      <!-- Slide Canvas Preview -->
+      <div class="flex-1 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between shadow-xl relative overflow-hidden">
+        <div class="flex justify-between items-start">
+          <div>
+            <span id="canvas-track-badge" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-cyan-950 text-cyan-400 border border-cyan-800/40">GENOHACK 2026</span>
+            <h2 id="canvas-title" class="text-xl sm:text-2xl font-extrabold text-white mt-2">Title</h2>
+            <p id="canvas-subtitle" class="text-xs sm:text-sm text-cyan-300/80 mt-0.5">Subtitle</p>
+          </div>
+          <div class="text-right">
+            <span id="canvas-time-est" class="px-2.5 py-1 rounded bg-slate-800 text-[11px] font-bold text-amber-300 mono border border-slate-700">00:00 - 00:20</span>
+          </div>
+        </div>
+
+        <!-- Middle Visual Representation -->
+        <div id="canvas-visual" class="my-auto py-6">
+          <!-- Dynamic visual snippet rendered by JS -->
+        </div>
+
+        <div class="flex justify-between items-center text-[11px] text-slate-400 border-t border-slate-800/60 pt-3">
+          <span>AquaSeq · Tim Disubmit Kok Tir Aman Ajah · Polije</span>
+          <span id="canvas-footer-step">Step 1 of 10</span>
+        </div>
+      </div>
+
+      <!-- Speaker Notes & Script Panel -->
+      <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-3">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+            <span>🗣️</span> Naskah Hadi (Bicara Santai & Percaya Diri):
+          </h3>
+          <span class="text-[11px] text-slate-400">Tekan Spacebar / Panah Kanan untuk Lanjut</span>
+        </div>
+
+        <div id="speaker-script" class="text-xs sm:text-sm text-slate-200 leading-relaxed bg-slate-950 p-4 rounded-xl border border-slate-800/80 max-h-40 overflow-y-auto">
+          <!-- Script text -->
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div class="p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-800/30">
+            <span class="text-emerald-400 font-bold block mb-1">🎯 Poin Wajib Masuk ke Juri:</span>
+            <span id="key-takeaway" class="text-slate-300">Takeaway</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-rose-950/30 border border-rose-800/30">
+            <span class="text-rose-400 font-bold block mb-1">⚠️ Pantangan (Jangan Diucapkan):</span>
+            <span id="taboo-warning" class="text-slate-300">Pantangan</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    const slides = [
+      {
+        id: 1,
+        title: "AquaSeq: Early-Warning Disease Platform",
+        subtitle: "From Pond-Water eDNA to Actionable Farm Decisions in Indonesian Aquaculture",
+        timeEst: "00:00 - 00:20 (20s)",
+        visual: `
+          <div class="text-center space-y-4">
+            <div class="inline-block px-4 py-1.5 rounded-xl bg-cyan-950 text-cyan-400 font-bold text-sm border border-cyan-800">
+              Motto: Sequencing to discover, qPCR to monitor, Bahasa Indonesia to act.
+            </div>
+            <div class="text-xs text-slate-400">Tim: Disubmit Kok Tir Aman Ajah · Politeknik Negeri Jember</div>
+          </div>
+        `,
+        script: `"Selamat pagi dewan juri dan hadirin sekalian. Kami dari tim Politeknik Negeri Jember memperkenalkan AquaSeq: platform peringatan dini penyakit udang berbasis eDNA air kolam. Formula kami: Sequencing to discover, qPCR to monitor, Bahasa Indonesia to act."`,
+        takeaway: "Tegaskan identitas tim dan formula produk dalam 15 detik pertama.",
+        taboo: "Jangan bertele-tele menyapa panitia terlalu lama. Langsung hajar dengan percaya diri!"
+      },
+      {
+        id: 2,
+        title: "The Bleeding Problem: Rp 100 Juta Hangus",
+        subtitle: "Wabah Penyakit AHPND Membunuh 100% Udang dalam 10–35 Hari",
+        timeEst: "00:20 - 00:50 (30s)",
+        visual: `
+          <div class="grid grid-cols-3 gap-3 text-center">
+            <div class="bg-slate-950 p-3 rounded-xl border border-red-900/40">
+              <div class="text-lg font-bold text-red-400 mono">USD 7 Miliar</div>
+              <div class="text-[10px] text-slate-400 mt-1">Kerugian AHPND Dunia</div>
+            </div>
+            <div class="bg-slate-950 p-3 rounded-xl border border-red-900/40">
+              <div class="text-lg font-bold text-red-400 mono">100% Mati</div>
+              <div class="text-[10px] text-slate-400 mt-1">Dalam DOC 10–35</div>
+            </div>
+            <div class="bg-slate-950 p-3 rounded-xl border border-red-900/40">
+              <div class="text-lg font-bold text-red-400 mono">Rp 100 Jt</div>
+              <div class="text-[10px] text-slate-400 mt-1">Modal Ludes / Kolam</div>
+            </div>
+          </div>
+        `,
+        script: `"Di pesisir Jawa Timur, seorang petambak udang vaname menginvestasikan 100 juta rupiah modal kerja per kolam. Namun dalam waktu kurang dari 35 hari, seluruh modal itu bisa musnah tanpa sisa karena wabah AHPND atau Vibriosis. Mengapa? Karena sensor IoT yang mereka andalkan hari ini hanya membaca suhu dan pH. Air tampak jernih di HP, tapi patogen sudah berpesta. Petambak baru sadar ketika udang sudah mengambang mati massal. Itu sudah terlambat."`,
+        takeaway: "Tunjukkan kontras: Sensor IoT air buta biologi, petambak butuh deteksi patogen hidup.",
+        taboo: "Jangan menyalahkan petani. Petani tidak punya alat untuk melihat DNA mikroba."
+      },
+      {
+        id: 3,
+        title: "Mengapa Solusi Eksisting Gagal?",
+        subtitle: "Keterbatasan IoT Sensor dan Uji PCR Konvensional",
+        timeEst: "00:50 - 01:10 (20s)",
+        visual: `
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <div class="font-bold text-amber-400 mb-1">❌ Sensor IoT Fisika-Kimia (JALA)</div>
+              <p class="text-slate-400 text-[11px]">Bagus untuk pH & DO, tapi tidak bisa mendeteksi ada atau tidaknya mikroba hidup di air.</p>
+            </div>
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <div class="font-bold text-amber-400 mb-1">❌ Kit PCR Lapangan Klasik</div>
+              <p class="text-slate-400 text-[11px]">Hanya mengecek 1 target spesifik setelah udang lesu. Buta terhadap pergeseran mikrobioma kolam.</p>
+            </div>
+          </div>
+        `,
+        script: `"Sensor fisika-kimia luar biasa dalam memantau oksigen dan salinitas, namun buta terhadap faktor biologis. Sedangkan tes PCR konvensional hanya menguji satu patogen yang dicurigai secara reaktif. Celah inilah yang diisi oleh AquaSeq: menghadirkan biological layer yang selama ini hilang."`,
+        takeaway: "Posisikan AquaSeq melengkapi ekosistem yang ada (menambahkan biological layer).",
+        taboo: "Jangan menjelekkan JALA. Katakan JALA adalah calon mitra integrasi data kita."
+      },
+      {
+        id: 4,
+        title: "Solusi AquaSeq: Workflow End-to-End",
+        subtitle: "Dari Air Kolam hingga Notifikasi WhatsApp di Ponsel Teknisi",
+        timeEst: "01:10 - 01:40 (30s)",
+        visual: `
+          <div class="flex items-center justify-between text-center text-xs">
+            <div class="bg-slate-950 p-2.5 rounded-xl border border-cyan-800/40 w-1/4">
+              <span class="text-cyan-400 font-bold block">1. eDNA Air</span>
+              <span class="text-[10px] text-slate-400">Saring air kolam</span>
+            </div>
+            <span class="text-slate-600">→</span>
+            <div class="bg-slate-950 p-2.5 rounded-xl border border-purple-800/40 w-1/4">
+              <span class="text-purple-400 font-bold block">2. Nanopore</span>
+              <span class="text-[10px] text-slate-400">Discover komunitas</span>
+            </div>
+            <span class="text-slate-600">→</span>
+            <div class="bg-slate-950 p-2.5 rounded-xl border border-amber-800/40 w-1/4">
+              <span class="text-amber-400 font-bold block">3. qPCR Mingguan</span>
+              <span class="text-[10px] text-slate-400">Monitor 3–5 marka</span>
+            </div>
+            <span class="text-slate-600">→</span>
+            <div class="bg-slate-950 p-2.5 rounded-xl border border-emerald-800/40 w-1/4">
+              <span class="text-emerald-400 font-bold block">4. WhatsApp</span>
+              <span class="text-[10px] text-slate-400">Bahasa Indonesia</span>
+            </div>
+          </div>
+        `,
+        script: `"Teknisi tambak cukup menyaring air kolam tanpa perlu membedah udang. Di awal tebar, sekuensing Nanopore membaca seluruh komunitas bakteri dan mencari gen racun pirAB. Dari ratusan bakteri, engine kami memilih 3 sampai 5 marka paling kritis untuk dipantau tiap minggu dengan qPCR berbiaya hemat. Bila ada sinyal bahaya, teknisi langsung menerima instruksi WhatsApp: 'Kolam B-02 waspada Vibrio, kurangi pakan 20% dan sipon hari ini'."`,
+        takeaway: "Jelaskan peran Nanopore (nemuin di awal) vs qPCR (mantau murah mingguan).",
+        taboo: "Jangan biarkan juri berpikir petani harus beli alat sekuensing sendiri (kita pakai lab mitra)."
+      },
+      {
+        id: 5,
+        title: "Track 2: Memantau Keanekaragaman Hayati",
+        subtitle: "Shannon Index & Bray-Curtis: Indikator Kesehatan Ekologis",
+        timeEst: "01:40 - 02:00 (20s)",
+        visual: `
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div class="p-3 bg-slate-950 rounded-xl border border-emerald-800/40">
+              <div class="font-bold text-emerald-400">Shannon Diversity Index</div>
+              <div class="text-[11px] text-slate-400 mt-1">Mengukur keseimbangan komunitas. Keruntuhan keragaman menandakan stres ekosistem tambak.</div>
+            </div>
+            <div class="p-3 bg-slate-950 rounded-xl border border-indigo-800/40">
+              <div class="font-bold text-indigo-400">Pencegahan Antibiotik Liar</div>
+              <div class="text-[11px] text-slate-400 mt-1">Mencegah petambak menyemprot antibiotik secara panik yang merusak ekosistem pesisir.</div>
+            </div>
+          </div>
+        `,
+        script: `"Sesuai mandat Track 2, AquaSeq bukan sekadar memburu patogen, tapi memantau keanekaragaman mikrobioma air tambak dengan Shannon Index. Kami mendeteksi keruntuhan stabilitas mikroba sebelum penyakit meledak, sehingga petambak tidak perlu lagi membabi buta menyemprot antibiotik yang merusak lingkungan pesisir."`,
+        takeaway: "Ini kunci penilaian Track 2 Biodiversity. Gunakan istilah 'memantau' keragaman.",
+        taboo: "Jangan bilang 'menjaga' biodiversitas (karena software kita mengukur dan memantau, bukan mengintervensi langsung)."
+      },
+      {
+        id: 6,
+        title: "Demo Prototipe & Farmer Dashboard",
+        subtitle: "Desain Mobile-First Kontras Tinggi untuk Tepi Tambak",
+        timeEst: "02:00 - 02:20 (20s)",
+        visual: `
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex justify-around text-center text-xs">
+            <div>
+              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-bold border border-emerald-800">AMAN (I)</span>
+              <p class="text-[10px] text-slate-400 mt-1">Kolam A-01 · DOC 14</p>
+            </div>
+            <div>
+              <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-400 font-bold border border-amber-800">WASPADA (II)</span>
+              <p class="text-[10px] text-slate-400 mt-1">Kolam B-02 · DOC 28</p>
+            </div>
+            <div>
+              <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-400 font-bold border border-rose-800">TINGGI (III)</span>
+              <p class="text-[10px] text-slate-400 mt-1">Kolam C-03 · DOC 35</p>
+            </div>
+          </div>
+        `,
+        script: `"Tampilan kami ramah lapangan: warna kontras tinggi disertai kode garis Romawi agar tetap terbaca jelas di bawah terik matahari tambak. Kolam paling berisiko selalu dipin di urutan teratas dengan rekomendasi aksi satu jempol."`,
+        takeaway: "Tunjukkan bahwa UI/UX dipikirkan untuk kondisi lapangan nyata (silau matahari, teknisi buru-buru).",
+        taboo: "Jangan tampilkan angka desimal rumit p-value ke teknisi lapangan."
+      },
+      {
+        id: 7,
+        title: "Unit Economics: Margin 51% & 22x ROI",
+        subtitle: "Model Bisnis Teruji Berbasis Analisis Tekno-Ekonomi (TEA)",
+        timeEst: "02:20 - 02:40 (20s)",
+        visual: `
+          <div class="grid grid-cols-3 gap-3 text-center text-xs">
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <span class="text-slate-400 text-[10px]">Harga Paket</span>
+              <div class="text-base font-bold text-emerald-400 mono mt-1">Rp 4,5 Jt</div>
+              <span class="text-[10px] text-slate-500">per kolam/siklus</span>
+            </div>
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <span class="text-slate-400 text-[10px]">COGS Lab Kita</span>
+              <div class="text-base font-bold text-amber-400 mono mt-1">Rp 2,2 Jt</div>
+              <span class="text-[10px] text-slate-500">75 multiplexing</span>
+            </div>
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <span class="text-slate-400 text-[10px]">Gross Margin</span>
+              <div class="text-base font-bold text-cyan-400 mono mt-1">51%</div>
+              <span class="text-[10px] text-cyan-300">Sehat & Scalable</span>
+            </div>
+          </div>
+        `,
+        script: `"Secara unit economics: Paket AquaSeq dibanderol Rp 4,5 juta per kolam per siklus. COGS lab kami Rp 2,2 juta berkat efisiensi multiplexing 75 sampel per run, memberikan margin kotor 51%. Bagi petambak, mengeluarkan Rp 4,5 juta untuk menyelamatkan modal Rp 100 juta adalah ROI 22 kali lipat."`,
+        takeaway: "Kuasai angka 51% margin dan 22x ROI di luar kepala!",
+        taboo: "Jangan ragu-ragu saat menyebut angka rupiah. Katakan dengan tegas dan percaya diri."
+      },
+      {
+        id: 8,
+        title: "Target Pasar & Strategi Go-To-Market",
+        subtitle: "Beachhead 1.200 Kolam Intensif di Segitiga Banyuwangi–Situbondo",
+        timeEst: "02:40 - 02:50 (10s)",
+        visual: `
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs flex justify-around items-center">
+            <div>
+              <span class="text-[10px] text-slate-400 block">TAM (Indonesia)</span>
+              <span class="font-bold text-white mono">Rp 945 Miliar</span>
+            </div>
+            <div class="text-slate-600">→</div>
+            <div>
+              <span class="text-[10px] text-slate-400 block">SAM (Jawa Timur)</span>
+              <span class="font-bold text-cyan-400 mono">Rp 162 Miliar</span>
+            </div>
+            <div class="text-slate-600">→</div>
+            <div>
+              <span class="text-[10px] text-emerald-400 font-semibold block">SOM (Beachhead)</span>
+              <span class="font-bold text-emerald-400 mono">1.200 Kolam</span>
+            </div>
+          </div>
+        `,
+        script: `"Pasar awal kami adalah 1.200 kolam intensif di segitiga Banyuwangi–Situbondo. Kami bermitra dengan pabrik pakan lokal dan mengintegrasikan API dengan aplikasi JALA untuk memperluas jangkauan ke petambak skala kecil."`,
+        takeaway: "Tunjukkan bahwa lokasi Polije sangat strategis karena bersebelahan dengan pusat tambak udang nasional di Banyuwangi.",
+        taboo: "Jangan mengklaim bisa menguasai seluruh Indonesia dalam 6 bulan."
+      },
+      {
+        id: 9,
+        title: "Roadmap Hilirisasi 12 Bulan (TRL 3 → 5)",
+        subtitle: "Validasi Retrospektif dan Uji Pilot Lapangan 2 Farm Jatim",
+        timeEst: "02:50 - 03:00 (10s)",
+        visual: `
+          <div class="flex justify-between items-center text-center text-xs">
+            <div class="bg-slate-950 p-2.5 rounded-xl border border-cyan-800/60 w-1/3">
+              <span class="text-cyan-400 font-bold block">TRL 3 (Hari Ini)</span>
+              <span class="text-[10px] text-slate-400">MVP Bioinformatika</span>
+            </div>
+            <span class="text-slate-600">→</span>
+            <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 w-1/3">
+              <span class="text-slate-300 font-bold block">TRL 4 (Bulan 3)</span>
+              <span class="text-[10px] text-slate-400">Validasi Retrospektif</span>
+            </div>
+            <span class="text-slate-600">→</span>
+            <div class="bg-slate-950 p-2.5 rounded-xl border border-emerald-800/60 w-1/3">
+              <span class="text-emerald-400 font-bold block">TRL 5 (Bulan 12)</span>
+              <span class="text-[10px] text-slate-400">Pilot 2 Tambak Jatim</span>
+            </div>
+          </div>
+        `,
+        script: `"Hari ini kami berada di TRL 3. Rencana hilirisasi 12 bulan ke depan difokuskan pada validasi retrospektif TRL 4 dan uji pilot lapangan TRL 5 pada dua tambak intensif Jawa Timur bekerja sama dengan Balai Perikanan Budidaya Air Payau Situbondo."`,
+        takeaway: "Pegang kerangka TRL (Slide 17): setiap fase menguji asumsi teratas.",
+        taboo: "Jangan klaim TRL 7 atau sudah komersial luas jika belum ada uji lapangan nyata."
+      },
+      {
+        id: 10,
+        title: "Tim & Dewan Penasihat Ahli",
+        subtitle: "Sinergi Software Engineering, AI & Patologi Perikanan",
+        timeEst: "03:00 (Closing)",
+        visual: `
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-center space-y-2">
+            <div class="font-bold text-white">6 Anggota Inti Politeknik Negeri Jember (AI, Bioinformatika, Fullstack)</div>
+            <div class="inline-block px-3 py-1 rounded bg-slate-900 border border-slate-700 text-cyan-300 text-[11px]">
+              + Dewan Penasihat (Advisory Board): Pakar Patologi Akuakultur & BBPBAP Situbondo
+            </div>
+          </div>
+        `,
+        script: `"Tim kami menggabungkan keahlian AI, bioinformatika, dan software engineering di bawah supervisi akademik Bapak Aji Seto Arifianto, serta diperkuat praktisi patologi perikanan sebagai Dewan Penasihat tim. Bersama AquaSeq, kita jaga pangan laut dan devisa maritim Indonesia. Terima kasih!"`,
+        takeaway: "Tutup dengan percaya diri, kontak mata ke juri, dan tersenyum ramah.",
+        taboo: "Jangan menambah anggota ke-7 di tim (aturan lomba maksimal 6 orang)."
+      }
+    ];
+
+    let currentSlide = 0;
+    let timerSeconds = 0;
+    let timerInterval = null;
+
+    function renderThumbnails() {
+      const container = document.getElementById('thumbnails-container');
+      container.innerHTML = '';
+      slides.forEach((s, idx) => {
+        const item = document.createElement('div');
+        item.className = `p-3 rounded-xl border border-slate-800/80 cursor-pointer transition text-xs flex items-center justify-between ${idx === currentSlide ? 'slide-active' : 'bg-slate-950/60 hover:bg-slate-900'}`;
+        item.onclick = () => goToSlide(idx);
+        item.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded bg-slate-800 flex items-center justify-center font-bold text-[10px] text-slate-300">${s.id}</span>
+            <span class="font-semibold text-slate-200 truncate max-w-[170px]">${s.title}</span>
+          </div>
+          <span class="text-[10px] text-slate-500 font-mono">${s.timeEst.split(' ')[0]}</span>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function renderSlide() {
+      const s = slides[currentSlide];
+      document.getElementById('slide-indicator').innerText = `Slide ${s.id} / ${slides.length}`;
+      document.getElementById('canvas-title').innerText = s.title;
+      document.getElementById('canvas-subtitle').innerText = s.subtitle;
+      document.getElementById('canvas-time-est').innerText = s.timeEst;
+      document.getElementById('canvas-visual').innerHTML = s.visual;
+      document.getElementById('canvas-footer-step').innerText = `Slide ${s.id} of ${slides.length}`;
+
+      document.getElementById('speaker-script').innerText = s.script;
+      document.getElementById('key-takeaway').innerText = s.takeaway;
+      document.getElementById('taboo-warning').innerText = s.taboo;
+
+      renderThumbnails();
+    }
+
+    function goToSlide(idx) {
+      currentSlide = idx;
+      renderSlide();
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        renderSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        renderSlide();
+      }
+    }
+
+    // Timer controls
+    function toggleTimer() {
+      const btn = document.getElementById('btn-timer');
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        btn.innerText = 'Lanjut Timer';
+        btn.classList.remove('bg-rose-900', 'text-rose-200');
+        btn.classList.add('bg-slate-800', 'text-slate-200');
+      } else {
+        btn.innerText = 'Jeda Timer';
+        btn.classList.remove('bg-slate-800', 'text-slate-200');
+        btn.classList.add('bg-rose-900', 'text-rose-200');
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+          const secs = String(timerSeconds % 60).padStart(2, '0');
+          const disp = document.getElementById('timer-display');
+          disp.innerText = `${mins}:${secs}`;
+          if (timerSeconds > 180) {
+            disp.classList.remove('text-cyan-400');
+            disp.classList.add('text-rose-400');
+          } else {
+            disp.classList.remove('text-rose-400');
+            disp.classList.add('text-cyan-400');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      timerSeconds = 0;
+      document.getElementById('timer-display').innerText = '00:00';
+      document.getElementById('timer-display').className = 'font-bold text-cyan-400 mono text-sm';
+      document.getElementById('btn-timer').innerText = 'Mulai Timer';
+      document.getElementById('btn-timer').className = 'px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 font-medium';
+    }
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderSlide();
+    });
+  </script>
+</body>
+</html>

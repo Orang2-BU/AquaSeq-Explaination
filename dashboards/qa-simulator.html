@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaSeq · Killer Q&A Defense & Judge Simulator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #070a13; color: #f8fafc; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .perspective { perspective: 1000px; }
+    .flip-card-inner { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+    .flipped { transform: rotateY(180deg); }
+    .flip-front, .flip-back { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .flip-back { transform: rotateY(180deg); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#070a13]">
+
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-30 px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="text-xs text-slate-400 hover:text-cyan-400">← Portal Utama</a>
+      <span class="text-slate-700">|</span>
+      <h1 class="text-sm font-bold text-white flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-400 border border-rose-800 text-xs">JUDGE DEFENSE</span>
+        Simulasi Tanya-Jawab Dewan Juri (Flashcard & Quiz)
+      </h1>
+    </div>
+
+    <!-- Mastery Tracker -->
+    <div class="flex items-center gap-3 text-xs">
+      <span class="text-slate-400 hidden sm:inline">Kesiapan Hadi:</span>
+      <div class="w-32 bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700">
+        <div id="mastery-bar" class="bg-gradient-to-r from-cyan-500 to-emerald-400 h-2.5 rounded-full" style="width: 0%"></div>
+      </div>
+      <span id="mastery-text" class="font-bold text-cyan-400 mono">0 / 8 Terkuasai</span>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- Hero Header -->
+    <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-950 text-rose-400 border border-rose-800/40 mb-2">
+          Kriteria E (Validasi & Bukti) & Q&A Defense
+        </div>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white">Latihan Menghadapi Serangan Juri</h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
+          Klik kartu untuk membalik dan melihat jawaban skakmat berintegritas tinggi serta jebakan yang wajib dihindari.
+        </p>
+      </div>
+
+      <!-- Category Filter Buttons -->
+      <div class="flex flex-wrap gap-1.5 text-xs">
+        <button onclick="filterCategory('all')" id="cat-all" class="px-3 py-1.5 rounded-lg bg-cyan-600 text-white font-semibold">Semua (8)</button>
+        <button onclick="filterCategory('vc')" id="cat-vc" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">Investor / Bisnis</button>
+        <button onclick="filterCategory('bio')" id="cat-bio" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">Biologi & Ilmiah</button>
+        <button onclick="filterCategory('tech')" id="cat-tech" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">AI & Tim IT</button>
+      </div>
+    </div>
+
+    <!-- Flashcards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="cards-container">
+      <!-- Rendered by JS -->
+    </div>
+
+  </main>
+
+  <script>
+    const questions = [
+      {
+        id: 1,
+        cat: "bio",
+        catName: "BIOLOGI MOLEKULER",
+        catBadge: "bg-purple-950 text-purple-400 border-purple-800/40",
+        q: "Air kolam kan beda dengan isi usus udang. Bagaimana bisa yakin eDNA air mencerminkan kondisi sakit di udang?",
+        why: "Juri dosen biologi menguji apakah kalian membaca literatur atau cuma berasumsi tanpa dasar ilmiah.",
+        answer: "Dasar ilmiah kami merujuk pada temuan Lu et al. (2023) di Applied Microbiology and Biotechnology: saat udang terinfeksi AHPND, mikrobioma usus konvergen dan strukturnya makin mirip dengan mikrobioma air kolam. Namun acuan akhir (ground truth) kami bukanlah isi usus, melainkan angka mortalitas lapangan nyata. Memvalidasi korelasi air vs mortalitas adalah target terukur kami pada fase retrospektif TRL 4.",
+        trap: "Jangan ngotot bilang 'air dan usus sudah 100% terbukti sama'. Akui bahwa validasi lapangan adalah tujuan pengembangan kalian.",
+        ref: "Lu et al. (2023) · DOI: 10.1007/s00253-023-12810-y"
+      },
+      {
+        id: 2,
+        cat: "tech",
+        catName: "AI & BIOINFORMATIKA",
+        catBadge: "bg-blue-950 text-blue-400 border-blue-800/40",
+        q: "Kenapa tidak pakai Deep Learning (Transformer / Foundation Model) untuk prediksi risikonya biar lebih mutakhir?",
+        why: "Juri AI ingin memastikan kalian tidak asal pasang buzzword AI yang rentan overfitting pada dataset kecil.",
+        answer: "Data berlabel air tambak dengan luaran mortalitas terkonfirmasi saat ini masih berjumlah puluhan hingga ratusan sampel. Deep Learning akan sangat mudah overfit (menghafal dataset studi tertentu) dan menjadi black box. Kami memilih Elastic Net (regresi logistik ter-regularisasi) dan Profile HMM: model ini terbukti tangguh pada data komposisional kecil, koefisiennya transparan (explainable AI), dan dievaluasi dengan leave-one-pond-out agar tidak ada kebocoran data.",
+        trap: "Jangan mengaku memakai Deep Learning jika datanya cuma puluhan sampel. Juri teknis akan langsung menghabisi kalian di sesi metode.",
+        ref: "Buku Belajar Bab 11 · Elastic Net & Leave-one-pond-out CV"
+      },
+      {
+        id: 3,
+        cat: "vc",
+        catName: "BISNIS & INVESTOR",
+        catBadge: "bg-emerald-950 text-emerald-400 border-emerald-800/40",
+        q: "Sekuensing itu mahal. Petambak kecil di pedesaan mana mampu bayar 4,5 juta rupiah per siklus?",
+        why: "Juri venture capital ingin memastikan strategi Go-To-Market kalian realistis dan punya beachhead market yang jelas.",
+        answer: "Beachhead market kami di 2 tahun pertama bukanlah petambak kecil, melainkan tambak intensif dan korporasi integrator (seperti pabrik pakan dan hatchery) yang mengelola modal ratusan juta per kolam. Bagi mereka, Rp 4,5 juta adalah premi asuransi murah untuk mengamankan modal Rp 100 juta. Untuk petambak kecil, akses dibuka melalui kemitraan integrator pakan atau koperasi secara kolektif (pooled sampling air pasok) sehingga biaya per petani sangat ringan.",
+        trap: "Jangan bilang 'petambak kecil pasti mau bayar'. Petani kecil sangat sensitif harga, akui bahwa mereka disasar di tahap lanjutan lewat koperasi/integrator.",
+        ref: "Slide 20 Bootcamp · Siapa pengguna vs Siapa pembayar"
+      },
+      {
+        id: 4,
+        cat: "tech",
+        catName: "TIM & SUMBER DAYA",
+        catBadge: "bg-blue-950 text-blue-400 border-blue-800/40",
+        q: "Tim kalian berenam berlatar belakang IT/Komputasi semua. Siapa yang pegang uji lab basah (wet-lab)?",
+        why: "Juri meragukan kelayakan eksekusi biologi jika tidak ada anggota tim berlatar belakang sains basah.",
+        answer: "Nilai inti AquaSeq adalah software layer: mesin analitik, seleksi marka dinamis, dan sistem penerjemah peringatan. Operasional lab basah kami alihdayakan (asset-light) ke laboratorium terakreditasi di Jawa Timur, seperti BBPBAP Situbondo dan lab universitas terdekat. Selain itu, untuk validasi biologi, kami menggandeng praktisi patologi perikanan sebagai Dewan Penasihat (Advisory Board) resmi tim kami guna tetap mematuhi batas maksimal 6 anggota tim.",
+        trap: "Jangan bilang 'kami mau rekrut anggota ke-7'. Aturan GenoHack membatasi tim maksimal 6 orang. Sebut posisi ahli luar sebagai Advisor / Dewan Penasihat.",
+        ref: "Catatan Dosen Poin 38 · Batas ukuran tim & Advisor"
+      },
+      {
+        id: 5,
+        cat: "bio",
+        catName: "GENOMIK & PATOGEN",
+        catBadge: "bg-purple-950 text-purple-400 border-purple-800/40",
+        q: "Gen 16S kan tidak bisa mendeteksi virus. Bagaimana kalian mendeteksi wabah IMNV atau White Spot (WSSV)?",
+        why: "Juri biologi menguji apakah kalian paham batas gen 16S rRNA.",
+        answer: "Tepat sekali. 16S rRNA hanya ada pada bakteri dan arkea karena virus tidak memiliki ribosom. Oleh karena itu, sekuensing Nanopore kami menggabungkan 16S untuk memetakan komunitas bakteri DENGAN amplikon primer target khusus untuk virus RNA (IMNV) dan virus DNA (WSSV). Pada pemantauan mingguan, marka virus terpilih dilacak menggunakan uji qPCR spesifik.",
+        trap: "Jangan sekali-kali bilang '16S kami bisa membaca semua virus'. Itu kesalahan fatal dalam biologi molekuler.",
+        ref: "Buku Belajar Bab 2 · Perbedaan Bakteri vs Virus"
+      },
+      {
+        id: 6,
+        cat: "bio",
+        catName: "BIODIVERSITAS (TRACK 2)",
+        catBadge: "bg-purple-950 text-purple-400 border-purple-800/40",
+        q: "Nilai Shannon Diversity Index kolam turun dari 3,2 menjadi 1,8. Apakah kolam itu PASTI terkena wabah penyakit?",
+        why: "Juri Track 2 Biodiversity ingin tahu apakah kalian paham dinamika ekologi mikroba atau cuma menganggap skor sebagai saklar mati-hidup.",
+        answer: "Penurunan keragaman tidak otomatis berarti penyakit. Keragaman secara alami dapat berubah akibat umur budidaya (DOC), fluktuasi salinitas air, atau aplikasi probiotik. Oleh karena itu, sistem kami selalu membandingkan nilai Shannon terhadap baseline normal kolam itu sendiri pada DOC yang sama, dikombinasikan dengan Bray-Curtis beta diversity untuk melihat arah pergeseran komunitas dan konfirmasi ada tidaknya gen toksin pirAB.",
+        trap: "Jangan mengklaim penurunan Shannon = 100% udang mati. Perlakukan sebagai sinyal peringatan awal yang harus dikonfirmasi silang.",
+        ref: "Catatan Dosen Poin 15 · Interpretasi Shannon & DOC"
+      },
+      {
+        id: 7,
+        cat: "vc",
+        catName: "KOMPETISI & PASAR",
+        catBadge: "bg-emerald-950 text-emerald-400 border-emerald-800/40",
+        q: "Apa bedanya kalian dengan JALA yang aplikasinya sudah dipakai ribuan tambak di Indonesia?",
+        why: "Juri ingin tahu apakah kalian mengerti peta kompetisi atau mau bunuh diri melawan unicorn lokal.",
+        answer: "JALA adalah platform manajemen tambak yang luar biasa untuk parameter fisika-kimia (pH, oksigen terlarut, suhu) dan manajemen pakan. Namun JALA tidak memiliki biological layer (deteksi mikroba/patogen hidup). Posisi AquaSeq bukan sebagai kompetitor, melainkan mitra sinergis. Rencana kami adalah mengintegrasikan data biologis AquaSeq ke dashboard JALA melalui API terbuka, sehingga petambak mendapatkan pemantauan holistik dari satu layar.",
+        trap: "Jangan bilang 'JALA kalah canggih dari kami'. Sebut JALA sebagai kawan kolaborasi strategis via API.",
+        ref: "Proposal Section 2 · Existing approach vs AquaSeq"
+      },
+      {
+        id: 8,
+        cat: "bio",
+        catName: "VALIDITAS DATA",
+        catBadge: "bg-purple-950 text-purple-400 border-purple-800/40",
+        q: "Demo kalian memakai data sintetis. Bukankah menguji akurasi model pada data sintetis itu sirkular?",
+        why: "Juri metodologi menguji integritas ilmiah prototipe 3 hari hackathon.",
+        answer: "Benar sekali dewan juri, kami mengakui secara jujur bahwa pengujian pada skenario sintetis selama 3 hari hackathon ini bertujuan untuk membuktikan kelancaran alur pipa komputasi (pipeline proof-of-concept), bukan pembuktian validasi akurasi klinis akhir. Validasi ilmiah riil akan kami eksekusi pada Fase 2 (retrospective validation) menggunakan dataset publik NCBI SRA dengan hasil penyakit yang terkonfirmasi, sebelum kami melangkah ke uji lapangan TRL 5.",
+        trap: "Jangan mengklaim model kalian 'sudah 99% akurat di dunia nyata' hanya berdasarkan data buatan sendiri.",
+        ref: "Catatan Dosen Poin 33 · Kejujuran Data Sintetis"
+      }
+    ];
+
+    let mastered = new Set();
+    let currentFilter = 'all';
+
+    function filterCategory(cat) {
+      currentFilter = cat;
+      const btns = ['all', 'vc', 'bio', 'tech'];
+      btns.forEach(b => {
+        const el = document.getElementById(`cat-${b}`);
+        if (b === cat) {
+          el.className = 'px-3 py-1.5 rounded-lg bg-cyan-600 text-white font-semibold';
+        } else {
+          el.className = 'px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300';
+        }
+      });
+      renderCards();
+    }
+
+    function toggleFlip(id) {
+      const card = document.getElementById(`card-inner-${id}`);
+      card.classList.toggle('flipped');
+    }
+
+    function markMastered(id, event) {
+      event.stopPropagation();
+      if (mastered.has(id)) {
+        mastered.delete(id);
+      } else {
+        mastered.add(id);
+      }
+      updateMastery();
+      renderCards();
+    }
+
+    function updateMastery() {
+      const pct = (mastered.size / questions.length) * 100;
+      document.getElementById('mastery-bar').style.width = `${pct}%`;
+      document.getElementById('mastery-text').innerText = `${mastered.size} / ${questions.length} Terkuasai`;
+    }
+
+    function renderCards() {
+      const container = document.getElementById('cards-container');
+      container.innerHTML = '';
+
+      const filtered = currentFilter === 'all' 
+        ? questions 
+        : questions.filter(q => q.cat === currentFilter);
+
+      filtered.forEach(q => {
+        const isMastered = mastered.has(q.id);
+        const card = document.createElement('div');
+        card.className = 'perspective h-96';
+        card.innerHTML = `
+          <div id="card-inner-${q.id}" onclick="toggleFlip(${q.id})" class="flip-card-inner relative w-full h-full cursor-pointer">
+            
+            <!-- Front of Card -->
+            <div class="flip-front absolute w-full h-full bg-slate-900 rounded-2xl border ${isMastered ? 'border-emerald-600/50' : 'border-slate-800'} p-5 flex flex-col justify-between shadow-xl">
+              <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold border ${q.catBadge}">${q.catName}</span>
+                  <button onclick="markMastered(${q.id}, event)" class="px-2 py-1 rounded text-[10px] font-semibold ${isMastered ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-slate-950 text-slate-400 border border-slate-800 hover:text-white'}">
+                    ${isMastered ? '✓ Paham' : 'Tandai Paham'}
+                  </button>
+                </div>
+                <div class="text-xs text-rose-400 font-mono font-bold">PERTANYAAN JURI #${q.id}:</div>
+                <h3 class="text-sm sm:text-base font-bold text-white leading-snug">"${q.q}"</h3>
+              </div>
+
+              <div class="p-3 bg-slate-950 rounded-xl border border-slate-800/80 space-y-1 text-xs">
+                <span class="text-slate-400 text-[10px] uppercase font-bold block">Kenapa Juri Nanya Ini:</span>
+                <p class="text-slate-300 text-[11px] leading-relaxed">${q.why}</p>
+              </div>
+
+              <div class="flex justify-between items-center text-[11px] text-cyan-400 font-semibold border-t border-slate-800/80 pt-2">
+                <span>🔄 Klik kartu untuk lihat contekan jawaban</span>
+                <span class="text-slate-500 font-mono">Q#${q.id}</span>
+              </div>
+            </div>
+
+            <!-- Back of Card -->
+            <div class="flip-back absolute w-full h-full bg-slate-900 rounded-2xl border border-cyan-800/60 p-5 flex flex-col justify-between shadow-xl overflow-y-auto custom-scrollbar">
+              <div class="space-y-2">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                  <span class="text-xs font-bold text-emerald-400 flex items-center gap-1">
+                    <span>🛡️</span> JAWABAN SKAKMAT HADI:
+                  </span>
+                  <span class="text-[10px] text-slate-400 font-mono">Q#${q.id}</span>
+                </div>
+                <p class="text-xs sm:text-[13px] text-slate-200 leading-relaxed bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+                  "${q.answer}"
+                </p>
+              </div>
+
+              <div class="space-y-1.5 pt-2">
+                <div class="p-2 rounded bg-rose-950/30 border border-rose-900/40 text-[11px] text-rose-300">
+                  <strong>⚠️ Jebakan Fatal:</strong> ${q.trap}
+                </div>
+                <div class="flex justify-between items-center text-[10px] text-slate-400 pt-1">
+                  <span class="truncate max-w-[250px]">📚 Ref: ${q.ref}</span>
+                  <span class="text-cyan-400">Balik lagi ↺</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCards();
+    });
+  </script>
+</body>
+</html>

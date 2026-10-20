@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaSeq · Techno-Economic Analysis (TEA) & Business Simulator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #090d16; color: #f1f5f9; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .card-glow { border: 1px solid rgba(255,255,255,0.08); transition: all 0.2s ease-in-out; }
+    .card-glow:hover { border-color: rgba(14, 165, 233, 0.4); box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.15); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#090d16]">
+
+  <!-- Top bar -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="text-xs text-slate-400 hover:text-cyan-400 flex items-center gap-1">
+          ← Kembali ke Portal Utama
+        </a>
+        <span class="text-slate-600">|</span>
+        <h1 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+          <span class="p-1 rounded bg-cyan-950 text-cyan-400 border border-cyan-800 text-xs">TEA SIMULATOR</span>
+          Kalkulator Kelayakan Bisnis & Sensitivitas Unit
+        </h1>
+      </div>
+      <div class="text-xs text-slate-400 hidden sm:block">
+        Format Standar Harrison et al. (2015) & Aulet Step 24
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 space-y-6">
+
+    <!-- Hero Header -->
+    <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800/40 mb-2">
+          Kriteria D (15%) & G (15%) GenoHack
+        </div>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white">Techno-Economic Analysis (TEA) Explorer</h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
+          Simulasikan biaya operasional lab, harga langganan per kolam, proteksi modal petambak, dan uji sensitivitas biaya reagen secara real-time.
+        </p>
+      </div>
+      <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 text-xs space-y-1">
+        <div class="text-slate-400">Rumus Inti (Slide 14):</div>
+        <div class="text-cyan-300 font-bold mono">Biaya Unit = (CAPEX + OPEX) ÷ Output Sampel</div>
+      </div>
+    </div>
+
+    <!-- 4 Key Stat Cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-glow space-y-1">
+        <span class="text-xs text-slate-400">Aset Modal Terlindungi</span>
+        <div id="stat-modal-total" class="text-xl sm:text-2xl font-bold text-white mono">Rp 500 Jt</div>
+        <span class="text-[11px] text-slate-400" id="stat-kolam-sub">Berdasarkan 5 kolam</span>
+      </div>
+
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-glow space-y-1">
+        <span class="text-xs text-slate-400">Pendapatan AquaSeq (1 Siklus)</span>
+        <div id="stat-rev-total" class="text-xl sm:text-2xl font-bold text-cyan-400 mono">Rp 22.5 Jt</div>
+        <span class="text-[11px] text-emerald-400" id="stat-margin-badge">51.1% Gross Margin</span>
+      </div>
+
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-glow space-y-1">
+        <span class="text-xs text-slate-400">Gross Profit (Untung Kotor)</span>
+        <div id="stat-profit-total" class="text-xl sm:text-2xl font-bold text-emerald-400 mono">Rp 11.5 Jt</div>
+        <span class="text-[11px] text-slate-400">COGS: Rp 11.0 Jt</span>
+      </div>
+
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-glow space-y-1">
+        <span class="text-xs text-slate-400">Payback Ratio Petambak</span>
+        <div id="stat-roi-val" class="text-xl sm:text-2xl font-bold text-amber-400 mono">22.2x</div>
+        <span class="text-[11px] text-amber-300">Proteksi kerugian modal</span>
+      </div>
+    </div>
+
+    <!-- Main Simulator Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Controls Column (5 cols) -->
+      <div class="lg:col-span-5 bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-5">
+        <h3 class="text-sm font-bold text-white flex items-center justify-between">
+          <span>Pengaturan Parameter Lapangan</span>
+          <button onclick="resetParams()" class="text-xs text-cyan-400 hover:underline">Reset Default</button>
+        </h3>
+
+        <!-- Control 1: Jumlah Kolam -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-300">Jumlah Kolam Dikelola</span>
+            <span id="txt-kolam" class="font-bold text-cyan-400 mono">5 Kolam</span>
+          </div>
+          <input type="range" id="slider-kolam" min="1" max="50" value="5" oninput="updateSim()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+          <div class="flex justify-between text-[10px] text-slate-400">
+            <span>1 Kolam</span>
+            <span>Rata-rata Farm (5-10)</span>
+            <span>50 Kolam (Klaster)</span>
+          </div>
+        </div>
+
+        <!-- Control 2: Modal Kerja Petambak -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-300">Modal Kerja Petani / Kolam / Siklus</span>
+            <span id="txt-modal" class="font-bold text-cyan-400 mono">Rp 100 Juta</span>
+          </div>
+          <input type="range" id="slider-modal" min="60" max="150" step="5" value="100" oninput="updateSim()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+          <div class="text-[11px] text-slate-400">Total belanja benur, pakan, probiotik, listrik aerasi 100 hari.</div>
+        </div>
+
+        <!-- Control 3: Harga Paket Layanan AquaSeq -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-300">Harga Paket Langganan / Kolam / Siklus</span>
+            <span id="txt-harga" class="font-bold text-emerald-400 mono">Rp 4.5 Juta</span>
+          </div>
+          <input type="range" id="slider-harga" min="3.0" max="7.0" step="0.5" value="4.5" oninput="updateSim()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+          <div class="text-[11px] text-slate-400">Paket lengkap: 3x Nanopore + 12x qPCR mingguan + WhatsApp Engine.</div>
+        </div>
+
+        <!-- Control 4: Sekuensing Cost (Nanopore 3x) -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-300">Beban Sekuensing Nanopore (3x uji)</span>
+            <span id="txt-nanopore" class="font-bold text-amber-400 mono">Rp 900.000</span>
+          </div>
+          <input type="range" id="slider-nanopore" min="600" max="1500" step="50" value="900" oninput="updateSim()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500">
+          <div class="text-[11px] text-slate-400">Asumsi: Multiplex 75 sampel per flowcell di lab mitra.</div>
+        </div>
+
+        <!-- Control 5: qPCR Cost (12x mingguan) -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-300">Beban qPCR Mingguan (12 minggu)</span>
+            <span id="txt-qpcr" class="font-bold text-amber-400 mono">Rp 900.000</span>
+          </div>
+          <input type="range" id="slider-qpcr" min="600" max="1500" step="50" value="900" oninput="updateSim()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500">
+          <div class="text-[11px] text-slate-400">Rp 75.000 per tes (3–5 marka terpilih).</div>
+        </div>
+
+        <!-- Control 6: Logistik & Kit Filter eDNA -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-300">Kit Filter eDNA & Kurir Rantai Dingin</span>
+            <span id="txt-logistik" class="font-bold text-amber-400 mono">Rp 400.000</span>
+          </div>
+          <input type="range" id="slider-logistik" min="200" max="700" step="50" value="400" oninput="updateSim()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500">
+          <div class="text-[11px] text-slate-400">15 filter membran sterilisasi + pengiriman lokal Jatim.</div>
+        </div>
+
+      </div>
+
+      <!-- Charts & Visuals Column (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Chart 1: P&L Petambak (Ada AquaSeq vs Kena Wabah) -->
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
+          <div class="flex justify-between items-center">
+            <h4 class="text-sm font-bold text-white">Perbandingan Finansial Petambak (Per Kolam)</h4>
+            <span class="text-xs text-emerald-400 font-semibold">Risk Prevention</span>
+          </div>
+          <div class="h-56">
+            <canvas id="chart-farmer"></canvas>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Tanpa AquaSeq, satu wabah di DOC 25 menghancurkan modal Rp 100 juta. Dengan AquaSeq, petambak hanya mengeluarkan premi Rp 4,5 juta dan panen senilai Rp 180 juta berhasil diselamatkan.
+          </p>
+        </div>
+
+        <!-- Chart 2: Struktur COGS vs Margin AquaSeq -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider">Komposisi Biaya Lab (COGS)</h4>
+            <div class="h-44 flex items-center justify-center">
+              <canvas id="chart-cogs"></canvas>
+            </div>
+            <div id="cogs-sum-text" class="text-center text-xs text-amber-400 font-bold mono">
+              Total COGS: Rp 2.200.000 / Kolam
+            </div>
+          </div>
+
+          <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3 flex flex-col justify-between">
+            <div>
+              <h4 class="text-xs font-bold text-white uppercase tracking-wider">Uji Sensitivitas (Slide 15)</h4>
+              <p class="text-xs text-slate-400 mt-1">Simulasi perubahan biaya reagen lab $\pm 20\%$:</p>
+            </div>
+            
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded bg-slate-950 border border-slate-800 flex justify-between items-center">
+                <span class="text-slate-300">Skenario (+20% Biaya Reagen)</span>
+                <span id="sens-up" class="font-bold text-amber-400 mono">Margin: 42.9%</span>
+              </div>
+              <div class="p-2.5 rounded bg-slate-950 border border-slate-800 flex justify-between items-center">
+                <span class="text-slate-300">Baseline (Normal)</span>
+                <span id="sens-base" class="font-bold text-emerald-400 mono">Margin: 51.1%</span>
+              </div>
+              <div class="p-2.5 rounded bg-slate-950 border border-slate-800 flex justify-between items-center">
+                <span class="text-slate-300">Skenario (-20% Skala Batch)</span>
+                <span id="sens-down" class="font-bold text-cyan-400 mono">Margin: 59.3%</span>
+              </div>
+            </div>
+
+            <p class="text-[11px] text-slate-400">
+              *Bahkan pada skenario terburuk reagen naik 20%, AquaSeq tetap mengantongi margin >40%!
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Pitch Quote Callout -->
+    <div class="bg-gradient-to-r from-cyan-950/40 via-blue-950/30 to-slate-900 p-5 rounded-2xl border border-cyan-800/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="space-y-1">
+        <h4 class="text-sm font-bold text-white flex items-center gap-2">
+          <span>🎯</span> Kalimat Emas untuk Menjawab Juri Investor:
+        </h4>
+        <p class="text-xs text-cyan-200 italic">
+          "Pak Juri, petambak kami tidak membayar sekuensing mahal; mereka membayar proteksi modal Rp 100 juta dengan premi Rp 4,5 juta. Itu ROI 22x lipat dan margin kotor bisnis kami 51%."
+        </p>
+      </div>
+      <button onclick="navigator.clipboard.writeText('Pak Juri, petambak kami tidak membayar sekuensing mahal; mereka membayar proteksi modal Rp 100 juta dengan premi Rp 4,5 juta. Itu ROI 22x lipat dan margin kotor bisnis kami 51%.'); alert('Kalimat berhasil disalin ke clipboard!')" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs whitespace-nowrap shadow-lg shadow-cyan-600/20">
+        Salin Kalimat
+      </button>
+    </div>
+
+  </main>
+
+  <script>
+    let chartFarmer = null;
+    let chartCogs = null;
+
+    function initCharts() {
+      // Farmer P&L Chart
+      const ctxF = document.getElementById('chart-farmer').getContext('2d');
+      chartFarmer = new Chart(ctxF, {
+        type: 'bar',
+        data: {
+          labels: ['Kondisi Normal (Panen)', 'Kena Wabah AHPND (Rugi)', 'Dengan AquaSeq (Panen Selamat)'],
+          datasets: [{
+            label: 'Net Finansial Petambak (Juta Rp)',
+            data: [80, -100, 75.5],
+            backgroundColor: [
+              'rgba(14, 165, 233, 0.6)',
+              'rgba(244, 63, 94, 0.7)',
+              'rgba(16, 185, 129, 0.7)'
+            ],
+            borderColor: [
+              'rgba(14, 165, 233, 1)',
+              'rgba(244, 63, 94, 1)',
+              'rgba(16, 185, 129, 1)'
+            ],
+            borderWidth: 1.5,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: {
+              grid: { color: 'rgba(255,255,255,0.06)' },
+              ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#94a3b8' }
+            }
+          }
+        }
+      });
+
+      // COGS Donut Chart
+      const ctxC = document.getElementById('chart-cogs').getContext('2d');
+      chartCogs = new Chart(ctxC, {
+        type: 'doughnut',
+        data: {
+          labels: ['Nanopore (3x)', 'qPCR (12x)', 'eDNA & Logistik'],
+          datasets: [{
+            data: [900, 900, 400],
+            backgroundColor: [
+              'rgba(168, 85, 247, 0.8)',
+              'rgba(14, 165, 233, 0.8)',
+              'rgba(245, 158, 11, 0.8)'
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { color: '#94a3b8', boxWidth: 10, font: { size: 10 } }
+            }
+          },
+          cutout: '65%'
+        }
+      });
+    }
+
+    function updateSim() {
+      const kolam = parseInt(document.getElementById('slider-kolam').value);
+      const modal = parseFloat(document.getElementById('slider-modal').value);
+      const harga = parseFloat(document.getElementById('slider-harga').value);
+      const nano = parseFloat(document.getElementById('slider-nanopore').value);
+      const qpcr = parseFloat(document.getElementById('slider-qpcr').value);
+      const logistik = parseFloat(document.getElementById('slider-logistik').value);
+
+      // Labels update
+      document.getElementById('txt-kolam').innerText = kolam + ' Kolam';
+      document.getElementById('txt-modal').innerText = 'Rp ' + modal.toFixed(0) + ' Juta';
+      document.getElementById('txt-harga').innerText = 'Rp ' + harga.toFixed(1) + ' Juta';
+      document.getElementById('txt-nanopore').innerText = 'Rp ' + (nano * 1000).toLocaleString('id-ID');
+      document.getElementById('txt-qpcr').innerText = 'Rp ' + (qpcr * 1000).toLocaleString('id-ID');
+      document.getElementById('txt-logistik').innerText = 'Rp ' + (logistik * 1000).toLocaleString('id-ID');
+
+      // Math
+      const cogsPerKolamJt = (nano + qpcr + logistik) / 1000;
+      const revTotal = kolam * harga;
+      const cogsTotal = kolam * cogsPerKolamJt;
+      const profitTotal = revTotal - cogsTotal;
+      const margin = (profitTotal / revTotal) * 100;
+      const roi = modal / harga;
+      const asetTotal = kolam * modal;
+
+      // Stats DOM
+      document.getElementById('stat-modal-total').innerText = 'Rp ' + asetTotal.toFixed(0) + ' Jt';
+      document.getElementById('stat-kolam-sub').innerText = 'Berdasarkan ' + kolam + ' kolam intensif';
+      document.getElementById('stat-rev-total').innerText = 'Rp ' + revTotal.toFixed(1) + ' Jt';
+      document.getElementById('stat-margin-badge').innerText = margin.toFixed(1) + '% Gross Margin';
+      document.getElementById('stat-profit-total').innerText = 'Rp ' + profitTotal.toFixed(1) + ' Jt';
+      document.getElementById('stat-roi-val').innerText = roi.toFixed(1) + 'x';
+      document.getElementById('cogs-sum-text').innerText = 'Total COGS: Rp ' + ((nano + qpcr + logistik) * 1000).toLocaleString('id-ID') + ' / Kolam';
+
+      // Sensitivity
+      const cogsUp = cogsPerKolamJt * 1.2;
+      const marginUp = ((harga - cogsUp) / harga) * 100;
+      const cogsDown = cogsPerKolamJt * 0.8;
+      const marginDown = ((harga - cogsDown) / harga) * 100;
+
+      document.getElementById('sens-up').innerText = 'Margin: ' + marginUp.toFixed(1) + '%';
+      document.getElementById('sens-base').innerText = 'Margin: ' + margin.toFixed(1) + '%';
+      document.getElementById('sens-down').innerText = 'Margin: ' + marginDown.toFixed(1) + '%';
+
+      // Update Charts
+      if (chartFarmer) {
+        chartFarmer.data.datasets[0].data = [
+          modal * 0.8, // untung normal panen 180jt - modal 100jt
+          -modal,      // gagal panen total
+          (modal * 0.8) - harga // panen normal selamat dikurangi langganan
+        ];
+        chartFarmer.update();
+      }
+
+      if (chartCogs) {
+        chartCogs.data.datasets[0].data = [nano, qpcr, logistik];
+        chartCogs.update();
+      }
+    }
+
+    function resetParams() {
+      document.getElementById('slider-kolam').value = 5;
+      document.getElementById('slider-modal').value = 100;
+      document.getElementById('slider-harga').value = 4.5;
+      document.getElementById('slider-nanopore').value = 900;
+      document.getElementById('slider-qpcr').value = 900;
+      document.getElementById('slider-logistik').value = 400;
+      updateSim();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initCharts();
+      updateSim();
+    });
+  </script>
+</body>
+</html>
