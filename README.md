@@ -38,6 +38,7 @@ Bagi yang ingin membaca secara mendalam dalam format teks Markdown:
 4. **[`04_PANDUAN_PITCHING_DAN_SCRIPT.md`](docs/04_PANDUAN_PITCHING_DAN_SCRIPT.md)**: Naskah lengkap presentasi 180 detik (detik demi detik), aturan panggung, dan tips percaya diri.
 5. **[`05_KILLER_QA_DEFENSE_JURI.md`](docs/05_KILLER_QA_DEFENSE_JURI.md)**: Kumpulan 8 pertanyaan tersulit juri beserta contekan jawaban skakmat dan referensi jurnal resminya.
 6. **[`06_ARSITEKTUR_TEKNIK_DAN_AI.md`](docs/06_ARSITEKTUR_TEKNIK_DAN_AI.md)**: Arsitektur software (FastAPI, Next.js, PostgreSQL), alasan menggunakan model Elastic Net dan transformasi CLR, serta guardrail LLM.
+7. **[`07_AUDIT_DATA_DAN_SITASI_RESMI.md`](docs/07_AUDIT_DATA_DAN_SITASI_RESMI.md)**: Audit validitas 100% data, rujukan DOI jurnal peer-reviewed, kalkulasi riil modal tambak Jatim, dan batasan ilmiah anti-blunder.
 
 ---
 
