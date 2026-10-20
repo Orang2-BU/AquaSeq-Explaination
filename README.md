@@ -41,6 +41,7 @@ Bagi yang ingin membaca secara mendalam dalam format teks Markdown:
 7. **[`07_AUDIT_DATA_DAN_SITASI_RESMI.md`](docs/07_AUDIT_DATA_DAN_SITASI_RESMI.md)**: Audit validitas 100% data, rujukan DOI jurnal peer-reviewed, kalkulasi riil modal tambak Jatim, dan batasan ilmiah anti-blunder.
 8. **[`08_BEDAH_LENGKAP_WABAH_AHPND.md`](docs/08_BEDAH_LENGKAP_WABAH_AHPND.md)**: Bedah biologi penyakit AHPND/EMS, plasmid pVA1, gen racun pirAB, mekanisme kerusakan organ hepatopankreas, dan tindakan intervensi petambak.
 9. **[`09_KAMUS_HACKER_BIOLOGI_UNTUK_ANAK_IT.md`](docs/09_KAMUS_HACKER_BIOLOGI_UNTUK_ANAK_IT.md)**: Kamus translasi istilah biologi saintifik ke analogi komputer (Wireshark, Regex, MAC address, Entropy, Knapsack) khusus buat mahasiswa IT.
+10. **[`10_PREDIKSI_PERTANYAAN_PAKAR_BIOLOGI.md`](docs/10_PREDIKSI_PERTANYAAN_PAKAR_BIOLOGI.md)**: 8 Prediksi pertanyaan terganas pakar biologi/dosen mikrobiologi molekuler Track 2 beserta anatomi serangan, jebakan maut, dan format jawaban skakmat (metode PREP).
 
 ---
 
