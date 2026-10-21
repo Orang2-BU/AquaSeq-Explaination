@@ -24,6 +24,7 @@ Cukup unduh / clone repositori ini, lalu **double-click** file [`index.html`](in
 
 | Dashboard | File | Deskripsi & Kegunaan |
 | :--- | :--- | :--- |
+| **⭐ Kitab Suci Versi Bahasa Bayi (Literally Semuanya!)** | [`dashboards/panduan-bahasa-bayi.html`](dashboards/panduan-bahasa-bayi.html) | Panduan visual interaktif lengkap: masalah Rp 100 juta petambak, biologi AHPND, celah JALA, 3 jurus AquaSeq, bedah modal Rp 2,2 juta, vs eFishery, plus kuis kilat! |
 | **1. Pitch Deck 3 Menit** | [`dashboards/pitch-deck-interactive.html`](dashboards/pitch-deck-interactive.html) | Mode presentasi 10 slide interaktif dengan stopwatch latihan 180 detik, naskah santai Hadi, poin wajib juri, dan pantangan panggung. |
 | **2. Simulator Bisnis & TEA** | [`dashboards/business-simulator.html`](dashboards/business-simulator.html) | Kalkulator Techno-Economic Analysis (TEA) dengan slider jumlah kolam, modal kerja, margin 51%, dan uji sensitivitas biaya reagen $\pm 20\%$. |
 | **3. Pipeline AI & Genomik** | [`dashboards/genomics-pipeline.html`](dashboards/genomics-pipeline.html) | Visualisasi alur data dari air kolam (eDNA) → sekuensing Nanopore → QC Filtlong & CLR → pelacakan toksin pirAB → skor disbiosis → WhatsApp alert. |
