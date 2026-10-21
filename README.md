@@ -30,6 +30,7 @@ Cukup unduh / clone repositori ini, lalu **double-click** file [`index.html`](in
 | **4. Radar Kompetisi & Moat** | [`dashboards/competitive-moat.html`](dashboards/competitive-moat.html) | Radar multi-dimensi membandingkan AquaSeq vs JALA vs Kit PCR Lapangan vs Lab Sentral. Menjelaskan kenapa JALA adalah mitra API kita. |
 | **5. Flashcard Killer Q&A** | [`dashboards/qa-simulator.html`](dashboards/qa-simulator.html) | Simulasi latihan menjawab 8 pertanyaan paling mematikan dari juri venture capital dan profesor biologi dengan kartu bolak-balik interaktif. |
 | **6. Biodiversity Explorer** | [`dashboards/biodiversity-engine.html`](dashboards/biodiversity-engine.html) | Eksplorasi keanekaragaman hayati mikrobioma air tambak (Shannon Index $H'$, Chao1, Bray-Curtis) untuk penilaian mandat Track 2. |
+| **7. Bahasa Bayi: Unit Economics & eFishery** | [`dashboards/unit-economics-efishery.html`](dashboards/unit-economics-efishery.html) | Pembedahan santai tanpa jargon: kenapa Rp 4,5 juta bisa tes 12 minggu, bedah modal Rp 2,2 juta, dan perbandingan langsung dengan raksasa eFishery. |
 
 ---
 
