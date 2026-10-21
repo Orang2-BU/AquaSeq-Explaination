@@ -7,6 +7,10 @@
 > **Motto Produk:**  
 > *"Sequencing to discover, qPCR to monitor, Bahasa Indonesia to act."*
 
+> **Prinsip Posisi Produk:**  
+> **Sistem Pelengkap Cerdas (The Missing Biological Layer), BUKAN Pengganti.**  
+> AquaSeq tidak meminta petambak mengganti sensor IoT (seperti JALA) atau alat pemantau fisik kolam. Petambak tetap memakai sensor pH, suhu, dan oksigen (DO), lalu AquaSeq melengkapinya dengan mengolah **dua aliran data laboratorium** (sekuensing Nanopore berkala + qPCR mingguan) untuk mendeteksi ledakan mikroba patogen dan gen racun *pirAB* sebelum udang mati.
+
 Repositori ini memuat seluruh materi pembelajaran komprehensif, arsitektur teknis, kalkulator bisnis interaktif, dan simulator presentasi (*pitch deck*) 3 menit untuk persiapan kompetisi **GenoHack 2026** di ITB Ganesha Bandung.
 
 ---
@@ -42,6 +46,16 @@ Bagi yang ingin membaca secara mendalam dalam format teks Markdown:
 8. **[`08_BEDAH_LENGKAP_WABAH_AHPND.md`](docs/08_BEDAH_LENGKAP_WABAH_AHPND.md)**: Bedah biologi penyakit AHPND/EMS, plasmid pVA1, gen racun pirAB, mekanisme kerusakan organ hepatopankreas, dan tindakan intervensi petambak.
 9. **[`09_KAMUS_HACKER_BIOLOGI_UNTUK_ANAK_IT.md`](docs/09_KAMUS_HACKER_BIOLOGI_UNTUK_ANAK_IT.md)**: Kamus translasi istilah biologi saintifik ke analogi komputer (Wireshark, Regex, MAC address, Entropy, Knapsack) khusus buat mahasiswa IT.
 10. **[`10_PREDIKSI_PERTANYAAN_PAKAR_BIOLOGI.md`](docs/10_PREDIKSI_PERTANYAAN_PAKAR_BIOLOGI.md)**: 8 Prediksi pertanyaan terganas pakar biologi/dosen mikrobiologi molekuler Track 2 beserta anatomi serangan, jebakan maut, dan format jawaban skakmat (metode PREP).
+11. **[`11_KURASI_DATASET_PUBLIK_DAN_ALUR_UJI.md`](docs/11_KURASI_DATASET_PUBLIK_DAN_ALUR_UJI.md)**: Kurasi dataset publik terverifikasi (NCBI BioProject PRJNA1087723 & PRJNA947186) dan alur pemrosesan data FastQ Nanopore + Ct qPCR di prototipe.
+
+---
+
+## 🧬 Dataset Publik Terverifikasi (Bahan Uji Prototipe Hackathon)
+Untuk memastikan validitas ilmiah 100% dan bebas fabrikasi, prototipe komputasi AquaSeq diuji pada dataset publik resmi dunia:
+* **NCBI BioProject PRJNA1087723** (*Rajonhson et al., 2024, Microbiology Spectrum*): Sekuensing Oxford Nanopore 16S full-length & Illumina pada **air tambak (*pond water*)** dan usus udang vaname.
+* **NCBI BioProject PRJNA1445501** (*Khanh et al., 2024*): Runtut waktu 16S mikrobioma air tambak selama 10 minggu masa pemeliharaan (DOC).
+* **NCBI BioProject PRJNA947186** (*Heliyon / Cell Press, 2024*): Profil komparatif mikrobioma udang sehat vs terinfeksi AHPND.
+* **NCBI GenBank KM067908.1**: Sekuens referensi plasmid pVA1 pembawa gen racun *pirA* dan *pirB*.
 
 ---
 

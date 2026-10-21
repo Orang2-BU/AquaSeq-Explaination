@@ -167,55 +167,55 @@
       },
       {
         id: 3,
-        title: "Mengapa Solusi Eksisting Gagal?",
-        subtitle: "Keterbatasan IoT Sensor dan Uji PCR Konvensional",
+        title: "Kepingan yang Hilang: The Biological Layer",
+        subtitle: "AquaSeq Hadir Melengkapi (Complementary), BUKAN Menggantikan Sensor IoT",
         timeEst: "00:50 - 01:10 (20s)",
         visual: `
           <div class="grid grid-cols-2 gap-4 text-xs">
-            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
-              <div class="font-bold text-amber-400 mb-1">❌ Sensor IoT Fisika-Kimia (JALA)</div>
-              <p class="text-slate-400 text-[11px]">Bagus untuk pH & DO, tapi tidak bisa mendeteksi ada atau tidaknya mikroba hidup di air.</p>
+            <div class="p-3 bg-slate-950 rounded-xl border border-blue-900/40">
+              <div class="font-bold text-cyan-300 mb-1">✅ Sensor Fisika-Kimia (JALA)</div>
+              <p class="text-slate-400 text-[11px]">Memantau pH, suhu, salinitas, dan oksigen (DO). Sangat bagus dan tetap wajib dipakai petambak.</p>
             </div>
-            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
-              <div class="font-bold text-amber-400 mb-1">❌ Kit PCR Lapangan Klasik</div>
-              <p class="text-slate-400 text-[11px]">Hanya mengecek 1 target spesifik setelah udang lesu. Buta terhadap pergeseran mikrobioma kolam.</p>
+            <div class="p-3 bg-slate-950 rounded-xl border border-emerald-900/40">
+              <div class="font-bold text-emerald-300 mb-1">➕ AquaSeq Biological Layer</div>
+              <p class="text-slate-400 text-[11px]">Plugin cerdas via API: menambahkan deteksi genomik bakteri patogen dan toksin pirAB yang selama ini kosong.</p>
             </div>
           </div>
         `,
-        script: `"Sensor fisika-kimia luar biasa dalam memantau oksigen dan salinitas, namun buta terhadap faktor biologis. Sedangkan tes PCR konvensional hanya menguji satu patogen yang dicurigai secara reaktif. Celah inilah yang diisi oleh AquaSeq: menghadirkan biological layer yang selama ini hilang."`,
-        takeaway: "Posisikan AquaSeq melengkapi ekosistem yang ada (menambahkan biological layer).",
-        taboo: "Jangan menjelekkan JALA. Katakan JALA adalah calon mitra integrasi data kita."
+        script: `"Penting untuk kami tegaskan: AquaSeq hadir bukan untuk menggantikan sensor IoT atau aplikasi seperti JALA. Petambak tetap membutuhkan monitoring harian pH dan suhu. Namun ada satu kepingan puzzle yang selama ini hilang: The Biological Layer—siapa mikroba patogen yang hidup di air sebelum udang sakit. AquaSeq hadir sebagai plugin pelengkap cerdas untuk melengkapi sistem yang sudah ada."`,
+        takeaway: "Posisikan AquaSeq sebagai pelengkap cerdas (The Missing Biological Layer), bukan pesaing.",
+        taboo: "Jangan pernah bilang mau menggantikan JALA. JALA adalah calon mitra integrasi data via API."
       },
       {
         id: 4,
-        title: "Solusi AquaSeq: Workflow End-to-End",
-        subtitle: "Dari Air Kolam hingga Notifikasi WhatsApp di Ponsel Teknisi",
+        title: "Solusi AquaSeq: Workflow Dua Aliran Data",
+        subtitle: "Dari Nanopore & qPCR Menjadi Notifikasi Aksi di WhatsApp",
         timeEst: "01:10 - 01:40 (30s)",
         visual: `
           <div class="flex items-center justify-between text-center text-xs">
-            <div class="bg-slate-950 p-2.5 rounded-xl border border-cyan-800/40 w-1/4">
-              <span class="text-cyan-400 font-bold block">1. eDNA Air</span>
-              <span class="text-[10px] text-slate-400">Saring air kolam</span>
-            </div>
-            <span class="text-slate-600">→</span>
             <div class="bg-slate-950 p-2.5 rounded-xl border border-purple-800/40 w-1/4">
-              <span class="text-purple-400 font-bold block">2. Nanopore</span>
+              <span class="text-purple-400 font-bold block">1. Nanopore 16S</span>
               <span class="text-[10px] text-slate-400">Discover komunitas</span>
             </div>
             <span class="text-slate-600">→</span>
             <div class="bg-slate-950 p-2.5 rounded-xl border border-amber-800/40 w-1/4">
-              <span class="text-amber-400 font-bold block">3. qPCR Mingguan</span>
+              <span class="text-amber-400 font-bold block">2. qPCR Mingguan</span>
               <span class="text-[10px] text-slate-400">Monitor 3–5 marka</span>
+            </div>
+            <span class="text-slate-600">→</span>
+            <div class="bg-slate-950 p-2.5 rounded-xl border border-cyan-800/40 w-1/4">
+              <span class="text-cyan-400 font-bold block">3. AquaSeq Engine</span>
+              <span class="text-[10px] text-slate-400">CLR + Shannon Risk</span>
             </div>
             <span class="text-slate-600">→</span>
             <div class="bg-slate-950 p-2.5 rounded-xl border border-emerald-800/40 w-1/4">
               <span class="text-emerald-400 font-bold block">4. WhatsApp</span>
-              <span class="text-[10px] text-slate-400">Bahasa Indonesia</span>
+              <span class="text-[10px] text-slate-400">Aksi Petani</span>
             </div>
           </div>
         `,
-        script: `"Teknisi tambak cukup menyaring air kolam tanpa perlu membedah udang. Di awal tebar, sekuensing Nanopore membaca seluruh komunitas bakteri dan mencari gen racun pirAB. Dari ratusan bakteri, engine kami memilih 3 sampai 5 marka paling kritis untuk dipantau tiap minggu dengan qPCR berbiaya hemat. Bila ada sinyal bahaya, teknisi langsung menerima instruksi WhatsApp: 'Kolam B-02 waspada Vibrio, kurangi pakan 20% dan sipon hari ini'."`,
-        takeaway: "Jelaskan peran Nanopore (nemuin di awal) vs qPCR (mantau murah mingguan).",
+        script: `"Sistem kami mengolah dua aliran data laboratorium mitra: di awal siklus, sekuensing Nanopore membaca seluruh komunitas mikrobioma air dan melacak gen racun pirAB. Dari ratusan bakteri, engine kami memilih 3 sampai 5 marka kritis untuk dilacak mingguan dengan qPCR murah. Bila terjadi disbiosis, sistem kami menerjemahkan data mentah menjadi notifikasi WhatsApp otomatis: 'Kolam B-02 waspada Vibrio, kurangi pakan 20% dan sipon hari ini'."`,
+        takeaway: "Jelaskan peran Nanopore (nemuin di awal) vs qPCR (mantau murah mingguan) yang diolah engine kita.",
         taboo: "Jangan biarkan juri berpikir petani harus beli alat sekuensing sendiri (kita pakai lab mitra)."
       },
       {
@@ -328,7 +328,7 @@
           <div class="flex justify-between items-center text-center text-xs">
             <div class="bg-slate-950 p-2.5 rounded-xl border border-cyan-800/60 w-1/3">
               <span class="text-cyan-400 font-bold block">TRL 3 (Hari Ini)</span>
-              <span class="text-[10px] text-slate-400">MVP Bioinformatika</span>
+              <span class="text-[10px] text-slate-400">NCBI PRJNA1087723</span>
             </div>
             <span class="text-slate-600">→</span>
             <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 w-1/3">
@@ -342,8 +342,8 @@
             </div>
           </div>
         `,
-        script: `"Hari ini kami berada di TRL 3. Rencana hilirisasi 12 bulan ke depan difokuskan pada validasi retrospektif TRL 4 dan uji pilot lapangan TRL 5 pada dua tambak intensif Jawa Timur bekerja sama dengan Balai Perikanan Budidaya Air Payau Situbondo."`,
-        takeaway: "Pegang kerangka TRL (Slide 17): setiap fase menguji asumsi teratas.",
+        script: `"Hari ini kami berada di TRL 3, di mana prototipe komputasi kami telah teruji menggunakan dataset publik NCBI BioProject PRJNA1087723 untuk sekuensing Nanopore air tambak vaname. Rencana hilirisasi 12 bulan ke depan difokuskan pada validasi retrospektif TRL 4 dan uji pilot lapangan TRL 5 pada dua tambak intensif Jawa Timur bekerja sama dengan Balai Perikanan Budidaya Air Payau Situbondo."`,
+        takeaway: "Sebut dataset publik NCBI BioProject PRJNA1087723 untuk menunjukkan integritas data ilmiah.",
         taboo: "Jangan klaim TRL 7 atau sudah komersial luas jika belum ada uji lapangan nyata."
       },
       {

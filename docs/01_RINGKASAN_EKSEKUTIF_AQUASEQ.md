@@ -15,6 +15,21 @@ Budidaya udang vaname (*Penaeus vannamei*) di Indonesia adalah penopang devisa e
 * **Kit PCR Konvensional di Lapangan:** Bersifat reaktif dan sempit. Hanya mencari 1 atau 2 target yang dicurigai setelah udang tampak lesu. Padahal penyakit udang bersifat **polimikroba** (kombinasi beberapa mikroba) dan dinamis.
 * **Hasil Tes Lab Lambat:** Petambak mengirim sampel ke lab luar dan menunggu 3–7 hari. Sementara AHPND bisa memusnahkan kolam dalam 48 jam.
 
+### Posisi Produk: Sistem Pelengkap Cerdas, BUKAN Pengganti (Complementary, Not a Replacement)
+Satu hal yang paling mendasar: **AquaSeq TIDAK meminta petambak membuang atau mengganti sensor IoT (seperti JALA) yang sudah mereka beli.**
+* Petambak **tetap membutuhkan** sensor fisika-kimia (pH, oksigen terlarut/DO, suhu, salinitas) dan pencatatan pakan yang sudah disediakan oleh JALA. Itu adalah lapisan vital pemantauan harian.
+* Namun, ada satu lapisan krusial yang selama ini **kosong dan belum pernah ada solusinya di level petambak**: yaitu **Biological / Genomic Layer** (siapa mikroba patogen yang sedang berlipat ganda di dalam air kolam sebelum gejala klinis muncul).
+* **AquaSeq adalah Add-on / Plugin Biologis Cerdas.** Sistem kami dirancang untuk mengintegrasikan data genomik langsung ke dashboard yang sudah dipakai petambak via REST API atau dikirim langsung ke ponsel teknisi lewat WhatsApp.
+
+```
+[ Sensor IoT Fisika-Kimia (JALA) ]   -->   Memantau pH, Suhu, DO, Salinitas (Tetap Dipakai!)
+                 +
+[ AquaSeq Genomic Intelligence ]    -->   Menambahkan Lapisan Biologi (eDNA, 16S, pirAB, Disbiosis)
+                 │
+                 ▼
+[ PEMANTAUAN TAMBAK HOLISTIK 360° ]  -->   Petambak Terlindungi Penuh dari Gagal Panen
+```
+
 ---
 
 ## 2. Solusi: "Sequencing to Discover, qPCR to Monitor, Bahasa Indonesia to Act"

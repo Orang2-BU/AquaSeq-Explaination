@@ -21,13 +21,13 @@
 
 ---
 
-### [00:35 – 01:15] SLIDE 3 & 4: SOLUSI AQUASEQ & ALUR KERJA
-> *"Memperkenalkan **AquaSeq**: Early-warning disease platform berbasis eDNA air kolam.*
-> *Prinsip inovasi kami sederhana: **'Sequencing to discover, qPCR to monitor, Bahasa Indonesia to act.'***
-> *Teknisi kolam tidak perlu lagi menangkap atau membedah udang. Cukup menyaring 1 liter air kolam.*
-> *Di awal siklus tebar, teknologi sekuensing Nanopore memetakan seluruh komunitas mikrobioma air dan melacak keberadaan gen racun berbahaya seperti pirAB.*
-> *Dari ratusan mikroba yang terdeteksi, engine analitik AquaSeq secara cerdas memilih 3 sampai 5 marka kritis yang paling relevan untuk tambak tersebut.*
-> *Marka terpilih inilah yang kami lacak setiap minggu menggunakan uji qPCR berbiaya murah. Bila terjadi pergeseran ke arah bahaya atau disbiosis, sistem kami tidak mengirim laporan tabel rumit berbahasa Inggris, melainkan notifikasi WhatsApp otomatis berbahasa Indonesia langsung ke ponsel teknisi: 'Kolam B-02 waspada Vibrio, kurangi pakan 20% dan sipon dasar hari ini'."*
+### [00:35 – 01:15] SLIDE 3 & 4: SOLUSI AQUASEQ (SISTEM PELENGKAP BIOLOGIS CERDAS)
+> *"Penting untuk kami tegaskan: **AquaSeq hadir bukan untuk menggantikan sensor IoT atau aplikasi tambak seperti JALA**. Petambak tetap membutuhkan monitoring harian suhu, pH, dan oksigen.*
+> *Namun, ada satu kepingan puzzle terbesar yang selama ini hilang: **The Biological Layer**—siapa mikroorganisme patogen yang sedang hidup dan berlipat ganda di dalam air sebelum udang menunjukkan gejala sakit.*
+> *Memperkenalkan **AquaSeq**: Early-warning disease platform berbasis eDNA air kolam.*
+> *Prinsip kerja kami adalah sistem pelengkap cerdas: **'Sequencing to discover, qPCR to monitor, Bahasa Indonesia to act.'***
+> *Sistem kami mengolah dua aliran data laboratorium mitra: di awal siklus, sekuensing Nanopore membaca seluruh komunitas bakteri dan mencari gen racun pirAB. Dari ratusan mikroba, engine analitik kami memilih 3 sampai 5 marka kritis.*
+> *Marka terpilih inilah yang dilacak tiap minggu menggunakan uji qPCR berbiaya murah. Bila terjadi pergeseran ke arah disbiosis, sistem kami menerjemahkan data mentah tersebut menjadi notifikasi WhatsApp otomatis berbahasa Indonesia langsung ke ponsel teknisi: 'Kolam B-02 waspada Vibrio, kurangi pakan 20% dan sipon dasar hari ini'."*
 
 ---
 
@@ -47,10 +47,10 @@
 ---
 
 ### [02:25 – 03:00] SLIDE 9 & 10: TRAKSI, ROADMAP 12 BULAN & TIM
-> *"Hari ini, prototipe analitik kami telah berfungsi di TRL 3 menggunakan kurasi dataset publik dan simulasi disbiosis.*
-> *Dalam 12 bulan ke depan, rencana hilirisasi kami difokuskan menaikkan kematangan teknologi ke TRL 5: melakukan validasi retrospektif dan uji pilot lapangan di dua tambak intensif Jawa Timur bekerja sama dengan Balai Perikanan Budidaya Air Payau (BBPBAP) Situbondo.*
-> *Tim kami terdiri dari 6 talenta Politeknik Negeri Jember di bidang AI, bioinformatika, dan software engineering di bawah supervisi akademik Bapak Aji Seto Arifianto, serta diperkuat oleh Dewan Penasihat praktisi patologi perikanan.*
-> *Bersama AquaSeq, kita wujudkan ketahanan pangan maritim Indonesia yang tangguh, lestari, dan berdaya saing global. Terima kasih!"*
+> *"Hari ini, prototipe analitik kami telah berfungsi di TRL 3 menggunakan kurasi dataset publik NCBI BioProject—secara khusus PRJNA1087723 untuk sekuensing Nanopore air tambak vaname dan PRJNA947186 untuk profil komparatif AHPND.
+> Dalam 12 bulan ke depan, rencana hilirisasi kami difokuskan menaikkan kematangan teknologi ke TRL 5: melakukan validasi retrospektif dan uji pilot lapangan di dua tambak intensif Jawa Timur bekerja sama dengan Balai Perikanan Budidaya Air Payau (BBPBAP) Situbondo.
+> Tim kami terdiri dari 6 talenta Politeknik Negeri Jember di bidang AI, bioinformatika, dan software engineering di bawah supervisi akademik Bapak Aji Seto Arifianto, serta diperkuat oleh Dewan Penasihat praktisi patologi perikanan.
+> Bersama AquaSeq, kita wujudkan ketahanan pangan maritim Indonesia yang tangguh, lestari, dan berdaya saing global. Terima kasih!"*
 
 ---
 
