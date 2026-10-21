@@ -48,6 +48,7 @@ Bagi yang ingin membaca secara mendalam dalam format teks Markdown:
 9. **[`09_KAMUS_HACKER_BIOLOGI_UNTUK_ANAK_IT.md`](docs/09_KAMUS_HACKER_BIOLOGI_UNTUK_ANAK_IT.md)**: Kamus translasi istilah biologi saintifik ke analogi komputer (Wireshark, Regex, MAC address, Entropy, Knapsack) khusus buat mahasiswa IT.
 10. **[`10_PREDIKSI_PERTANYAAN_PAKAR_BIOLOGI.md`](docs/10_PREDIKSI_PERTANYAAN_PAKAR_BIOLOGI.md)**: 8 Prediksi pertanyaan terganas pakar biologi/dosen mikrobiologi molekuler Track 2 beserta anatomi serangan, jebakan maut, dan format jawaban skakmat (metode PREP).
 11. **[`11_KURASI_DATASET_PUBLIK_DAN_ALUR_UJI.md`](docs/11_KURASI_DATASET_PUBLIK_DAN_ALUR_UJI.md)**: Kurasi dataset publik terverifikasi (NCBI BioProject PRJNA1087723 & PRJNA947186) dan alur pemrosesan data FastQ Nanopore + Ct qPCR di prototipe.
+12. **[`12_PANDUAN_TOTAL_BAHASA_BAYI.md`](docs/12_PANDUAN_TOTAL_BAHASA_BAYI.md)**: Kitab suci AquaSeq versi bahasa bayi (literally semuanya tanpa istilah biologi rumit).
 
 ---
 
