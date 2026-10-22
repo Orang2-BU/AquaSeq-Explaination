@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaSeq · Hackday Challenge & Judging Masterclass | GenoHack 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #060913; color: #f1f5f9; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .card-glow { border: 1px solid rgba(255,255,255,0.07); transition: all 0.25s ease-in-out; }
+    .card-glow:hover { border-color: rgba(6, 182, 212, 0.4); transform: translateY(-2px); box-shadow: 0 15px 35px -10px rgba(6, 182, 212, 0.15); }
+    .tab-active { background-color: #0891b2; color: #ffffff; border-color: #06b6d4; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#060913]">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-40 px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="text-xs text-slate-400 hover:text-cyan-400 flex items-center gap-1 font-semibold">
+        ← Portal Utama
+      </a>
+      <span class="text-slate-700">|</span>
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded-full bg-amber-950 text-amber-400 border border-amber-800 text-[11px] font-bold mono">
+          HACKDAY MASTERCLASS 🏆
+        </span>
+        <h1 class="text-sm font-extrabold text-white hidden sm:block">
+          Strategi Menang Hackday GenoHack 2026 (Participant Kit & Zoom Analysis)
+        </h1>
+      </div>
+    </div>
+
+    <!-- Submission Deadline Pill -->
+    <div class="flex items-center gap-2 bg-slate-900 px-3 py-1.5 rounded-xl border border-rose-900/50 text-xs">
+      <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+      <span class="text-slate-400">Submission Round 1:</span>
+      <strong class="text-rose-300 mono">Sabtu 24 Okt, 18.00 WIB</strong>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-950/30 to-slate-900 p-6 rounded-3xl border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">
+          <span>🎯 BEDAH MATERI BOOTCAMP DAY 1 – DAY 6 & INDUSTRY CHALLENGES</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          Peta Rahasia Menaklukkan Juri GenoHack 2026
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
+          Kompilasi wawasan dari para pembicara industri (Falasifah ALBITEC, apt. Suci Utami SoluSEA, Shelly Natalia MIT Sloan) dan analisis challenge industri Pathgen.
+        </p>
+      </div>
+
+      <!-- Rubric Score Box -->
+      <div class="bg-slate-950 p-4 rounded-2xl border border-cyan-800/40 text-xs space-y-1.5 min-w-[240px]">
+        <div class="flex justify-between items-center text-slate-400 text-[11px]">
+          <span>Bobot Penentu Juara:</span>
+          <span class="text-cyan-400 font-bold mono">45% Total Nilai</span>
+        </div>
+        <div class="space-y-1 mono text-[11px]">
+          <div class="flex justify-between text-slate-300">
+            <span>• Kriteria D (Bisnis):</span>
+            <strong class="text-emerald-400">15%</strong>
+          </div>
+          <div class="flex justify-between text-slate-300">
+            <span>• Kriteria E (Validasi):</span>
+            <strong class="text-amber-400">15%</strong>
+          </div>
+          <div class="flex justify-between text-slate-300">
+            <span>• Kriteria G (Pasar):</span>
+            <strong class="text-cyan-400">15% (Final)</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="flex flex-wrap gap-2 mt-6 border-b border-slate-800 pb-3 text-xs sm:text-sm">
+      <button onclick="switchTab('challenge')" id="tab-btn-challenge" class="px-4 py-2 rounded-xl font-bold border border-slate-800 tab-active transition">
+        🧬 Bedah Challenge (Pathgen vs AquaSeq)
+      </button>
+      <button onclick="switchTab('3things')" id="tab-btn-3things" class="px-4 py-2 rounded-xl font-bold border border-slate-800 bg-slate-900 text-slate-400 hover:text-white transition">
+        📋 3 Hal Wajib Bawa (Jumat 23 Okt)
+      </button>
+      <button onclick="switchTab('lensa')" id="tab-btn-lensa" class="px-4 py-2 rounded-xl font-bold border border-slate-800 bg-slate-900 text-slate-400 hover:text-white transition">
+        🔍 4 Lensa Industri (ALBITEC)
+      </button>
+      <button onclick="switchTab('rubrik')" id="tab-btn-rubrik" class="px-4 py-2 rounded-xl font-bold border border-slate-800 bg-slate-900 text-slate-400 hover:text-white transition">
+        🏆 Rubrik Penilaian Kriteria E (Skor 1-5)
+      </button>
+    </div>
+  </section>
+
+  <!-- Main Content Wrapper -->
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+
+    <!-- ================= TAB 1: BEDAH CHALLENGE ================= -->
+    <section id="tab-challenge" class="space-y-6">
+      
+      <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+        <div class="flex items-center gap-2.5">
+          <span class="p-2 rounded-xl bg-purple-950 text-purple-400 border border-purple-800 text-lg">🔬</span>
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-white">
+              Mengapa Pathgen Industry Challenge Sangat Mirip dengan AquaSeq?
+            </h3>
+            <p class="text-xs text-slate-400">
+              Di Participant Kit, ada dokumen tantangan dari Pathgen (Track 1 Kanker Payudara). Ternyata, filosofi desainnya 100% identik dengan AquaSeq di Track 2!
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 text-slate-400">
+                <th class="py-3 px-3">Prinsip Desain Industri</th>
+                <th class="py-3 px-3 text-purple-400 bg-purple-950/20 font-bold">Pathgen Challenge (Track 1)</th>
+                <th class="py-3 px-3 text-cyan-400 bg-cyan-950/20 font-bold">Implementasi AquaSeq (Track 2)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800 text-slate-300">
+              <tr>
+                <td class="py-3.5 px-3 font-semibold text-white">Batasan Jumlah Target (Panel Ringkas)</td>
+                <td class="py-3.5 px-3 bg-purple-950/20">Maksimal 15 target mutasi (*compact hotspot panel*). Lebih sedikit lebih baik asalkan *coverage* terjaga.</td>
+                <td class="py-3.5 px-3 bg-cyan-950/20 text-emerald-400 font-bold">Cuma 3 sampai 5 marka kritis! Dipilih otomatis oleh Nanopore untuk pemantauan qPCR mingguan murah.</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-3 font-semibold text-white">Kelemahan Basis Data Global (The Gap)</td>
+                <td class="py-3.5 px-3 bg-purple-950/20">TCGA-BRCA didominasi populasi Barat (95% Kaukasia). Pasien Indonesia underrepresented.</td>
+                <td class="py-3.5 px-3 bg-cyan-950/20 text-cyan-300">Database mikrobioma global didominasi tambak subtropis/usus, bias terhadap air tambak tropis Indonesia.</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-3 font-semibold text-white">Kecocokan Populasi Lokal (Cohort Fit)</td>
+                <td class="py-3.5 px-3 bg-purple-950/20">Mutasi khas Asia & Indonesia: PIK3CA H1047L frekuensi tinggi (32,9% kasus).</td>
+                <td class="py-3.5 px-3 bg-cyan-950/20 text-cyan-300">Varian lokal Jatim: mutasi delesi 622 aa pada IMNV Situbondo 2018 & plasmid pVA1 virulen lokal.</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-3 font-semibold text-white">Relevansi Aksi (Actionability)</td>
+                <td class="py-3.5 px-3 bg-purple-950/20">Hanya memilih mutasi yang memicu keputusan terapi obat bertarget.</td>
+                <td class="py-3.5 px-3 bg-cyan-950/20 text-emerald-400 font-bold">Hanya memilih marka yang memicu aksi budidaya nyata di kolam (potong pakan, sipon lumpur dasar).</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-3 font-semibold text-white">Batasan Biaya (Cost Constraint)</td>
+                <td class="py-3.5 px-3 bg-purple-950/20">Menekan biaya tes agar terjangkau pasien Indonesia & sistem BPJS.</td>
+                <td class="py-3.5 px-3 bg-cyan-950/20 text-amber-300 font-bold">Menekan biaya qPCR jadi Rp 75.000/minggu agar petambak sanggup berlangganan rutin.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-xs text-slate-300 flex items-start gap-3">
+          <span class="text-xl">💡</span>
+          <div>
+            <strong class="text-cyan-300">Kutipan Panggung untuk Hadi:</strong><br>
+            <em>"Pak Juri, prinsip rekayasa AquaSeq selaras sempurna dengan metodologi industri terbaik seperti Pathgen: kami tidak menguji ratusan gen secara membabi buta. Algoritma kami memilih compact panel 3–5 biomarker lokal yang actionable dengan batasan biaya pengujian terjangkau bagi petambak."</em>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= TAB 2: 3 HAL WAJIB BAWA ================= -->
+    <section id="tab-3things" class="hidden space-y-6">
+      
+      <div class="bg-gradient-to-r from-slate-900 to-slate-850 p-6 rounded-3xl border border-slate-800 space-y-3">
+        <div class="flex items-center gap-2 text-xs font-bold text-amber-400 font-mono">
+          <span>📌 PERSYARATAN RESMI SLIDE 23 BOOTCAMP 4</span>
+        </div>
+        <h3 class="text-xl font-bold text-white">Tiga Hal Wajib yang Dibawa ke Hackathon (Jumat, 23 Oktober)</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Ketiga hal ini dinilai langsung oleh panel juri pada <strong>Submission Round I (Sabtu, 24 Oktober 18.00 WIB)</strong> untuk Kriteria D (15%) dan Kriteria E (15%).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs">
+        
+        <!-- Box 1 -->
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3 card-glow flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-950 text-amber-400 border border-amber-800 font-mono">ARTEFAK 1</span>
+            <h4 class="text-base font-bold text-white">Worksheet 20.1</h4>
+            <p class="text-slate-300 font-semibold text-[11px]">Matriks 5–10 Asumsi Kunci Terurut Risiko</p>
+            <p class="text-slate-400 leading-relaxed">
+              Mendaftar asumsi pasar, teknis, ekonomi, dan regulasi. Asumsi teratas kita: <em>"Pemilik tambak mau bayar premi Rp 4,5 juta demi lindungi modal Rp 100 juta."</em>
+            </p>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-emerald-400 font-semibold font-mono text-[10px]">
+            ✓ Siap di docs/13
+          </div>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3 card-glow flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono">ARTEFAK 2</span>
+            <h4 class="text-base font-bold text-white">Worksheet 21.1–21.2</h4>
+            <p class="text-slate-300 font-semibold text-[11px]">Rencana Uji Validasi Kilat 48 Jam</p>
+            <p class="text-slate-400 leading-relaxed">
+              Rencana menguji 3 asumsi teratas dengan biaya termurah. Minimal 1 uji dijalankan (wawancara 3–5 pengelola tambak di Problem Owner Clinic Jumat 23 Okt).
+            </p>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-emerald-400 font-semibold font-mono text-[10px]">
+            ✓ Siap di docs/13
+          </div>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3 card-glow flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono">ARTEFAK 3</span>
+            <h4 class="text-base font-bold text-white">Sketsa TEA Resmi</h4>
+            <p class="text-slate-300 font-semibold text-[11px]">Biaya per Unit & 3 Parameter Penggerak</p>
+            <p class="text-slate-400 leading-relaxed">
+              Biaya unit kasar: COGS Rp 2,2 juta, margin kotor 51,1%, dan uji sensitivitas reagen lab ±20%. Parameter paling sensitif: utilisasi multiplex 75 sampel.
+            </p>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-emerald-400 font-semibold font-mono text-[10px]">
+            ✓ Siap di dashboards/business-simulator
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= TAB 3: 4 LENSA INDUSTRI ================= -->
+    <section id="tab-lensa" class="hidden space-y-6">
+      
+      <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="p-2 rounded-xl bg-blue-950 text-blue-400 border border-blue-800 text-lg">🔍</span>
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-white">
+              Empat Lensa Industri Bioteknologi (Falasifah — Co-Founder ALBITEC)
+            </h3>
+            <p class="text-xs text-slate-400">
+              "Industri melihat 4 lensa, bukan cuma 3. Kegagalan biotech jarang terjadi karena sainsnya salah, melainkan karena mengabaikan pasar dan izin regulasi."
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+          
+          <!-- Lensa 1 -->
+          <div class="p-5 bg-slate-950 rounded-2xl border border-emerald-800/40 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+              <h5 class="font-bold text-white text-sm">1. Desirability</h5>
+            </div>
+            <p class="text-slate-300 font-semibold text-[11px]">"Apakah mereka mau?"</p>
+            <p class="text-slate-400 leading-relaxed">
+              Siapa yang merasa sakit, seberapa sering, dan apa yang mereka pakai sekarang.<br>
+              <strong class="text-emerald-300">AquaSeq:</strong> Petambak intensif trauma kehilangan modal Rp 100 juta dalam 48 jam akibat AHPND.
+            </p>
+          </div>
+
+          <!-- Lensa 2 -->
+          <div class="p-5 bg-slate-950 rounded-2xl border border-blue-800/40 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-blue-400"></span>
+              <h5 class="font-bold text-white text-sm">2. Feasibility</h5>
+            </div>
+            <p class="text-slate-300 font-semibold text-[11px]">"Bisakah kita buat?"</p>
+            <p class="text-slate-400 leading-relaxed">
+              Konsisten antar-batch pada skala dan biaya yang realistis.<br>
+              <strong class="text-blue-300">AquaSeq:</strong> Pipeline Python teruji pada dataset publik NCBI (PRJNA1087723) + alur filtrasi membran 0.22 μm.
+            </p>
+          </div>
+
+          <!-- Lensa 3 -->
+          <div class="p-5 bg-slate-950 rounded-2xl border border-amber-800/40 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+              <h5 class="font-bold text-white text-sm">3. Viability</h5>
+            </div>
+            <p class="text-slate-300 font-semibold text-[11px]">"Apakah menguntungkan?"</p>
+            <p class="text-slate-400 leading-relaxed">
+              Harga pasar menutup COGS, biaya logistik, dan akuisisi pelanggan.<br>
+              <strong class="text-amber-300">AquaSeq:</strong> Harga langganan Rp 4,5 juta menutup COGS Rp 2,2 juta (Gross Margin sehat 51,1%).
+            </p>
+          </div>
+
+          <!-- Lensa 4 -->
+          <div class="p-5 bg-slate-950 rounded-2xl border border-rose-800/40 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+              <h5 class="font-bold text-white text-sm">4. Permissibility</h5>
+            </div>
+            <p class="text-slate-300 font-semibold text-[11px]">"Bolehkah dijual & diklaim?"</p>
+            <p class="text-slate-400 leading-relaxed">
+              Izin edar, etika data, akses genetik, dan aturan klaim pemasaran.<br>
+              <strong class="text-rose-300">AquaSeq:</strong> Sebagai software monitoring non-obat hewan, regulasi masuk di bawah izin laboratorium uji mutu KKP.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= TAB 4: RUBRIK KRITERIA E ================= -->
+    <section id="rubrik" class="hidden space-y-6">
+      
+      <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="p-2 rounded-xl bg-amber-950 text-amber-400 border border-amber-800 text-lg">🎯</span>
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-white">
+              Bocoran Panel Juri: Skala Rubrik Kriteria E (Validasi dan Bukti)
+            </h3>
+            <p class="text-xs text-slate-400">
+              Dinilai langsung mulai Submission Round I (Sabtu 24 Okt 18.00). Jangan sampai tim kita mentok di skor 1 atau 2!
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          
+          <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800 opacity-60 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-slate-800 font-bold flex items-center justify-center text-slate-400 mono">1</span>
+              <div>
+                <strong class="text-white block">Skor 1: Tidak Ada Validasi Sama Sekali</strong>
+                <span class="text-slate-400">Hanya ide di atas kertas tanpa bukti eksternal. (Zona Gagal)</span>
+              </div>
+            </div>
+            <span class="text-rose-400 font-mono text-[11px]">HINDARI</span>
+          </div>
+
+          <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800 opacity-75 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-amber-950 text-amber-400 border border-amber-800 font-bold flex items-center justify-center mono">2</span>
+              <div>
+                <strong class="text-white block">Skor 2: Validasi Hanya Internal / Diskusi Mentor</strong>
+                <span class="text-slate-400">Hanya berdiskusi sesama tim atau dosen pembimbing. (Belum cukup untuk lolos final)</span>
+              </div>
+            </div>
+            <span class="text-amber-400 font-mono text-[11px]">POSISI AWAL</span>
+          </div>
+
+          <div class="p-3.5 bg-slate-950 rounded-2xl border border-cyan-800/80 flex items-center justify-between shadow-lg shadow-cyan-950/30">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-cyan-950 text-cyan-400 border border-cyan-800 font-bold flex items-center justify-center mono">3</span>
+              <div>
+                <strong class="text-cyan-300 block text-sm">Skor 3: 3–5 Percakapan dengan Calon Pengguna / Problem Owner</strong>
+                <span class="text-slate-300">Wawancara terarah dengan pengelola tambak atau mentor Problem Owner Clinic Jumat 23 Okt.</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg bg-cyan-950 text-cyan-300 border border-cyan-800 font-bold font-mono text-[10px]">TARGET ROUND 1</span>
+          </div>
+
+          <div class="p-3.5 bg-slate-950 rounded-2xl border border-emerald-800/80 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold flex items-center justify-center mono">4</span>
+              <div>
+                <strong class="text-emerald-300 block text-sm">Skor 4: Asumsi Diuji dengan Bukti Tertulis & Ada Pivot / Perubahan</strong>
+                <span class="text-slate-300">Catatan wawancara disimpan rapi; ada penyesuaian fitur atau strategi berdasarkan feedback petambak.</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg bg-emerald-950 text-emerald-300 border border-emerald-800 font-bold font-mono text-[10px]">TARGET FINAL</span>
+          </div>
+
+          <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-purple-950 text-purple-400 border border-purple-800 font-bold flex items-center justify-center mono">5</span>
+              <div>
+                <strong class="text-white block">Skor 5: Komitmen Tertulis dari Pengguna / Mitra (LoI, Data Uji, Pilot)</strong>
+                <span class="text-slate-400">Surat minat resmi (*Letter of Intent*) atau kesepakatan uji coba pilot berbayar dari pemilik tambak.</span>
+              </div>
+            </div>
+            <span class="text-purple-400 font-mono text-[11px]">TARGET TRL 4-5</span>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-center text-xs text-slate-400">
+    GenoHack 2026 Hackday Masterclass · Tim Disubmit Kok Tir Aman Ajah · Politeknik Negeri Jember
+  </footer>
+
+  <script>
+    function switchTab(tabId) {
+      const tabs = ['challenge', '3things', 'lensa', 'rubrik'];
+      tabs.forEach(t => {
+        const el = document.getElementById('tab-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (t === tabId) {
+          el.classList.remove('hidden');
+          btn.classList.add('tab-active');
+          btn.classList.remove('bg-slate-900', 'text-slate-400');
+        } else {
+          el.classList.add('hidden');
+          btn.classList.remove('tab-active');
+          btn.classList.add('bg-slate-900', 'text-slate-400');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -32,6 +32,7 @@ Cukup unduh / clone repositori ini, lalu **double-click** file [`index.html`](in
 | **5. Flashcard Killer Q&A** | [`dashboards/qa-simulator.html`](dashboards/qa-simulator.html) | Simulasi latihan menjawab 8 pertanyaan paling mematikan dari juri venture capital dan profesor biologi dengan kartu bolak-balik interaktif. |
 | **6. Biodiversity Explorer** | [`dashboards/biodiversity-engine.html`](dashboards/biodiversity-engine.html) | Eksplorasi keanekaragaman hayati mikrobioma air tambak (Shannon Index $H'$, Chao1, Bray-Curtis) untuk penilaian mandat Track 2. |
 | **7. Bahasa Bayi: Unit Economics & eFishery** | [`dashboards/unit-economics-efishery.html`](dashboards/unit-economics-efishery.html) | Pembedahan santai tanpa jargon: kenapa Rp 4,5 juta bisa tes 12 minggu, bedah modal Rp 2,2 juta, dan perbandingan langsung dengan raksasa eFishery. |
+| **8. Hackday Challenge Masterclass** | [`dashboards/hackday-challenge-guide.html`](dashboards/hackday-challenge-guide.html) | Bedah materi Participant Kit D1–D6, tantangan industri Pathgen vs AquaSeq, 3 artefak wajib bawa ke Hackathon (Worksheet 20.1, 21.1, TEA), 4 lensa industri ALBITEC, dan rubrik Kriteria E. |
 
 ---
 
@@ -50,6 +51,7 @@ Bagi yang ingin membaca secara mendalam dalam format teks Markdown:
 10. **[`10_PREDIKSI_PERTANYAAN_PAKAR_BIOLOGI.md`](docs/10_PREDIKSI_PERTANYAAN_PAKAR_BIOLOGI.md)**: 8 Prediksi pertanyaan terganas pakar biologi/dosen mikrobiologi molekuler Track 2 beserta anatomi serangan, jebakan maut, dan format jawaban skakmat (metode PREP).
 11. **[`11_KURASI_DATASET_PUBLIK_DAN_ALUR_UJI.md`](docs/11_KURASI_DATASET_PUBLIK_DAN_ALUR_UJI.md)**: Kurasi dataset publik terverifikasi (NCBI BioProject PRJNA1087723 & PRJNA947186) dan alur pemrosesan data FastQ Nanopore + Ct qPCR di prototipe.
 12. **[`12_PANDUAN_TOTAL_BAHASA_BAYI.md`](docs/12_PANDUAN_TOTAL_BAHASA_BAYI.md)**: Kitab suci AquaSeq versi bahasa bayi (literally semuanya tanpa istilah biologi rumit).
+13. **[`13_ANALISIS_PARTICIPANT_KIT_DAN_HACKDAY_CHALLENGE.md`](docs/13_ANALISIS_PARTICIPANT_KIT_DAN_HACKDAY_CHALLENGE.md)**: Analisis komprehensif seluruh dokumen Participant Kit, materi Zoom Bootcamp Day 1–6, pembedahan Hackday Challenge, 3 artefak wajib Jumat 23 Okt, dan strategi Kriteria D, E, G.
 
 ---
 
