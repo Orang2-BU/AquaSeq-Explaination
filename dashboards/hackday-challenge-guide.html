@@ -94,6 +94,9 @@
       <button onclick="switchTab('rubrik')" id="tab-btn-rubrik" class="px-4 py-2 rounded-xl font-bold border border-slate-800 bg-slate-900 text-slate-400 hover:text-white transition">
         🏆 Rubrik Penilaian Kriteria E (Skor 1-5)
       </button>
+      <button onclick="switchTab('mvbp')" id="tab-btn-mvbp" class="px-4 py-2 rounded-xl font-bold border border-slate-800 bg-slate-900 text-slate-400 hover:text-white transition">
+        📦 Desain MVBP (Step 22–24)
+      </button>
     </div>
   </section>
 
@@ -382,6 +385,105 @@
         </div>
       </div>
 
+    <!-- ================= TAB 5: DESAIN MVBP ================= -->
+    <section id="tab-mvbp" class="hidden space-y-6">
+      
+      <div class="bg-gradient-to-r from-slate-900 to-slate-850 p-6 rounded-3xl border border-slate-800 space-y-3">
+        <div class="flex items-center gap-2 text-xs font-bold text-emerald-400 font-mono">
+          <span>📦 IMPLEMENTASI STEP 22–24 (SHELLY NATALIA - MIT SLOAN)</span>
+        </div>
+        <h3 class="text-xl font-bold text-white">Minimum Viable Business Product (MVBP) AquaSeq</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Prototype hanya menguji apakah komputasi bisa jalan. MVBP membuktikan apakah ada petambak nyata yang <strong>menerima nilai (Value)</strong>, <strong>bersedia membayar (Pay > 0)</strong>, dan <strong>terjadi siklus feedback</strong>.
+        </p>
+      </div>
+
+      <!-- 3 Tests of MVBP Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-5 bg-slate-900 rounded-2xl border border-emerald-800/40 space-y-2 card-glow">
+          <span class="text-xl">💎</span>
+          <h4 class="font-bold text-white text-sm">1. Value Test</h4>
+          <p class="text-slate-300 leading-relaxed">
+            Petambak menerima nilai nyata: peringatan dini mendeteksi sinyal disbiosis 5–7 hari sebelum udang lemas, menyelamatkan modal panen Rp 100 juta.
+          </p>
+        </div>
+        <div class="p-5 bg-slate-900 rounded-2xl border border-cyan-800/40 space-y-2 card-glow">
+          <span class="text-xl">💳</span>
+          <h4 class="font-bold text-white text-sm">2. Pay Test</h4>
+          <p class="text-slate-300 leading-relaxed">
+            Pemilik tambak mengeluarkan dana riil > Rp 0. Di fase pilot (Lighthouse Customer), ditawarkan paket percontohan bersubsidi Rp 2,5 juta per kolam.
+          </p>
+        </div>
+        <div class="p-5 bg-slate-900 rounded-2xl border border-purple-800/40 space-y-2 card-glow">
+          <span class="text-xl">🔄</span>
+          <h4 class="font-bold text-white text-sm">3. Feedback Test</h4>
+          <p class="text-slate-300 leading-relaxed">
+            Interaksi mingguan: teknisi kolam memberi tanggapan atas instruksi WhatsApp dan tim mengkalibrasi model prediksinya secara berulang.
+          </p>
+        </div>
+      </div>
+
+      <!-- Worksheet Step 22 Details -->
+      <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+        <h4 class="text-base font-bold text-white flex items-center gap-2">
+          <span>📋</span> Pengisian Resmi Worksheet Step 22: Desain MVBP
+        </h4>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-1.5">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block">Target Customer & Buyer</span>
+            <strong class="text-white block">User: Teknisi Tambak · Buyer: Pemilik Tambak</strong>
+            <p class="text-slate-300">Teknisi butuh instruksi praktis tanpa istilah DNA. Pemilik tambak memegang otorisasi anggaran Rp 4,5 juta.</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-1.5">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block">Critical Customer Problem</span>
+            <strong class="text-rose-400 block">Kerugian Mendadak Rp 100 Juta Akibat AHPND</strong>
+            <p class="text-slate-300">Wabah mematikan di DOC 10–35 yang tidak bisa dideteksi oleh sensor pH dan suhu IoT.</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-1.5">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block">3 Kemampuan Inti Produk (Essential)</span>
+            <strong class="text-cyan-400 block">1) Filter eDNA · 2) Risk Engine CLR · 3) WA Alert</strong>
+            <p class="text-slate-300">Tiga fitur mutlak: saring air 500 mL, scoring risiko pirAB, dan pesan rekomendasi aksi berbahasa Indonesia.</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-1.5">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block">Concierge & Outsourced (Ditunda)</span>
+            <strong class="text-amber-400 block">Lab Alihdaya · WhatsApp Semi-Manual</strong>
+            <p class="text-slate-300">Sekuensing dialihdayakan ke BBPBAP Situbondo. Pengiriman WhatsApp semi-manual oleh tim di awal untuk nol halusinasi.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Roadmap V1 - V3 -->
+      <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+        <h4 class="text-base font-bold text-white flex items-center gap-2">
+          <span>🚀</span> Step 24: Rencana Evolusi Produk (Roadmap V1 – V3)
+        </h4>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="p-4 bg-slate-950 rounded-2xl border border-cyan-800/60 space-y-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono">V1 · BULAN 1-6 (TRL 4)</span>
+            <h5 class="font-bold text-white">Concierge Managed Service</h5>
+            <p class="text-slate-300 leading-relaxed">
+              Layanan terkelola untuk 2 farm di Jatim. Lab basah bermitra dengan Balai Situbondo. Output: WhatsApp Alert + Web Dashboard sederhana. Membuktikan willingness to pay.
+            </p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700 font-mono">V2 · BULAN 7-18 (TRL 5-6)</span>
+            <h5 class="font-bold text-white">Structured API & Integrator</h5>
+            <p class="text-slate-300 leading-relaxed">
+              Integrasi REST API ke aplikasi JALA. Penyeragaman panel marka qPCR. Paket kemitraan bundled dengan program pakan integrator eFishery.
+            </p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700 font-mono">V3 · BULAN 19+ (TRL 7-8)</span>
+            <h5 class="font-bold text-white">Autonomous Genomic Platform</h5>
+            <p class="text-slate-300 leading-relaxed">
+              Penambahan modul Shotgun Metagenomics untuk penemuan patogen novel de-novo. Pemantauan multi-spesies dan penjaminan risiko asuransi tambak nasional.
+            </p>
+          </div>
+        </div>
+      </div>
+
     </section>
 
   </main>
@@ -392,7 +494,7 @@
 
   <script>
     function switchTab(tabId) {
-      const tabs = ['challenge', '3things', 'lensa', 'rubrik'];
+      const tabs = ['challenge', '3things', 'lensa', 'rubrik', 'mvbp'];
       tabs.forEach(t => {
         const el = document.getElementById('tab-' + t);
         const btn = document.getElementById('tab-btn-' + t);

@@ -52,6 +52,7 @@ Bagi yang ingin membaca secara mendalam dalam format teks Markdown:
 11. **[`11_KURASI_DATASET_PUBLIK_DAN_ALUR_UJI.md`](docs/11_KURASI_DATASET_PUBLIK_DAN_ALUR_UJI.md)**: Kurasi dataset publik terverifikasi (NCBI BioProject PRJNA1087723 & PRJNA947186) dan alur pemrosesan data FastQ Nanopore + Ct qPCR di prototipe.
 12. **[`12_PANDUAN_TOTAL_BAHASA_BAYI.md`](docs/12_PANDUAN_TOTAL_BAHASA_BAYI.md)**: Kitab suci AquaSeq versi bahasa bayi (literally semuanya tanpa istilah biologi rumit).
 13. **[`13_ANALISIS_PARTICIPANT_KIT_DAN_HACKDAY_CHALLENGE.md`](docs/13_ANALISIS_PARTICIPANT_KIT_DAN_HACKDAY_CHALLENGE.md)**: Analisis komprehensif seluruh dokumen Participant Kit, materi Zoom Bootcamp Day 1–6, pembedahan Hackday Challenge, 3 artefak wajib Jumat 23 Okt, dan strategi Kriteria D, E, G.
+14. **[`14_DESAIN_LENGKAP_MVBP_AQUASEQ_STEP_22_24.md`](docs/14_DESAIN_LENGKAP_MVBP_AQUASEQ_STEP_22_24.md)**: Desain resmi MVBP (Minimum Viable Business Product) mengacu pada Disciplined Entrepreneurship Step 22–24 (Shelly Natalia MIT Sloan), 3 ujian kelayakan (Value, Pay, Feedback), strategi Concierge MVP, corong adopsi 7 tahap, dan roadmap produk V1–V3.
 
 ---
 
