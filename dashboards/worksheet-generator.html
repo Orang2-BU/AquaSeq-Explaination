@@ -1197,14 +1197,16 @@ Buyer: Pemilik Tambak Intensif (Pond Owner) di Situbondo & Banyuwangi."
       views.forEach(v => {
         const el = document.getElementById(`view-${v}`);
         const btn = document.getElementById(`tab-btn-${v}`);
-        if (v === viewId) {
-          el.classList.remove('hidden');
-          btn.classList.add('tab-btn-active');
-          btn.classList.remove('bg-slate-900', 'text-slate-400');
-        } else {
-          el.classList.add('hidden');
-          btn.classList.remove('tab-btn-active');
-          btn.classList.add('bg-slate-900', 'text-slate-400');
+        if (el && btn) {
+          if (v === viewId) {
+            el.classList.remove('hidden');
+            btn.classList.add('tab-btn-active');
+            btn.classList.remove('bg-slate-900', 'text-slate-400');
+          } else {
+            el.classList.add('hidden');
+            btn.classList.remove('tab-btn-active');
+            btn.classList.add('bg-slate-900', 'text-slate-400');
+          }
         }
       });
     }

@@ -310,7 +310,7 @@
     </section>
 
     <!-- ================= TAB 4: RUBRIK KRITERIA E ================= -->
-    <section id="rubrik" class="hidden space-y-6">
+    <section id="tab-rubrik" class="hidden space-y-6">
       
       <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
         <div class="flex items-center gap-2">
@@ -531,14 +531,16 @@
       tabs.forEach(t => {
         const el = document.getElementById('tab-' + t);
         const btn = document.getElementById('tab-btn-' + t);
-        if (t === tabId) {
-          el.classList.remove('hidden');
-          btn.classList.add('tab-active');
-          btn.classList.remove('bg-slate-900', 'text-slate-400');
-        } else {
-          el.classList.add('hidden');
-          btn.classList.remove('tab-active');
-          btn.classList.add('bg-slate-900', 'text-slate-400');
+        if (el && btn) {
+          if (t === tabId) {
+            el.classList.remove('hidden');
+            btn.classList.add('tab-active');
+            btn.classList.remove('bg-slate-900', 'text-slate-400');
+          } else {
+            el.classList.add('hidden');
+            btn.classList.remove('tab-active');
+            btn.classList.add('bg-slate-900', 'text-slate-400');
+          }
         }
       });
     }
