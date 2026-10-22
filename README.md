@@ -33,6 +33,7 @@ Cukup unduh / clone repositori ini, lalu **double-click** file [`index.html`](in
 | **6. Biodiversity Explorer** | [`dashboards/biodiversity-engine.html`](dashboards/biodiversity-engine.html) | Eksplorasi keanekaragaman hayati mikrobioma air tambak (Shannon Index $H'$, Chao1, Bray-Curtis) untuk penilaian mandat Track 2. |
 | **7. Bahasa Bayi: Unit Economics & eFishery** | [`dashboards/unit-economics-efishery.html`](dashboards/unit-economics-efishery.html) | Pembedahan santai tanpa jargon: kenapa Rp 4,5 juta bisa tes 12 minggu, bedah modal Rp 2,2 juta, dan perbandingan langsung dengan raksasa eFishery. |
 | **8. Hackday Challenge Masterclass** | [`dashboards/hackday-challenge-guide.html`](dashboards/hackday-challenge-guide.html) | Bedah materi Participant Kit D1–D6, tantangan industri Pathgen vs AquaSeq, 3 artefak wajib bawa ke Hackathon (Worksheet 20.1, 21.1, TEA), 4 lensa industri ALBITEC, dan rubrik Kriteria E. |
+| **9. Worksheet Generator & Simulator 9 Skema Bayar** | [`dashboards/worksheet-generator.html`](dashboards/worksheet-generator.html) | Generator interaktif formulir resmi Worksheet 20.1, 21.1–21.2, dan 22. Lengkap dengan bukti validasi Pak Gatot (Situbondo), simulasi 9 skema pembayaran, dan tombol cetak laporan resmi! |
 
 ---
 
@@ -53,6 +54,8 @@ Bagi yang ingin membaca secara mendalam dalam format teks Markdown:
 12. **[`12_PANDUAN_TOTAL_BAHASA_BAYI.md`](docs/12_PANDUAN_TOTAL_BAHASA_BAYI.md)**: Kitab suci AquaSeq versi bahasa bayi (literally semuanya tanpa istilah biologi rumit).
 13. **[`13_ANALISIS_PARTICIPANT_KIT_DAN_HACKDAY_CHALLENGE.md`](docs/13_ANALISIS_PARTICIPANT_KIT_DAN_HACKDAY_CHALLENGE.md)**: Analisis komprehensif seluruh dokumen Participant Kit, materi Zoom Bootcamp Day 1–6, pembedahan Hackday Challenge, 3 artefak wajib Jumat 23 Okt, dan strategi Kriteria D, E, G.
 14. **[`14_DESAIN_LENGKAP_MVBP_AQUASEQ_STEP_22_24.md`](docs/14_DESAIN_LENGKAP_MVBP_AQUASEQ_STEP_22_24.md)**: Desain resmi MVBP (Minimum Viable Business Product) mengacu pada Disciplined Entrepreneurship Step 22–24 (Shelly Natalia MIT Sloan), 3 ujian kelayakan (Value, Pay, Feedback), strategi Concierge MVP, corong adopsi 7 tahap, dan roadmap produk V1–V3.
+15. **[`15_VALIDASI_LAPANGAN_WAWANCARA_PAK_GATOT_SITUBONDO.md`](docs/15_VALIDASI_LAPANGAN_WAWANCARA_PAK_GATOT_SITUBONDO.md)**: Transkrip & analisis 18 poin wawancara praktisi tambak super-intensif Situbondo (Pak Gatot) yang mengunci Skor 4 pada Kriteria E.
+16. **[`16_SKEMA_PEMBAYARAN_DAN_PIVOT_LAB_QPCR_VS_NANOPORE.md`](docs/16_SKEMA_PEMBAYARAN_DAN_PIVOT_LAB_QPCR_VS_NANOPORE.md)**: 9 Skema pembayaran fleksibel (bayar per tahap, paket per tambak dasar+kolam, potong panen), pivot lab qPCR-First vs Nanopore on-demand, dan triangulasi data sekunder pasar.
 
 ---
 
