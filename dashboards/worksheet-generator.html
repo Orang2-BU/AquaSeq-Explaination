@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AquaSeq · Official Worksheet Generator & Pricing Simulator | GenoHack 2026</title>
+  <title>AquaSeq · Official Worksheet Generator, Financial Engine & Competitor Wargame | GenoHack 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #070b14; color: #f8fafc; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #060913; color: #f1f5f9; }
     .mono { font-family: 'JetBrains Mono', monospace; }
-    .card-glow { border: 1px solid rgba(255,255,255,0.08); transition: all 0.2s ease-in-out; }
-    .card-glow:hover { border-color: rgba(6, 182, 212, 0.4); }
+    .card-glow { border: 1px solid rgba(255,255,255,0.08); transition: all 0.25s ease-in-out; }
+    .card-glow:hover { border-color: rgba(6, 182, 212, 0.4); transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(6, 182, 212, 0.15); }
     .tab-btn-active { background-color: #0891b2; color: #ffffff; border-color: #06b6d4; }
     @media print {
       body { background-color: #ffffff !important; color: #000000 !important; }
       header, nav, .no-print { display: none !important; }
       .print-area { display: block !important; border: none !important; box-shadow: none !important; color: #000000 !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
       .print-table { border-collapse: collapse !important; width: 100% !important; color: #000000 !important; }
-      .print-table th, .print-table td { border: 1px solid #333333 !important; padding: 8px !important; color: #000000 !important; }
-      .print-card { border: 1px solid #666666 !important; background: #ffffff !important; color: #000000 !important; margin-bottom: 15px !important; padding: 12px !important; }
+      .print-table th, .print-table td { border: 1px solid #333333 !important; padding: 6px 8px !important; color: #000000 !important; font-size: 10px !important; }
+      .print-card { border: 1px solid #666666 !important; background: #ffffff !important; color: #000000 !important; margin-bottom: 12px !important; padding: 10px !important; }
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col bg-[#070b14]">
+<body class="min-h-screen flex flex-col bg-[#060913]">
 
-  <!-- Header -->
+  <!-- Top Sticky Header -->
   <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-40 px-4 py-3 flex justify-between items-center no-print">
     <div class="flex items-center gap-3">
       <a href="../index.html" class="text-xs text-slate-400 hover:text-cyan-400 flex items-center gap-1 font-semibold">
@@ -33,20 +33,20 @@
       <span class="text-slate-700">|</span>
       <div class="flex items-center gap-2">
         <span class="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 text-[11px] font-bold mono">
-          WORKSHEET GENERATOR 📄
+          WORKSHEET SUITE 📑
         </span>
         <h1 class="text-sm font-extrabold text-white hidden sm:block">
-          Generator Laporan Resmi Step 20–22 & Simulator 9 Skema Bayar
+          Generator Laporan Step 20–22, Rumus Juri, MVBP & Wargame
         </h1>
       </div>
     </div>
 
     <!-- Actions -->
     <div class="flex items-center gap-2">
-      <button onclick="window.print()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-white font-bold flex items-center gap-1.5 border border-slate-700">
+      <button onclick="window.print()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-white font-bold flex items-center gap-1.5 border border-slate-700 transition">
         <span>🖨️</span> Cetak / Simpan PDF
       </button>
-      <button onclick="exportJson()" class="px-3.5 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-xs text-white font-bold shadow-lg shadow-cyan-600/20">
+      <button onclick="exportJson()" class="px-3.5 py-1.5 rounded-xl bg-cyan-600 hover:cyan-500 text-xs text-white font-bold shadow-lg shadow-cyan-600/20 transition">
         Export JSON Data
       </button>
     </div>
@@ -54,44 +54,67 @@
 
   <!-- Hero Banner -->
   <section class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 no-print">
-    <div class="bg-gradient-to-r from-slate-900 via-cyan-950/20 to-slate-900 p-6 rounded-3xl border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <div class="bg-gradient-to-r from-slate-900 via-cyan-950/30 to-slate-900 p-6 rounded-3xl border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
       <div class="space-y-2">
         <div class="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">
-          <span>📑 SUBMISSION ROUND I (SABTU 24 OKT 18.00 WIB) · 3 ARTEFAK RESMI</span>
+          <span>🏆 SUBMISSION ROUND I (SABTU 24 OKT 18.00 WIB) · DOSSIER LENGKAP</span>
         </div>
         <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
-          Generator Worksheet Disciplined Entrepreneurship
+          Worksheet Generator & Financial Engine AquaSeq
         </h2>
         <p class="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
-          Semua data telah terisi berdasarkan <strong>wawancara riil Pak Gatot (Situbondo)</strong>, masukan ahli lab (pivot <strong>qPCR-First</strong>), dan benchmark pasar terpublikasi. Ubah angka sesukamu dan cetak langsung!
+          Menggabungkan <strong>formula resmi dari panel juri</strong> (TEA, LTV:COCA, BEP, Gross Margin, Shannon CLR), <strong>desain lengkap MVBP</strong>, <strong>rubrik penilaian juri</strong>, <strong>data riil Pak Gatot (Situbondo)</strong>, pivot teknis <strong>qPCR-First</strong>, dan wargame menghadapi <strong>CeKolam & JALA</strong>.
         </p>
       </div>
 
-      <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-xs space-y-1 min-w-[220px]">
-        <span class="text-slate-400 text-[10px] block font-mono">STATUS VALIDASI HARI INI:</span>
-        <div class="text-emerald-400 font-bold text-sm flex items-center gap-1.5">
-          <span>✓</span> Kriteria E: Skor 4 (Validasi Riil)
+      <!-- Quick Metrics Summary -->
+      <div class="bg-slate-950 p-4 rounded-2xl border border-cyan-800/40 text-xs space-y-1.5 min-w-[240px]">
+        <div class="flex justify-between items-center text-slate-400 text-[11px]">
+          <span>Status Kriteria Juri:</span>
+          <span class="text-emerald-400 font-bold mono">Lulus Kriteria D & E</span>
         </div>
-        <span class="text-[11px] text-slate-400">18 Poin Wawancara Situbondo</span>
+        <div class="space-y-1 mono text-[11px]">
+          <div class="flex justify-between text-slate-300">
+            <span>• Rasio LTV : COCA:</span>
+            <strong class="text-cyan-400">6,25 : 1 (Sehat &gt; 3:1)</strong>
+          </div>
+          <div class="flex justify-between text-slate-300">
+            <span>• Titik Impas (BEP):</span>
+            <strong class="text-emerald-400">6,4 Tambak (2,1% Pasar)</strong>
+          </div>
+          <div class="flex justify-between text-slate-300">
+            <span>• Payback Ratio:</span>
+            <strong class="text-amber-400">46,1x Lipat (3 Kolam)</strong>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Navigation Tabs -->
+    <!-- Navigation Tabs (8 Tabs Total) -->
     <div class="flex flex-wrap gap-2 mt-6 border-b border-slate-800 pb-3 text-xs sm:text-sm">
-      <button onclick="switchView('ws20')" id="tab-btn-ws20" class="px-4 py-2 rounded-xl font-bold border border-slate-800 tab-btn-active transition">
-        1. Worksheet 20.1 (Asumsi Kunci)
+      <button onclick="switchView('ws20')" id="tab-btn-ws20" class="px-3.5 py-2 rounded-xl font-bold border border-slate-800 tab-btn-active transition">
+        1. WS 20.1 (Asumsi Kunci)
       </button>
-      <button onclick="switchView('ws21')" id="tab-btn-ws21" class="px-4 py-2 rounded-xl font-bold border border-slate-800 bg-slate-900 text-slate-400 hover:text-white transition">
-        2. Worksheet 21.1–21.2 (Uji 48 Jam)
+      <button onclick="switchView('ws21')" id="tab-btn-ws21" class="px-3.5 py-2 rounded-xl font-bold border border-slate-800 bg-slate-900 text-slate-400 hover:text-white transition">
+        2. WS 21.1–21.2 (Uji 48 Jam)
       </button>
-      <button onclick="switchView('ws22')" id="tab-btn-ws22" class="px-4 py-2 rounded-xl font-bold border border-slate-800 bg-slate-900 text-slate-400 hover:text-white transition">
-        3. Worksheet 22 (Desain MVBP)
+      <button onclick="switchView('ws22')" id="tab-btn-ws22" class="px-3.5 py-2 rounded-xl font-bold border border-emerald-800 bg-emerald-950/60 text-emerald-300 hover:text-white transition">
+        3. Desain MVBP (Step 22–24)
       </button>
-      <button onclick="switchView('pricing')" id="tab-btn-pricing" class="px-4 py-2 rounded-xl font-bold border border-slate-800 bg-slate-900 text-slate-400 hover:text-white transition">
-        4. Simulator 9 Skema Bayar & Pivot Lab
+      <button onclick="switchView('rubrik')" id="tab-btn-rubrik" class="px-3.5 py-2 rounded-xl font-bold border border-amber-800 bg-amber-950/60 text-amber-300 hover:text-white transition">
+        4. Rubrik Penilaian Juri (A-G)
       </button>
-      <button onclick="switchView('preview')" id="tab-btn-preview" class="px-4 py-2 rounded-xl font-bold border border-emerald-800 bg-emerald-950 text-emerald-400 hover:text-white transition">
-        📄 Laporan Lengkap (Siap Cetak)
+      <button onclick="switchView('rumus')" id="tab-btn-rumus" class="px-3.5 py-2 rounded-xl font-bold border border-cyan-800 bg-cyan-950/60 text-cyan-300 hover:text-white transition">
+        5. Rumus Juri & Finansial Engine
+      </button>
+      <button onclick="switchView('pricing')" id="tab-btn-pricing" class="px-3.5 py-2 rounded-xl font-bold border border-slate-800 bg-slate-900 text-slate-400 hover:text-white transition">
+        6. Simulator 9 Skema Bayar
+      </button>
+      <button onclick="switchView('wargame')" id="tab-btn-wargame" class="px-3.5 py-2 rounded-xl font-bold border border-purple-800 bg-purple-950/60 text-purple-300 hover:text-white transition">
+        7. Wargame Lawan Kompetitor
+      </button>
+      <button onclick="switchView('preview')" id="tab-btn-preview" class="px-3.5 py-2 rounded-xl font-bold border border-emerald-800 bg-emerald-950 text-emerald-400 hover:text-white transition">
+        📄 Laporan Dossier Siap Cetak
       </button>
     </div>
   </section>
@@ -105,7 +128,7 @@
         <div class="flex justify-between items-center">
           <div>
             <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800">STEP 20 · IDENTIFY KEY ASSUMPTIONS</span>
-            <h3 class="text-lg font-bold text-white mt-1">Matriks Asumsi Kunci AquaSeq (Terurut Prioritas Risiko)</h3>
+            <h3 class="text-lg font-bold text-white mt-1">Matriks Asumsi Kunci AquaSeq (Data-Driven)</h3>
           </div>
           <button onclick="resetWs20()" class="text-xs text-cyan-400 hover:underline">Reset Default</button>
         </div>
@@ -117,8 +140,8 @@
                 <th class="py-2.5 px-3">No</th>
                 <th class="py-2.5 px-3">Kategori</th>
                 <th class="py-2.5 px-3">Asumsi Kunci Kami</th>
+                <th class="py-2.5 px-3">Bukti Empiris Penopang (By Data)</th>
                 <th class="py-2.5 px-3">Dampak Bila Salah</th>
-                <th class="py-2.5 px-3">Bukti Hari Ini</th>
                 <th class="py-2.5 px-3">Tingkat Risiko</th>
               </tr>
             </thead>
@@ -130,7 +153,7 @@
 
         <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs text-slate-400 flex items-center justify-between">
           <span>*Prinsip Step 20: Uji dulu asumsi yang dampaknya tinggi dan buktinya paling tipis.</span>
-          <span class="text-emerald-400 font-semibold font-mono">5 Asumsi Utama Terpetakan</span>
+          <span class="text-emerald-400 font-semibold font-mono">5 Asumsi Utama Didukung Data Primer & Sekunder</span>
         </div>
       </div>
     </section>
@@ -140,7 +163,7 @@
       <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
         <div>
           <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800">STEP 21 · TEST KEY ASSUMPTIONS</span>
-          <h3 class="text-lg font-bold text-white mt-1">Rencana Uji Validasi Kilat 48 Jam (3 Asumsi Teratas)</h3>
+          <h3 class="text-lg font-bold text-white mt-1">Rencana & Hasil Uji Validasi 48 Jam (3 Asumsi Teratas)</h3>
           <p class="text-xs text-slate-400 mt-1">Aturan emas Step 21: Kriteria lulus ditulis LEBIH DULU sebelum uji dijalankan!</p>
         </div>
 
@@ -150,22 +173,373 @@
       </div>
     </section>
 
-    <!-- ================= VIEW 3: WORKSHEET 22 ================= -->
+    <!-- ================= VIEW 3: WORKSHEET 22 (DESAIN MVBP LENGKAP) ================= -->
     <section id="view-ws22" class="hidden space-y-6 no-print">
-      <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-5">
-        <div>
-          <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">STEP 22 · DESIGN MINIMUM VIABLE BUSINESS PRODUCT</span>
-          <h3 class="text-lg font-bold text-white mt-1">Formulir Resmi Desain MVBP AquaSeq</h3>
-          <p class="text-xs text-slate-400 mt-1">Membuktikan Tiga Ujian: 1) Value, 2) Pay (> 0), 3) Feedback loop.</p>
+      
+      <!-- Top Overview Banner -->
+      <div class="bg-gradient-to-r from-emerald-950/40 via-slate-900 to-slate-850 p-6 rounded-3xl border border-emerald-800/40 space-y-3">
+        <div class="flex items-center gap-2 text-xs font-bold text-emerald-400 font-mono">
+          <span>📦 STEP 22–24 · MINIMUM VIABLE BUSINESS PRODUCT (SHELLY NATALIA - MIT SLOAN)</span>
         </div>
+        <h3 class="text-xl font-bold text-white">Desain Lengkap MVBP AquaSeq: Bukan Cuma Prototype Kodingan!</h3>
+        <p class="text-xs text-slate-400 leading-relaxed max-w-3xl">
+          Prototype hanya menguji kelayakan teknis di komputer. MVBP adalah <strong>produk bisnis terkecil yang membuktikan kelayakan transaksi</strong> di hadapan petambak nyata.
+        </p>
+      </div>
 
+      <!-- 3 Tests of MVBP Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-5 bg-slate-900 rounded-2xl border border-emerald-800/50 space-y-2 card-glow">
+          <div class="flex justify-between items-center">
+            <span class="text-2xl">💎</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800 mono">TEST 1</span>
+          </div>
+          <h4 class="font-bold text-white text-sm">Value Test (Nilai Nyata)</h4>
+          <p class="text-slate-300 leading-relaxed">
+            Teknisi kolam menerima peringatan dini disbiosis 5–7 hari sebelum udang lemas, menyelamatkan panen modal Rp 100 juta per kolam.
+          </p>
+        </div>
+        <div class="p-5 bg-slate-900 rounded-2xl border border-cyan-800/50 space-y-2 card-glow">
+          <div class="flex justify-between items-center">
+            <span class="text-2xl">💳</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950 text-cyan-400 border border-cyan-800 mono">TEST 2</span>
+          </div>
+          <h4 class="font-bold text-white text-sm">Pay Test (Duit Riil &gt; 0)</h4>
+          <p class="text-slate-300 leading-relaxed">
+            Pemilik tambak mengeluarkan dana riil. Untuk 2 tambak pilot percontohan, ditawarkan paket bersubsidi Rp 2,5 juta per kolam demi membuktikan kesediaan transaksi.
+          </p>
+        </div>
+        <div class="p-5 bg-slate-900 rounded-2xl border border-purple-800/50 space-y-2 card-glow">
+          <div class="flex justify-between items-center">
+            <span class="text-2xl">🔄</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-950 text-purple-400 border border-purple-800 mono">TEST 3</span>
+          </div>
+          <h4 class="font-bold text-white text-sm">Feedback Loop (Respon Harian)</h4>
+          <p class="text-slate-300 leading-relaxed">
+            Interaksi mingguan: teknisi membalas alert WhatsApp (apakah pakan sudah dikurangi, bagaimana kondisi air) untuk mengkalibrasi model AI secara iteratif.
+          </p>
+        </div>
+      </div>
+
+      <!-- Worksheet Step 22 Form Table -->
+      <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+        <h4 class="text-base font-bold text-white flex items-center gap-2">
+          <span>📋</span> Pengisian Resmi Worksheet Step 22: Desain MVBP
+        </h4>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs" id="ws22-fields">
           <!-- Rendered by JS -->
         </div>
       </div>
+
+      <!-- Concierge Before You Automate Workflow -->
+      <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="p-2 rounded-xl bg-cyan-950 text-cyan-400 border border-cyan-800 text-lg">⚙️</span>
+          <div>
+            <h4 class="text-base font-bold text-white">Strategi "Concierge Before You Automate" AquaSeq</h4>
+            <p class="text-xs text-slate-400">Gak perlu serba otomatis 100% di awal. Validasi pasar dengan alur terkelola semi-manual di belakang layar.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-1.5">
+            <span class="text-cyan-400 font-bold mono text-[10px] block">LANGKAH 1 · USER REQUEST</span>
+            <h5 class="font-bold text-white">Order Sampling Sederhana</h5>
+            <p class="text-slate-300 text-[11px]">Teknisi kolam cukup mengisi bot WA sederhana: "Sampel Kolam B-02 siap diambil".</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-1.5">
+            <span class="text-amber-400 font-bold mono text-[10px] block">LANGKAH 2 · MANUAL BACKEND</span>
+            <h5 class="font-bold text-white">Concierge QA & Lab Ingest</h5>
+            <p class="text-slate-300 text-[11px]">Kurir antar ke BBPBAP Situbondo, data diolah pipeline, skor diverifikasi manual oleh tim & advisor.</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-1.5">
+            <span class="text-emerald-400 font-bold mono text-[10px] block">LANGKAH 3 · DELIVERED VALUE</span>
+            <h5 class="font-bold text-white">WhatsApp Actionable Alert</h5>
+            <p class="text-slate-300 text-[11px]">Notifikasi resmi terkirim ke ponsel teknisi kolam: instruksi kerja potong pakan & sipon dalam Bahasa Indonesia.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 24: Product Roadmap V1-V3 -->
+      <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+        <h4 class="text-base font-bold text-white flex items-center gap-2">
+          <span>🚀</span> Step 24: Rencana Evolusi Produk (Roadmap V1 – V3)
+        </h4>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="p-4 bg-slate-950 rounded-2xl border border-cyan-800/60 space-y-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono">V1 · BULAN 1-6 (TRL 4)</span>
+            <h5 class="font-bold text-white">Concierge Managed Service</h5>
+            <p class="text-slate-300 leading-relaxed">
+              Layanan terkelola untuk 2 farm percontohan Jawa Timur. Lab basah bermitra dengan Balai Situbondo. Output: WhatsApp Alert + Web Dashboard sederhana. Membuktikan willingness to pay.
+            </p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700 font-mono">V2 · BULAN 7-18 (TRL 5-6)</span>
+            <h5 class="font-bold text-white">Structured API & Integrator</h5>
+            <p class="text-slate-300 leading-relaxed">
+              Integrasi REST API ke aplikasi JALA. Penyeragaman panel marka qPCR. Paket kemitraan bundled dengan program pakan integrator eFishery (Kabayan).
+            </p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700 font-mono">V3 · BULAN 19+ (TRL 7-8)</span>
+            <h5 class="font-bold text-white">Autonomous Genomic Platform</h5>
+            <p class="text-slate-300 leading-relaxed">
+              Penambahan modul Shotgun Metagenomics untuk penemuan patogen novel de-novo. Pemantauan multi-spesies dan penjaminan risiko asuransi tambak nasional.
+            </p>
+          </div>
+        </div>
+      </div>
+
     </section>
 
-    <!-- ================= VIEW 4: SIMULATOR 9 SKEMA BAYAR ================= -->
+    <!-- ================= VIEW 4: RUBRIK PENILAIAN JURI (A-G) ================= -->
+    <section id="view-rubrik" class="hidden space-y-6 no-print">
+      
+      <!-- Top Rubric Overview -->
+      <div class="bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-850 p-6 rounded-3xl border border-amber-800/40 space-y-3">
+        <div class="flex items-center gap-2 text-xs font-bold text-amber-400 font-mono">
+          <span>⚖️ BOCORAN RESMI PANEL JURI GENOHACK 2026</span>
+        </div>
+        <h3 class="text-xl font-bold text-white">Rubrik Penilaian Juri (Kriteria A s/d G)</h3>
+        <p class="text-xs text-slate-400 leading-relaxed max-w-3xl">
+          Tiga kriteria bisnis (D, E, dan G) menguasai <strong>45% bobot penilaian akhir</strong>. Inilah peta lengkap bagaimana AquaSeq dinilai sejak Submission Round I (Sabtu 24 Okt 18.00 WIB) hingga Babak Final.
+        </p>
+      </div>
+
+      <!-- 7 Criteria Overview Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+        <div class="p-4 bg-slate-900 rounded-2xl border border-slate-800 space-y-1">
+          <span class="text-slate-500 font-mono text-[10px] block">KRITERIA A · 15%</span>
+          <h5 class="font-bold text-white">Inovasi Teknologi</h5>
+          <p class="text-slate-400 text-[11px]">Kebaruan sains, arsitektur CLR komputasi, dan pemantauan eDNA non-invasif.</p>
+        </div>
+        <div class="p-4 bg-slate-900 rounded-2xl border border-slate-800 space-y-1">
+          <span class="text-slate-500 font-mono text-[10px] block">KRITERIA B · 15%</span>
+          <h5 class="font-bold text-white">Kesesuaian Track 2</h5>
+          <p class="text-slate-400 text-[11px]">Food Security (menjaga panen udang) & Biodiversity (Shannon Index air tambak).</p>
+        </div>
+        <div class="p-4 bg-slate-900 rounded-2xl border border-slate-800 space-y-1">
+          <span class="text-slate-500 font-mono text-[10px] block">KRITERIA C · 10%</span>
+          <h5 class="font-bold text-white">Kematangan Prototipe</h5>
+          <p class="text-slate-400 text-[11px]">Pipeline berfungsi di TRL 3 menggunakan data NCBI SRA PRJNA1087723.</p>
+        </div>
+        <div class="p-4 bg-slate-900 rounded-2xl border border-emerald-800/60 space-y-1 shadow-lg shadow-emerald-950/20">
+          <span class="text-emerald-400 font-mono text-[10px] font-bold block">KRITERIA D · 15% (KUNCI)</span>
+          <h5 class="font-bold text-emerald-300">Kelayakan Bisnis</h5>
+          <p class="text-slate-300 text-[11px]">TEA, Gross margin 46–51%, LTV:COCA 6,25:1, BEP 6,4 tambak (2,1% pasar).</p>
+        </div>
+      </div>
+
+      <!-- Kriteria E Deep Dive (Skala 1 - 5) -->
+      <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800 font-mono text-[10px] font-bold">KRITERIA E · BOBOT 15%</span>
+            <h4 class="text-base font-bold text-white mt-1">Skala Penilaian Kriteria E: Validasi &amp; Bukti Nyata</h4>
+          </div>
+          <span class="px-3 py-1 rounded-xl bg-emerald-950 text-emerald-400 border border-emerald-800 text-xs font-bold font-mono">
+            STATUS: SKOR 4 TERKUNCI ✓
+          </span>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800 opacity-50 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-slate-800 font-bold flex items-center justify-center text-slate-400 mono">1</span>
+              <div>
+                <strong class="text-white block">Skor 1: Tidak Ada Validasi</strong>
+                <span class="text-slate-400">Ide murni di atas kertas tanpa bukti eksternal. (Zona Gagal)</span>
+              </div>
+            </div>
+            <span class="text-rose-400 font-mono text-[11px]">HINDARI</span>
+          </div>
+
+          <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800 opacity-60 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-amber-950 text-amber-400 border border-amber-800 font-bold flex items-center justify-center mono">2</span>
+              <div>
+                <strong class="text-white block">Skor 2: Validasi Hanya Internal / Diskusi Mentor</strong>
+                <span class="text-slate-400">Hanya berdiskusi sesama tim atau dosen pembimbing. (Belum cukup untuk lolos final)</span>
+              </div>
+            </div>
+            <span class="text-amber-400 font-mono text-[11px]">POSISI AWAL</span>
+          </div>
+
+          <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800 opacity-80 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-cyan-950 text-cyan-400 border border-cyan-800 font-bold flex items-center justify-center mono">3</span>
+              <div>
+                <strong class="text-cyan-300 block text-sm">Skor 3: 3–5 Percakapan dengan Calon Pengguna / Problem Owner</strong>
+                <span class="text-slate-300">Wawancara terarah dengan pengelola tambak atau mentor Problem Owner Clinic Jumat 23 Okt.</span>
+              </div>
+            </div>
+            <span class="text-cyan-400 font-mono text-[11px]">TARGET ROUND 1</span>
+          </div>
+
+          <div class="p-4 bg-slate-950 rounded-2xl border-2 border-emerald-500/80 flex items-center justify-between shadow-xl shadow-emerald-950/30">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 rounded-xl bg-emerald-950 text-emerald-300 border border-emerald-800 font-extrabold flex items-center justify-center mono text-sm">4</span>
+              <div>
+                <strong class="text-emerald-300 block text-sm">Skor 4: Asumsi Diuji dengan Bukti Tertulis &amp; Ada Pivot Berdasarkan Hasil</strong>
+                <span class="text-slate-200 text-[11px]">Wawancara Pak Gatot (Situbondo) tersimpan rapi + pivot qPCR-First berdasarkan masukan ahli lab!</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg bg-emerald-950 text-emerald-300 border border-emerald-800 font-bold font-mono text-[10px]">PENCAPAIAN KITA</span>
+          </div>
+
+          <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-purple-950 text-purple-400 border border-purple-800 font-bold flex items-center justify-center mono">5</span>
+              <div>
+                <strong class="text-white block">Skor 5: Komitmen Tertulis dari Mitra (LoI, Data Uji, Pilot Berbayar)</strong>
+                <span class="text-slate-400">Surat minat resmi (Letter of Intent) atau kesepakatan pilot berbayar dari pemilik tambak.</span>
+              </div>
+            </div>
+            <span class="text-purple-400 font-mono text-[11px]">TARGET TRL 4-5</span>
+          </div>
+        </div>
+
+        <!-- Pak Gatot Proof Spotlight -->
+        <div class="p-4 rounded-2xl bg-emerald-950/30 border border-emerald-800/40 text-xs text-slate-300 space-y-1.5">
+          <div class="text-emerald-300 font-bold flex items-center gap-2">
+            <span>✓</span> Kunci Pembuktian Skor 4 di Hadapan Juri:
+          </div>
+          <p class="leading-relaxed">
+            Kita punya bukti tertulis dari <strong>Pak Gatot (Praktisi Tambak Situbondo, 3 Kolam padat tebar 300/m³)</strong> yang memvalidasi bahwa SOP tindakan potong pakan &amp; sipon 100% selaras dengan rekomendasi WA AquaSeq, serta bukti pivot teknis dari lab yang merekomendasikan qPCR-First.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= VIEW 5: RUMUS JURI & FINANSIAL ENGINE ================= -->
+    <section id="view-rumus" class="hidden space-y-6 no-print">
+      
+      <!-- Top Overview of Formulas -->
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 p-6 rounded-3xl border border-indigo-800/40 space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 rounded bg-indigo-950 text-indigo-300 font-bold font-mono text-[10px] border border-indigo-800">
+            METODOLOGI RESMI JURI
+          </span>
+          <h3 class="text-lg font-bold text-white">Rumus-Rumus Baku Panel Juri (Harrison et al. / Bill Aulet Step 14–19)</h3>
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Semua angka bisnis AquaSeq diturunkan langsung dari formula yang diajarkan oleh para narasumber resmi (apt. Suci Utami SoluSEA, Falasifah ALBITEC, dan Anisa Azizah). Ubah slider di bawah untuk melihat bagaimana metrik beradaptasi secara real-time.
+        </p>
+      </div>
+
+      <!-- Live Sliders & Financial Calculator -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Controls (5 cols) -->
+        <div class="lg:col-span-5 bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4 text-xs">
+          <h4 class="text-sm font-bold text-white flex items-center justify-between">
+            <span>Parameter Keuangan Operasional</span>
+            <button onclick="resetFinanceParams()" class="text-cyan-400 hover:underline">Reset Acuan</button>
+          </h4>
+
+          <div class="space-y-1">
+            <div class="flex justify-between">
+              <span class="text-slate-400">Fixed Costs Tahunan (Gaji Sales + Server):</span>
+              <span id="txt-fc" class="font-bold text-cyan-400 mono">Rp 48.000.000</span>
+            </div>
+            <input type="range" id="sl-fc" min="30" max="100" step="2" value="48" oninput="calcFinanceEngine()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex justify-between">
+              <span class="text-slate-400">Harga Layanan per Tambak (3 Kolam):</span>
+              <span id="txt-price-tambak" class="font-bold text-emerald-400 mono">Rp 6.500.000</span>
+            </div>
+            <input type="range" id="sl-price-tambak" min="4.0" max="10.0" step="0.5" value="6.5" oninput="calcFinanceEngine()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex justify-between">
+              <span class="text-slate-400">COGS Lab per Tambak (3 Kolam):</span>
+              <span id="txt-cogs-tambak" class="font-bold text-amber-400 mono">Rp 3.500.000</span>
+            </div>
+            <input type="range" id="sl-cogs-tambak" min="2.0" max="5.0" step="0.1" value="3.5" oninput="calcFinanceEngine()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500">
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex justify-between">
+              <span class="text-slate-400">Anggaran Akuisisi / Sales Tahunan:</span>
+              <span id="txt-coca-budget" class="font-bold text-purple-400 mono">Rp 24.000.000</span>
+            </div>
+            <input type="range" id="sl-coca-budget" min="10" max="60" step="2" value="24" oninput="calcFinanceEngine()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500">
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex justify-between">
+              <span class="text-slate-400">Target Akuisisi Tambak Baru per Tahun:</span>
+              <span id="txt-new-tambak" class="font-bold text-white mono">10 Tambak Baru</span>
+            </div>
+            <input type="range" id="sl-new-tambak" min="5" max="30" step="1" value="10" oninput="calcFinanceEngine()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+          </div>
+
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-[11px] text-slate-400">
+            <strong>Catatan Lapangan:</strong> 1 Tambak diasumsikan beroperasi rata-rata 2,5 siklus panen per tahun dengan retensi hubungan 2 tahun.
+          </div>
+        </div>
+
+        <!-- Computed Outputs (7 cols) -->
+        <div class="lg:col-span-7 bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+          <div class="flex justify-between items-center">
+            <h4 class="text-sm font-bold text-white">Hasil Kalkulasi Formula Resmi Juri</h4>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800 mono">LIVE COMPUTED</span>
+          </div>
+
+          <!-- Formula Output Cards Grid -->
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            
+            <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">Titik Impas (BEP):</span>
+              <div id="res-bep-val" class="text-xl font-bold text-white mono">6,4 Tambak</div>
+              <span id="res-bep-sub" class="text-[11px] text-emerald-400">Hanya butuh 2,1% pasar beachhead</span>
+            </div>
+
+            <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">Rasio LTV : COCA (Step 19):</span>
+              <div id="res-ltv-coca" class="text-xl font-bold text-cyan-400 mono">6,25 : 1</div>
+              <span class="text-[11px] text-cyan-300">Lolos patokan sehat (&gt; 3:1)</span>
+            </div>
+
+            <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">Customer LTV (Gross Profit):</span>
+              <div id="res-ltv-val" class="text-lg font-bold text-emerald-400 mono">Rp 15.015.000</div>
+              <span class="text-[10px] text-slate-500">Nilai laba per pelanggan (2 th)</span>
+            </div>
+
+            <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">COCA per Tambak:</span>
+              <div id="res-coca-val" class="text-lg font-bold text-purple-400 mono">Rp 2.400.000</div>
+              <span class="text-[10px] text-slate-500">Biaya mendapatkan 1 tambak</span>
+            </div>
+
+          </div>
+
+          <!-- Formula Explanations & Reference Proofs -->
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-2 text-xs">
+            <div class="text-slate-300 font-semibold flex items-center justify-between">
+              <span>Bukti Matematis di Hadapan Juri:</span>
+              <span class="text-amber-400 mono text-[11px]">Payback Petambak: 46,1x Lipat</span>
+            </div>
+            <div class="text-[11px] text-slate-400 space-y-1 font-mono">
+              <div>• BEP = Fixed Costs Rp48Jt ÷ (Margin Kontribusi Tahunan Rp7,5Jt/tambak) = 6,4 Tambak</div>
+              <div>• LTV = 5 Siklus × Rp6,5Jt × 46,2% Margin = Rp 15.015.000</div>
+              <div>• COCA = Rp24Jt Budget ÷ 10 Tambak Baru = Rp 2.400.000</div>
+              <div>• LTV/COCA = Rp15.015.000 ÷ Rp2.400.000 = 6,25 (Sangat Sehat &amp; Investable!)</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= VIEW 6: SIMULATOR 9 SKEMA BAYAR ================= -->
     <section id="view-pricing" class="hidden space-y-6 no-print">
       
       <!-- Top Alert: Lab Feedback Pivot -->
@@ -252,13 +626,13 @@
               </div>
               <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-0.5">
                 <span class="text-[10px] text-slate-400">Estimasi COGS Lab:</span>
-                <div id="out-cogs" class="text-lg font-bold text-amber-400 mono">Rp 3.200.000</div>
-                <span class="text-[10px] text-slate-500">Biaya reagen & kurir</span>
+                <div id="out-cogs" class="text-lg font-bold text-amber-400 mono">Rp 3.500.000</div>
+                <span id="out-sub-cogs" class="text-[10px] text-slate-500">Biaya reagen & kurir</span>
               </div>
               <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-0.5 col-span-2 sm:col-span-1">
                 <span class="text-[10px] text-slate-400">Gross Margin Kita:</span>
-                <div id="out-margin" class="text-lg font-bold text-emerald-400 mono">50.8%</div>
-                <span id="out-profit" class="text-[10px] text-emerald-300 font-semibold">Profit: Rp 3.300.000</span>
+                <div id="out-margin" class="text-lg font-bold text-emerald-400 mono">46.2%</div>
+                <span id="out-profit" class="text-[10px] text-emerald-300 font-semibold">Profit: Rp 3.000.000</span>
               </div>
             </div>
 
@@ -281,7 +655,95 @@
 
     </section>
 
-    <!-- ================= VIEW 5: PRINTABLE REPORT ================= -->
+    <!-- ================= VIEW 7: WARGAME KOMPETITOR ================= -->
+    <section id="view-wargame" class="hidden space-y-6 no-print">
+      
+      <div class="bg-gradient-to-r from-purple-950/40 via-slate-900 to-slate-900 p-6 rounded-3xl border border-purple-800/40 space-y-3">
+        <div class="flex items-center gap-2 text-xs font-bold text-purple-400 font-mono">
+          <span>⚔️ WARGAME ANALYSIS · PERSIAPAN MENGHADAPI SERANGAN JURI</span>
+        </div>
+        <h3 class="text-xl font-bold text-white">Analisis Manuver Lawan & Strategi Pukulan Balik AquaSeq</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Memetakan kekuatan riil CeKolam (Nusantics), JALA Tech, Kit PCR Portabel, dan Lab Sentral Daerah, serta serangan mematikan yang mungkin mereka lancarkan.
+        </p>
+      </div>
+
+      <!-- Competitor Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+        
+        <!-- CeKolam -->
+        <div class="p-5 bg-slate-900 rounded-3xl border border-purple-800/60 space-y-3 card-glow">
+          <div class="flex justify-between items-center">
+            <h4 class="text-base font-bold text-white flex items-center gap-2">
+              <span>★</span> CeKolam / Nusantics
+            </h4>
+            <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800 mono text-[10px]">LAB BANYUWANGI</span>
+          </div>
+          <div class="space-y-1.5 text-slate-300">
+            <div><strong>Manuver Mematikan Lawan:</strong> Membuka akses tes same-day di Banyuwangi dan menjual NGS AquaCheck secara bundling dengan distributor pakan.</div>
+            <div><strong>Kelemahan Lawan:</strong> Harga tertutup (quote-based), menjual laporan lab tebal yang membingungkan teknisi, dan berbasis per tes eceran mahal.</div>
+            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-cyan-300 font-semibold">
+              🛡️ Pukulan Balik AquaSeq: Kami menjual "Keputusan Aksi WhatsApp", bukan laporan lab mentah. Harga kami transparan dan panel qPCR adaptif per kolam.
+            </div>
+          </div>
+        </div>
+
+        <!-- JALA Tech -->
+        <div class="p-5 bg-slate-900 rounded-3xl border border-blue-800/60 space-y-3 card-glow">
+          <div class="flex justify-between items-center">
+            <h4 class="text-base font-bold text-white flex items-center gap-2">
+              <span>★</span> JALA Tech
+            </h4>
+            <span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 mono text-[10px]">PENGUASA IOT AIR</span>
+          </div>
+          <div class="space-y-1.5 text-slate-300">
+            <div><strong>Manuver Mematikan Lawan:</strong> Menambahkan modul pencatatan lab eksternal di aplikasi JALA App Plus mereka.</div>
+            <div><strong>Kelemahan Lawan:</strong> JALA adalah perusahaan hardware fisika-kimia dan software pakan. Mereka buta total terhadap mikrobioma genomik.</div>
+            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-cyan-300 font-semibold">
+              🛡️ Pukulan Balik AquaSeq: Kami tidak bersaing dengan JALA, melainkan menjadi mitra "Intel Inside" melalui integrasi REST API terbuka.
+            </div>
+          </div>
+        </div>
+
+        <!-- Kit PCR Portabel -->
+        <div class="p-5 bg-slate-900 rounded-3xl border border-amber-800/60 space-y-3 card-glow">
+          <div class="flex justify-between items-center">
+            <h4 class="text-base font-bold text-white flex items-center gap-2">
+              <span>★</span> Kit PCR Portabel (POCKIT / On-Site)
+            </h4>
+            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 mono text-[10px]">ALAT LAPANGAN</span>
+          </div>
+          <div class="space-y-1.5 text-slate-300">
+            <div><strong>Manuver Mematikan Lawan:</strong> Mengklaim hasil cepat 2 jam langsung di tepi kolam tanpa perlu kirim sampel keluar.</div>
+            <div><strong>Kelemahan Lawan:</strong> Mesin sangat mahal (CAPEX Rp80–150 Jt), rawan human error pipeting teknisi kolam, dan hanya menguji 1 target (panel buta).</div>
+            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-cyan-300 font-semibold">
+              🛡️ Pukulan Balik AquaSeq: Zero-CAPEX (petani tanpa beli mesin), ekstraksi profesional lab ISO 17025, dan mendeteksi koinfeksi polimikroba.
+            </div>
+          </div>
+        </div>
+
+        <!-- Lab Sentral Pemda -->
+        <div class="p-5 bg-slate-900 rounded-3xl border border-slate-800 space-y-3 card-glow">
+          <div class="flex justify-between items-center">
+            <h4 class="text-base font-bold text-white flex items-center gap-2">
+              <span>★</span> Lab Sentral Pemda (UPT Pasuruan / Balai)
+            </h4>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 mono text-[10px]">LAB PEMERINTAH</span>
+          </div>
+          <div class="space-y-1.5 text-slate-300">
+            <div><strong>Kondisi Saat Ini:</strong> Diakui resmi, namun turnaround time lambat (3–7 hari kerja; data Pak Gatot: lab luar butuh 2 hari).</div>
+            <div><strong>Kelemahan:</strong> Udang keburu mati sebelum hasil keluar, format sertifikat teknis tanpa rekomendasi mitigasi.</div>
+            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-cyan-300 font-semibold">
+              🛡️ Sinergi AquaSeq: Mereka bukan lawan, melainkan mitra penyedia kapasitas lab basah kami (Asset-Light Partner).
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= VIEW 8: PRINTABLE REPORT ================= -->
     <section id="view-preview" class="space-y-6">
       
       <div class="bg-white text-slate-900 p-8 rounded-3xl border border-slate-300 shadow-2xl print-area space-y-6">
@@ -289,8 +751,8 @@
         <!-- Report Header -->
         <div class="border-b-2 border-slate-900 pb-4 flex justify-between items-start">
           <div>
-            <div class="text-[11px] font-bold tracking-widest text-slate-500 uppercase font-mono">GENOHACK 2026 ITB · SUBMISSION ROUND I REPORT</div>
-            <h2 class="text-2xl font-black text-slate-900 tracking-tight mt-1">AQUASEQ: WORKSHEET DOSSIER STEP 20–22</h2>
+            <div class="text-[11px] font-bold tracking-widest text-slate-500 uppercase font-mono">GENOHACK 2026 ITB · SUBMISSION ROUND I DOSSIER</div>
+            <h2 class="text-2xl font-black text-slate-900 tracking-tight mt-1">AQUASEQ: COMPLETE WORKSHEET DOSSIER STEP 20–22</h2>
             <p class="text-xs text-slate-600 mt-0.5">Early-Warning Disease Platform for Shrimp Aquaculture · Tim Disubmit Kok Tir Aman Ajah · Politeknik Negeri Jember</p>
           </div>
           <div class="text-right font-mono text-xs text-slate-600">
@@ -302,7 +764,7 @@
         <!-- Section 1 in Report: WS 20.1 -->
         <div class="space-y-3">
           <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 bg-slate-100 p-2 rounded border border-slate-200">
-            1. Worksheet 20.1 — Matriks Asumsi Kunci Terurut Prioritas Risiko
+            1. Worksheet 20.1 — Matriks Asumsi Kunci Terurut Prioritas Risiko (Data-Driven)
           </h3>
           <table class="w-full text-left text-xs print-table border-collapse">
             <thead>
@@ -310,8 +772,8 @@
                 <th class="p-2 border border-slate-300">No</th>
                 <th class="p-2 border border-slate-300">Kategori</th>
                 <th class="p-2 border border-slate-300">Asumsi Kunci</th>
+                <th class="p-2 border border-slate-300">Bukti Empiris Penopang (By Data)</th>
                 <th class="p-2 border border-slate-300">Dampak Bila Salah</th>
-                <th class="p-2 border border-slate-300">Bukti Saat Ini</th>
                 <th class="p-2 border border-slate-300">Risiko</th>
               </tr>
             </thead>
@@ -341,7 +803,32 @@
           </div>
         </div>
 
-        <!-- Section 4 in Report: Field Evidence -->
+        <!-- Section 4: Mathematical Proofs with Judges' Formulas -->
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 bg-slate-100 p-2 rounded border border-slate-200">
+            4. Pembuktian Finansial Berdasarkan Formula Resmi Juri (Harrison et al. / Bill Aulet)
+          </h3>
+          <div class="grid grid-cols-2 gap-3 text-xs text-slate-800 font-mono">
+            <div class="p-3 border border-slate-300 rounded bg-slate-50">
+              <strong>Titik Impas (Break-Even Point / BEP):</strong><br>
+              BEP = Fixed Costs (Rp48Jt) ÷ Margin Tahunan (Rp7,5Jt/tambak) = <strong>6,4 Tambak (2,1% Beachhead)</strong>
+            </div>
+            <div class="p-3 border border-slate-300 rounded bg-slate-50">
+              <strong>Rasio Kelayakan Bisnis (LTV : COCA):</strong><br>
+              LTV (Rp15.015.000) ÷ COCA (Rp2.400.000) = <strong>6,25 : 1 (Lolos Patokan Sehat &gt; 3:1)</strong>
+            </div>
+            <div class="p-3 border border-slate-300 rounded bg-slate-50">
+              <strong>Rasio Proteksi Modal (Customer ROI):</strong><br>
+              Aset 3 Kolam (Rp300Jt) ÷ Biaya Paket Tambak (Rp6,5Jt) = <strong>46,1x Lipat</strong>
+            </div>
+            <div class="p-3 border border-slate-300 rounded bg-slate-50">
+              <strong>Gross Profit Margin:</strong><br>
+              (Harga Rp6,5Jt - COGS Rp3,5Jt) ÷ Rp6,5Jt = <strong>46,2% (Paket Tambak) / 51,1% (Paket Kolam)</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5 in Report: Field Evidence -->
         <div class="space-y-2 border-t-2 border-slate-300 pt-4 text-xs text-slate-800">
           <h4 class="font-bold text-slate-900 text-sm">Bukti Lapangan Utama (Triangulasi Kriteria E):</h4>
           <p class="italic bg-slate-50 p-3 rounded border border-slate-200">
@@ -376,47 +863,47 @@
     // Master Data
     const ws20Data = [
       {
-        no: 1,
+        no: "A1",
         cat: "Pasar (Buyer)",
-        assumption: "Pemilik tambak mau membayar langganan bertahap (Rp1–1,5jt/tahap) demi mengamankan modal Rp100 juta.",
-        impact: "FATAL: Model bisnis langganan gagal total.",
-        evidence: "Tervalidasi wawancara Pak Gatot (Owner Situbondo bersedia tes jika fleksibel & lab luar Rp250rb/tes).",
+        assumption: "Pemilik tambak mau membayar langganan bertahap (Rp1–1,5jt/tahap) atau paket per tambak Rp6,5jt/3 kolam demi proteksi modal Rp100jt.",
+        evidence: "Wawancara Pak Gatot: Keputusan di tangan owner, lab luar Rp250rb/uji tetap dibeli saat darurat. Nilai eceran pasar Rp4,5-7,5jt.",
+        impact: "FATAL: Adopsi mandek jika harga dinilai terlalu mahal di depan.",
         risk: "TINGGI",
         badge: "text-rose-400 font-bold"
       },
       {
-        no: 2,
+        no: "A2",
         cat: "Operasional (User)",
         assumption: "Teknisi tambak mau menyaring air 500 mL dan mengeksekusi rekomendasi potong pakan & sipon dari WhatsApp.",
-        impact: "TINGGI: Sistem tidak menghasilkan tindakan penyelamatan di kolam.",
-        evidence: "Tervalidasi 100% oleh Pak Gatot: memotong pakan & ganti air adalah SOP mutlak mereka bila air berisiko.",
+        evidence: "Wawancara Pak Gatot: SOP mutlak praktisi Situbondo saat air berisiko adalah kurangi pakan dan ganti air/sipon.",
+        impact: "TINGGI: Sistem hanya jadi laporan tanpa tindakan penyelamatan.",
         risk: "TINGGI",
         badge: "text-rose-400 font-bold"
       },
       {
-        no: 3,
+        no: "A3",
+        cat: "Teknis (Biologi)",
+        assumption: "Pergeseran mikrobioma air (Shannon Index & gen virulensi pirAB) mendahului gejala klinis kematian udang.",
+        evidence: "Data CeKolam: Positivity patogen air tambak 12,59%. Jurnal Lu et al. (2023): Usus udang konvergen menyerupai air saat AHPND.",
+        impact: "TINGGI: Peringatan dini tidak memiliki jendela waktu tindakan.",
+        risk: "SEDANG",
+        badge: "text-amber-400 font-bold"
+      },
+      {
+        no: "A4",
         cat: "Ekonomi (TEA)",
         assumption: "Biaya monitoring mingguan bisa ditekan ke Rp75.000–100.000/uji dengan fokus qPCR terarah (qPCR-First).",
-        impact: "SEDANG: COGS naik bila memaksakan Nanopore rutin mingguan.",
-        evidence: "Pivot Lab: Ahli lab mengonfirmasi Nanopore overkill untuk rutin, qPCR sangat murah dan cukup.",
+        evidence: "Wawancara Lab: Nanopore overkill untuk rutin, qPCR sangat murah dan cepat. Data Juanpere-Borràs (2026): Multiplex 75 sampel.",
+        impact: "SEDANG: COGS membengkak jika memaksakan Nanopore tiap minggu.",
         risk: "SEDANG",
         badge: "text-amber-400 font-bold"
       },
       {
-        no: 4,
-        cat: "Teknis (Biologi)",
-        assumption: "Pergeseran stabilitas komunitas air (Shannon Index & pirAB) mendahului mortalitas klinis udang.",
-        impact: "TINGGI: Peringatan dini tidak memiliki jendela waktu tindakan.",
-        evidence: "Didukung jurnal Lu et al. (2023) & data lapangan CeKolam (positivity air tambak 12,59%).",
-        risk: "SEDANG",
-        badge: "text-amber-400 font-bold"
-      },
-      {
-        no: 5,
-        cat: "Regulasi",
-        assumption: "Software bioinformatika eDNA tidak memerlukan izin edar IVD alat kesehatan manusia.",
-        impact: "RENDAH: Hambatan sertifikasi izin edar komersial.",
-        evidence: "Regulasi KKP/Kementan untuk penjaminan mutu kesehatan ikan air payau non-farmasi.",
+        no: "A5",
+        cat: "Musiman & Jadwal",
+        assumption: "Pemantauan terjadwal 12 minggu cocok dengan siklus budidaya 120 hari dan kalender wabah lokal.",
+        evidence: "Data Pak Gatot: Siklus budidaya 120 hari. Data CeKolam: Risiko AHPND memuncak Juni-Agustus.",
+        impact: "RENDAH: Jadwal tidak sinkron dengan kalender tebar petambak.",
         risk: "RENDAH",
         badge: "text-emerald-400 font-bold"
       }
@@ -449,7 +936,8 @@
     const ws22Data = [
       {
         label: "Target Customer & Economic Buyer",
-        val: "User: Teknisi Tambak & Kepala Kolam (Butuh instruksi simpel tanpa jargon DNA).\nBuyer: Pemilik Tambak Intensif (Pond Owner) di Situbondo & Banyuwangi."
+        val: "User: Teknisi Tambak & Kepala Kolam (Butuh instruksi simpel tanpa jargon DNA).
+Buyer: Pemilik Tambak Intensif (Pond Owner) di Situbondo & Banyuwangi."
       },
       {
         label: "Critical Customer Problem",
@@ -457,7 +945,9 @@
       },
       {
         label: "3 Essential Product Capabilities",
-        val: "1. Kit saringan eDNA 500 mL tanpa bedah udang.\n2. Risk Engine CLR + Shannon + HMM gen toksin pirAB.\n3. Notifikasi WhatsApp instruksi kerja Bahasa Indonesia."
+        val: "1. Kit saringan eDNA 500 mL tanpa bedah udang.
+2. Risk Engine CLR + Shannon + HMM gen toksin pirAB.
+3. Notifikasi WhatsApp instruksi kerja Bahasa Indonesia."
       },
       {
         label: "Concierge / Outsourced Components",
@@ -465,7 +955,7 @@
       },
       {
         label: "Value Proposition & Payment",
-        val: "Paket langganan fleksibel (Bayar per tahap DOC 0, 30, 60 atau Paket Per Tambak Rp2jt dasar + Rp1,5jt/kolam). ROI petambak 22x lipat."
+        val: "Paket langganan fleksibel (Bayar per tahap DOC 0, 30, 60 atau Paket Per Tambak Rp2jt dasar + Rp1,5jt/kolam). ROI petambak 46,1x lipat (3 kolam)."
       }
     ];
 
@@ -484,18 +974,18 @@
             <td class="py-3 px-3 font-mono text-cyan-400">${d.no}</td>
             <td class="py-3 px-3 font-semibold text-white">${d.cat}</td>
             <td class="py-3 px-3">${d.assumption}</td>
-            <td class="py-3 px-3 text-rose-300">${d.impact}</td>
             <td class="py-3 px-3 text-slate-300">${d.evidence}</td>
+            <td class="py-3 px-3 text-rose-300">${d.impact}</td>
             <td class="py-3 px-3 ${d.badge}">${d.risk}</td>
           </tr>
         `;
         ptb.innerHTML += `
           <tr class="border border-slate-300">
-            <td class="p-2 border border-slate-300 font-mono">${d.no}</td>
+            <td class="p-2 border border-slate-300 font-mono font-bold">${d.no}</td>
             <td class="p-2 border border-slate-300 font-bold">${d.cat}</td>
             <td class="p-2 border border-slate-300">${d.assumption}</td>
-            <td class="p-2 border border-slate-300">${d.impact}</td>
             <td class="p-2 border border-slate-300">${d.evidence}</td>
+            <td class="p-2 border border-slate-300">${d.impact}</td>
             <td class="p-2 border border-slate-300 font-bold">${d.risk}</td>
           </tr>
         `;
@@ -550,6 +1040,57 @@
       });
     }
 
+    // Financial Engine Calculations (Judges Formulas)
+    function calcFinanceEngine() {
+      const fc = parseFloat(document.getElementById('sl-fc').value) * 1000000;
+      const price = parseFloat(document.getElementById('sl-price-tambak').value) * 1000000;
+      const cogs = parseFloat(document.getElementById('sl-cogs-tambak').value) * 1000000;
+      const cocaBudget = parseFloat(document.getElementById('sl-coca-budget').value) * 1000000;
+      const newTambak = parseInt(document.getElementById('sl-new-tambak').value);
+
+      document.getElementById('txt-fc').innerText = `Rp ${(fc/1000000).toFixed(0)}.000.000`;
+      document.getElementById('txt-price-tambak').innerText = `Rp ${(price/1000000).toFixed(1)} Juta`;
+      document.getElementById('txt-cogs-tambak').innerText = `Rp ${(cogs/1000000).toFixed(1)} Juta`;
+      document.getElementById('txt-coca-budget').innerText = `Rp ${(cocaBudget/1000000).toFixed(0)}.000.000`;
+      document.getElementById('txt-new-tambak').innerText = `${newTambak} Tambak Baru`;
+
+      // Contribution Margin per tambak per siklus
+      const cmPerSiklus = price - cogs;
+      const marginPct = (cmPerSiklus / price) * 100;
+      // Asumsi 2.5 siklus per tahun
+      const cmPerTahun = cmPerSiklus * 2.5;
+
+      // BEP in tambaks
+      const bepTambak = fc / cmPerTahun;
+      const bepPonds = bepTambak * 3;
+      const beachheadPct = (bepPonds / 1200) * 100;
+
+      // COCA
+      const coca = cocaBudget / newTambak;
+
+      // LTV (2 tahun retensi = 5 siklus, Gross Profit)
+      const ltv = 5 * price * (marginPct / 100);
+
+      // Ratio
+      const ratio = ltv / coca;
+
+      // Output to DOM
+      document.getElementById('res-bep-val').innerText = `${bepTambak.toFixed(1)} Tambak`;
+      document.getElementById('res-bep-sub').innerText = `Hanya ${bepPonds.toFixed(0)} kolam (${beachheadPct.toFixed(1)}% pasar beachhead)`;
+      document.getElementById('res-ltv-coca').innerText = `${ratio.toFixed(2)} : 1`;
+      document.getElementById('res-ltv-val').innerText = `Rp ${ltv.toLocaleString('id-ID')}`;
+      document.getElementById('res-coca-val').innerText = `Rp ${coca.toLocaleString('id-ID')}`;
+    }
+
+    function resetFinanceParams() {
+      document.getElementById('sl-fc').value = 48;
+      document.getElementById('sl-price-tambak').value = 6.5;
+      document.getElementById('sl-cogs-tambak').value = 3.5;
+      document.getElementById('sl-coca-budget').value = 24;
+      document.getElementById('sl-new-tambak').value = 10;
+      calcFinanceEngine();
+    }
+
     function setTier(tier) {
       currentTier = tier;
       const bPan = document.getElementById('btn-tier-panel');
@@ -574,7 +1115,6 @@
       let explainer = '';
       let milestones = [];
 
-      // Base single pond price
       const pricePerPond = (currentTier === 'panel') ? 3000000 : 4500000;
       const cogsPerPond = (currentTier === 'panel') ? 1400000 : 2200000;
 
@@ -591,7 +1131,7 @@
         const baseFee = 2000000;
         const addPerPond = (currentTier === 'panel') ? 1200000 : 1500000;
         totalPrice = baseFee + (ponds * addPerPond);
-        cogs = 1000000 + (ponds * 750000);
+        cogs = 1000000 + (ponds * 833333);
         explainer = `<strong>Paket Per Tambak:</strong> Biaya dasar Rp2 Jt + Rp${(addPerPond/1000000).toFixed(1)} Jt per kolam. Untuk ${ponds} kolam totalnya Rp${(totalPrice/1000000).toFixed(1)} Jt (jauh lebih murah dibanding Rp${((ponds*pricePerPond)/1000000).toFixed(1)} Jt jika murni per kolam!). Sangat cocok untuk petambak mandiri seperti Pak Gatot.`;
         milestones = [
           `Biaya Dasar Tambak: Rp 2.000.000 (Menutup transport kurir & preparasi batch lab)`,
@@ -653,7 +1193,7 @@
     }
 
     function switchView(viewId) {
-      const views = ['ws20', 'ws21', 'ws22', 'pricing', 'preview'];
+      const views = ['ws20', 'ws21', 'ws22', 'rubrik', 'rumus', 'pricing', 'wargame', 'preview'];
       views.forEach(v => {
         const el = document.getElementById(`view-${v}`);
         const btn = document.getElementById(`tab-btn-${v}`);
@@ -674,8 +1214,15 @@
         meta: {
           project: "AquaSeq",
           event: "GenoHack 2026",
+          track: "Track 2: Food Security & Biodiversity",
           team: "Disubmit Kok Tir Aman Ajah",
           institution: "Politeknik Negeri Jember"
+        },
+        financial_engine_formulas: {
+          bep_tambak: "6.4 Tambak (20 Kolam = 2.1% Beachhead)",
+          ltv_coca_ratio: "6.25 : 1 (Exceeds 3:1 guideline)",
+          gross_margin: "46.2% - 51.1%",
+          customer_payback_ratio: "46.1x (3 Ponds Protection)"
         },
         worksheet_20_1: ws20Data,
         worksheet_21_1: ws21Data,
@@ -692,12 +1239,13 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'AquaSeq_Worksheet_Dossier_GenoHack2026.json';
+      a.download = 'AquaSeq_Official_Worksheet_Dossier_GenoHack2026.json';
       a.click();
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       renderTables();
+      calcFinanceEngine();
       calculatePricing();
     });
   </script>
