@@ -86,10 +86,29 @@
       
       <!-- Controls Column (5 cols) -->
       <div class="lg:col-span-5 bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-5">
-        <h3 class="text-sm font-bold text-white flex items-center justify-between">
-          <span>Pengaturan Parameter Lapangan</span>
-          <button onclick="resetParams()" class="text-xs text-cyan-400 hover:underline">Reset Default</button>
-        </h3>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white">Pengaturan Parameter Lapangan</h3>
+            <button onclick="resetParams()" class="text-xs text-cyan-400 hover:underline">Reset Default</button>
+          </div>
+          <!-- Quick Preset Button -->
+          <div class="flex gap-2 pt-1">
+            <button onclick="presetPakGatot()" class="w-full px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-950 to-cyan-950 border border-emerald-800/80 text-emerald-300 font-bold text-xs hover:border-emerald-400 transition flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950/20">
+              <span>🌾</span> Preset: Tambak Pak Gatot Situbondo (3 Kolam)
+            </button>
+          </div>
+        </div>
+
+        <!-- Callout Validasi Pak Gatot & Lab -->
+        <div class="p-3 bg-slate-950 rounded-xl border border-emerald-900/40 text-[11px] text-slate-300 space-y-1">
+          <div class="flex items-center justify-between text-emerald-400 font-bold">
+            <span>✓ Validasi Pak Gatot (Situbondo):</span>
+            <span class="mono">3 Kolam · Tebar 300/m³</span>
+          </div>
+          <p class="text-slate-400 leading-relaxed">
+            Lab luar butuh 2 hari &amp; biaya Rp 250rb/tes. AquaSeq qPCR-First cuma Rp 75rb/minggu instan via WA. Paket 3 Kolam hanya Rp 6,5 Jt (Dasar 2 Jt + 1,5 Jt/kolam)!
+          </p>
+        </div>
 
         <!-- Control 1: Jumlah Kolam -->
         <div class="space-y-1.5">
@@ -371,6 +390,17 @@
         chartCogs.data.datasets[0].data = [nano, qpcr, logistik];
         chartCogs.update();
       }
+    }
+
+    function presetPakGatot() {
+      document.getElementById('slider-kolam').value = 3;
+      document.getElementById('slider-modal').value = 100;
+      // Untuk 3 kolam di paket tambak: Rp 6.5jt total / 3 = ~2.17jt atau 4.5 standard
+      document.getElementById('slider-harga').value = 4.5;
+      document.getElementById('slider-nanopore').value = 900;
+      document.getElementById('slider-qpcr').value = 900;
+      document.getElementById('slider-logistik').value = 400;
+      updateSim();
     }
 
     function resetParams() {

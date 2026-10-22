@@ -157,6 +157,28 @@
         answer: "Benar sekali dewan juri, kami mengakui secara jujur bahwa pengujian pada skenario sintetis selama 3 hari hackathon ini bertujuan untuk membuktikan kelancaran alur pipa komputasi (pipeline proof-of-concept), bukan pembuktian validasi akurasi klinis akhir. Validasi ilmiah riil akan kami eksekusi pada Fase 2 (retrospective validation) menggunakan dataset publik NCBI SRA dengan hasil penyakit yang terkonfirmasi, sebelum kami melangkah ke uji lapangan TRL 5.",
         trap: "Jangan mengklaim model kalian 'sudah 99% akurat di dunia nyata' hanya berdasarkan data buatan sendiri.",
         ref: "Catatan Dosen Poin 33 · Kejujuran Data Sintetis"
+      },
+      {
+        id: 9,
+        cat: "vc",
+        catName: "VALIDASI LAPANGAN (KRITERIA E)",
+        catBadge: "bg-emerald-950 text-emerald-400 border-emerald-800/40",
+        q: "Apakah asumsi produk dan kemauan membayar ini sudah kalian validasi langsung ke petambak nyata di luar laboratorium kampus?",
+        why: "Juri menguji Kriteria E (Validasi & Bukti) untuk menentukan apakah tim kalian mentok di Skor 1-2 atau layak tembus Skor 4.",
+        answer: "Sudah, Bapak/Ibu Dewan Juri! Kami telah memvalidasi langsung ke Pak Gatot, praktisi tambak super-intensif di Situbondo (3 kolam beton, volume 3.100–3.460 m³, padat tebar 300 ekor/m³). Dari 18 poin hasil wawancara: 1) Pak Gatot mengonfirmasi bahwa lab luar berbayar Rp 250rb/tes dan butuh 2 hari, yang terlalu lambat; 2) SOP penanganan air berisiko petambak Situbondo terbukti 100% selaras dengan instruksi WhatsApp kami yaitu 'pakan dikurangi dan ganti air/sipon'; 3) Terkait pembayaran, Pak Gatot menegaskan pengeluaran ada di tangan owner, sehingga Paket Per Tambak Rp 6,5 juta untuk 3 kolam jauh lebih rasional dibanding membebankan Rp 4,5 juta per kolam secara terpisah.",
+        trap: "Jangan ragu atau menjawab 'kami baru menyebar kuesioner online'. Juri sangat menghargai 1 wawancara mendalam terverifikasi (in-depth interview) dengan praktisi riil seperti Pak Gatot.",
+        ref: "Dokumen 15 · Transkrip 18 Poin Wawancara Pak Gatot Situbondo (Skor 4 Terkunci)"
+      },
+      {
+        id: 10,
+        cat: "tech",
+        catName: "INSTRUMEN & PIVOT LAB",
+        catBadge: "bg-blue-950 text-blue-400 border-blue-800/40",
+        q: "Awalnya kalian merancang Nanopore mingguan, mengapa beralih ke qPCR-First? Apakah sekuensing Nanopore itu gagal atau kurang akurat?",
+        why: "Juri teknis dan investor menguji apakah tim kalian fleksibel menerima feedback ahli lab atau ngotot menjual teknologi yang tidak efisien.",
+        answer: "Bukan gagal, melainkan penyesuaian efisiensi ekonomi dan kecepatan aksi. Dari hasil wawancara kami dengan ahli laboratorium pengujian molekuler, terungkap bahwa sekuensing Nanopore mingguan bersifat overkill secara biaya (bisa tembus jutaan per run bila tidak multiplex penuh) dan turnaround time-nya kurang cepat untuk penanganan harian. Ahli lab merekomendasikan: deteksi rutin 3–5 marka patogen utama (gen toksin pirAB, WSSV, EHP) jauh lebih hemat dan cepat menggunakan qPCR (hanya Rp 75.000/tes). Nanopore kami pertahankan di titik paling strategis: DOC 0 untuk memetakan baseline mikrobioma dan keanekaragaman hayati (Shannon Index), serta saat terjadi dugaan wabah baru. Ini adalah bukti pivot terukur kami.",
+        trap: "Jangan merasa bersalah karena mengubah teknologi. Dalam metodologi Disciplined Entrepreneurship, pivot berbasis masukan ahli lab adalah syarat mutlak meraih Skor 4 pada Kriteria E!",
+        ref: "Dokumen 16 · Analisis Pivot Lab qPCR-First vs Nanopore On-Demand"
       }
     ];
 
