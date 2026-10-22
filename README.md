@@ -56,6 +56,7 @@ Bagi yang ingin membaca secara mendalam dalam format teks Markdown:
 14. **[`14_DESAIN_LENGKAP_MVBP_AQUASEQ_STEP_22_24.md`](docs/14_DESAIN_LENGKAP_MVBP_AQUASEQ_STEP_22_24.md)**: Desain resmi MVBP (Minimum Viable Business Product) mengacu pada Disciplined Entrepreneurship Step 22–24 (Shelly Natalia MIT Sloan), 3 ujian kelayakan (Value, Pay, Feedback), strategi Concierge MVP, corong adopsi 7 tahap, dan roadmap produk V1–V3.
 15. **[`15_VALIDASI_LAPANGAN_WAWANCARA_PAK_GATOT_SITUBONDO.md`](docs/15_VALIDASI_LAPANGAN_WAWANCARA_PAK_GATOT_SITUBONDO.md)**: Transkrip & analisis 18 poin wawancara praktisi tambak super-intensif Situbondo (Pak Gatot) yang mengunci Skor 4 pada Kriteria E.
 16. **[`16_SKEMA_PEMBAYARAN_DAN_PIVOT_LAB_QPCR_VS_NANOPORE.md`](docs/16_SKEMA_PEMBAYARAN_DAN_PIVOT_LAB_QPCR_VS_NANOPORE.md)**: 9 Skema pembayaran fleksibel (bayar per tahap, paket per tambak dasar+kolam, potong panen), pivot lab qPCR-First vs Nanopore on-demand, dan triangulasi data sekunder pasar.
+17. **[`17_WORKSHEET_LENGKAP_RUMUS_JURI_DAN_ANALISIS_KOMPETITOR.md`](docs/17_WORKSHEET_LENGKAP_RUMUS_JURI_DAN_ANALISIS_KOMPETITOR.md)**: Dossier resmi lengkap pengajuan Submission Round I: perpaduan seluruh formula baku juri (TEA Harrison, BEP, LTV:COCA 6,25:1, Payback 46x), matriks wargame kompetitor mendalam (AquaSeq vs CeKolam vs JALA vs Kit PCR), dan pembuktian matematis siap uji.
 
 ---
 
